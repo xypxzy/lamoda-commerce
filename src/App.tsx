@@ -1,10 +1,6 @@
+import Root from "./routes/root.tsx";
+
 function App() {
-
-  return (
-    <>
-        Hello World!
-    </>
-  )
+  return (<Root />)
 }
-
 export default App
