@@ -9,16 +9,24 @@
 .nav__icons {
   @apply block text-lg;
 }
+.icon__text {
+  @apply block text-xs;
+}
+
 .nav__icons:first-child {
   @apply block text-xl;
 }
 
 .nav__list {
-  @apply hidden w-full lg:block md:w-auto;
+  @apply hidden w-full lg:block lg:w-auto;
+}
+
+.nav__list_open {
+  @apply w-full lg:block lg:w-auto;
 }
 
 .nav__list ul {
-  @apply flex flex-col  font-medium mt-4 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700;
+  @apply flex flex-col font-medium mt-4 rounded-lg bg-gray-50 lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 lg:bg-transparent;
 }
 
 .burger {
