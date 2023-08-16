@@ -1,6 +1,6 @@
 import cls from './ProductCard.module.css'
-import {MdFavoriteBorder} from 'react-icons/md'
-import {PiBagSimpleLight} from 'react-icons/pi'
+import {MdFavorite, MdFavoriteBorder} from 'react-icons/md'
+import {PiBagSimpleLight, PiBagSimpleFill} from 'react-icons/pi'
 import {useState} from "react";
 
 const ProductCard = () => {
@@ -22,7 +22,11 @@ const ProductCard = () => {
                     <div
                         onClick={() => setLiked(!liked)}
                         className={`${cls.favouriteBtn} ${liked ? `${cls.liked}` : ''}`}>
-                        <MdFavoriteBorder />
+                        {liked ?
+                            <MdFavorite/>
+                            :
+                            <MdFavoriteBorder />
+                        }
                     </div>
                 </div>
                 <div className={cls.button}>
@@ -30,7 +34,11 @@ const ProductCard = () => {
                         onClick={() => setAddCart(!addCart)}
                         className={`${cls.favouriteBtn} ${addCart ? `${cls.addedToCart}` : ''}`}
                     >
-                        <PiBagSimpleLight />
+                        {addCart ?
+                            <PiBagSimpleFill/>
+                            :
+                            <PiBagSimpleLight/>
+                        }
                     </div>
                 </div>
             </div>

@@ -31,7 +31,10 @@
 }
 
 .button {
-    @apply border border-transparent rounded-full bg-white hover:bg-gray-300 hover:text-red-500;
+    @apply border border-black rounded-full bg-white hover:bg-gray-200 hover:text-red-500
+    transition-all duration-150 ease-in-out
+    ;
+
 }
 
 .favouriteBtn {
