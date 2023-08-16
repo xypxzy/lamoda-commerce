@@ -1,0 +1,15 @@
+.products {
+    @apply text-gray-600;
+}
+
+.productsContainer {
+    @apply container px-5 py-24 mx-auto;
+}
+
+.productsTitle {
+    @apply text-5xl mb-5;
+}
+
+.productsWrapper {
+    @apply flex flex-wrap -m-4;
+}
