@@ -12,7 +12,7 @@ const Hero: React.FC = () => {
             Пришло время найти время для себя
           </h1>
           <div className={styles.hero__desc}>
-            <Link rel="noopener noreferrer" to="#" className={styles.hero__btn}>
+            <Link rel="noopener noreferrer" to="catalog" className={styles.hero__btn}>
               Перейти в каталог
             </Link>
           </div>

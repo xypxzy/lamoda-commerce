@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 //Страница если пользователь попробует найти не существующую страницу
 const NotFoundPage: React.FC = () => {
   return (
-    <>
+    <div className={"h-screen w-full flex flex-col items-center justify-center"}>
       <p className="zoom-area">
         Упс ! Что то пошло не так. Страница не найдена
       </p>
@@ -25,7 +25,7 @@ const NotFoundPage: React.FC = () => {
           Back Home
         </Link>
       </div>
-    </>
+    </div>
   );
 };
 
