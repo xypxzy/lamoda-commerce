@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 const NotFoundPage: React.FC = () => {
   return (
     <>
-      <p className="zoom-area">We didn't find this page</p>
+      <p className="zoom-area">
+        Упс ! Что то пошло не так. Страница не найдена
+      </p>
       <section className="error-container">
         <span className="four">
           <span className="screen-reader-text">4</span>
