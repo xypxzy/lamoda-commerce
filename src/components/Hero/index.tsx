@@ -9,7 +9,7 @@ const Hero: React.FC = () => {
       <div className={styles.hero__body}>
         <div className={styles.hero__body_info}>
           <h1 className={styles.hero__title}>
-            Пришло время позаботиться о себе
+            Пришло время найти время для себя
           </h1>
           <div className={styles.hero__desc}>
             <Link rel="noopener noreferrer" to="#" className={styles.hero__btn}>
