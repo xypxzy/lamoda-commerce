@@ -1,8 +1,8 @@
 import {MdFavorite, MdFavoriteBorder} from 'react-icons/md'
 import {useState} from "react";
 import cls from './ProductDetails.module.css'
-import Accordion from "../Accordion/Accordion.tsx";
-import FavoriteButton from "../FavoriteButton/FavoriteButton.tsx";
+import Accordion from "../../components/Accordion/Accordion.tsx";
+import FavoriteButton from "../../components/FavoriteButton/FavoriteButton.tsx";
 
 const ProductDetails = () => {
     const [liked, setLiked] = useState(false);

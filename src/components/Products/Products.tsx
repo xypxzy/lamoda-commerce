@@ -7,10 +7,8 @@ const Products = () => {
         <section className={cls.products}>
             <div className={cls.productsContainer}>
                 <h1 className={cls.productsTitle}>Каталог</h1>
-                <ContentControls />
+                <ContentControls/>
                 <div className={cls.productsWrapper}>
-                    <ProductCard/>
-                    <ProductCard/>
                     <ProductCard/>
                     <ProductCard/>
                     <ProductCard/>

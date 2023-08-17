@@ -4,7 +4,7 @@ import {Counter} from "../components/Counter.tsx";
 import HomePage from "../pages/HomePage.tsx";
 import NotFoundPage from "../pages/NotFoundPage";
 import CatalogPage from "../pages/CatalogPage/CatalogPage.tsx";
-import ProductDetails from "../components/ProductDetails/ProductDetails.tsx";
+import ProductDetails from "../pages/ProductDetailsPage/ProductDetails.tsx";
 
 export default function Root() {
     return (

@@ -17,7 +17,7 @@ export default function Header() {
 
   //Страницы и иконки из Navbar
   const navItems = [
-    { id: 1, text: "Каталог", link: "#" },
+    { id: 1, text: "Каталог", link: "/catalog" },
     { id: 2, text: "Бренды", link: "#" },
     { id: 3, text: "Новинки", link: "#" },
     { id: 4, text: "Контакты", link: "#" },
