@@ -4,6 +4,7 @@ import {Counter} from "../components/Counter.tsx";
 import HomePage from "../pages/HomePage.tsx";
 import NotFoundPage from "../pages/NotFoundPage";
 import CatalogPage from "../pages/CatalogPage/CatalogPage.tsx";
+import ProductDetails from "../components/ProductDetails/ProductDetails.tsx";
 
 export default function Root() {
     return (
@@ -12,7 +13,7 @@ export default function Root() {
                 <Route path="/" element={<HomePage />} />
                 <Route path={"counter"} element={<Counter />} />
                 <Route path={'catalog'} element={<CatalogPage />} />
-                <Route path={'products/:id'} element={<Product />} />
+                <Route path={'product/:id'} element={<ProductDetails />} />
             </Route>
             <Route path="*" element={<NotFoundPage />}></Route>
         </Routes>
