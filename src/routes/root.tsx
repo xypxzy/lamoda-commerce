@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "../layout/Layout.tsx";
 import { Counter } from "../components/Counter.tsx";
 import HomePage from "../pages/HomePage.tsx";
+import NotFoundPage from "../pages/NotFoundPage/index.tsx";
 
 export default function Root() {
   return (
@@ -10,6 +11,7 @@ export default function Root() {
         <Route path="/" element={<HomePage />} />
         <Route path={"counter"} element={<Counter />} />
       </Route>
+      <Route path="*" element={<NotFoundPage />}></Route>
     </Routes>
   );
 }

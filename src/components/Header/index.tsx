@@ -10,10 +10,12 @@ import { Turn as Hamburger } from "hamburger-react";
 export default function Header() {
   const [isOpen, setOpen] = React.useState(false);
 
+  //Логика burger menu
   const onClickMenu = () => {
     setOpen(!isOpen);
   };
 
+  //Страницы и иконки из Navbar
   const navItems = [
     { id: 1, text: "Каталог", link: "#" },
     { id: 2, text: "Бренды", link: "#" },
