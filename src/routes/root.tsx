@@ -1,4 +1,4 @@
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Layout from "../layout/Layout.tsx";
 import { Counter } from "../components/Counter.tsx";
 import HomePage from "../pages/HomePage.tsx";
