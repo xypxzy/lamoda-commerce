@@ -4,7 +4,7 @@ import AccordionLayout from "../AccordionLayout/AccordionLayout.tsx";
 
 const Accordion = () => {
     const [activeIndex, setActiveIndex] = useState(0);
-
+    //accordion
     return (
         <div className={cls.accadion}>
             <AccordionLayout
