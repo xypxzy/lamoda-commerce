@@ -1,6 +1,7 @@
 import {useState} from "react";
 import cls from './Accordion.module.css'
 import AccordionLayout from "../AccordionLayout/AccordionLayout.tsx";
+
 const Accordion = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 

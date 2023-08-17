@@ -1,41 +1,14 @@
-import {cloneElement, FC, JSXElementConstructor, ReactElement, useState} from "react";
-import cls from './Dropdown.module.css';
-import {BsChevronDown} from 'react-icons/bs';
+import { Dropdown } from 'flowbite-react';
 
-interface DropdownProps {
-    trigger: ReactElement<{ onClick: () => void; }, string | JSXElementConstructor<Element>>,
-    menu: ReactElement<{ onClick: () => void; }, string | JSXElementConstructor<Element>>[],
-}
-
-const Dropdown: FC<DropdownProps> = ({trigger, menu}) => {
-    const [open, setOpen] = useState(false);
-
-    const handleOpen = () => {
-        setOpen(!open);
-    };
-
+export default function MyDropdown() {
     return (
-        <div className={cls.dropdown}>
-            <div className={"flex items-center justify-between cursor-pointer w-48"} onClick={handleOpen}>
-                {trigger}
-                <BsChevronDown />
-            </div>
-            {open ? (
-                <ul className={cls.menu}>
-                    {menu.map((menuItem, index) => (
-                        <li key={index} className={cls.menu__item}>
-                            {cloneElement(menuItem, {
-                                onClick: () => {
-                                    menuItem.props.onClick();
-                                    setOpen(false);
-                                },
-                            })}
-                        </li>
-                    ))}
-                </ul>
-            ) : null}
-        </div>
-    );
-};
-
-export default Dropdown;
+        <Dropdown inline label="Сортировать по">
+            <Dropdown.Item onClick={()=>alert("Dashboard!")}>
+                По убыванию
+            </Dropdown.Item>
+            <Dropdown.Item onClick={()=>alert("Settings!")}>
+                По возрастанию
+            </Dropdown.Item>
+        </Dropdown>
+    )
+}

@@ -9,7 +9,7 @@ import CatalogPage from "../pages/CatalogPage/CatalogPage.tsx";
 import ProductDetails from "../pages/ProductDetailsPage/ProductDetails.tsx";
 
 export default function Root() {
-    const checkAuth = true
+    const checkAuth = false
     return (
         <Routes>
             {checkAuth ? (

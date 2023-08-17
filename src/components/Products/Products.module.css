@@ -1,5 +1,5 @@
 .products {
-    @apply text-gray-600 ;
+    @apply text-gray-600 my-5;
 }
 
 .productsContainer {
@@ -7,7 +7,7 @@
 }
 
 .productsTitle {
-    @apply text-5xl;
+    @apply text-5xl text-start;
 }
 
 .productsWrapper {

@@ -1,9 +1,9 @@
 .productDetails {
-    @apply text-gray-600 overflow-hidden;
+    @apply text-gray-600 overflow-hidden my-20;
 }
 
 .productDetails__container {
-    @apply container px-5 py-24 mx-auto;
+    @apply container px-5 py-10 mx-auto;
 }
 
 .productDetails__wrapper {
@@ -23,7 +23,7 @@
 }
 
 .productDetails__title {
-    @apply text-gray-900 text-3xl font-medium mb-1
+    @apply text-gray-900 text-3xl font-medium mb-1 text-start
 }
 
 .productDetails__description {
