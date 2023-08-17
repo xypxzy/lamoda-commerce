@@ -16,7 +16,7 @@ const Dropdown: FC<DropdownProps> = ({trigger, menu}) => {
 
     return (
         <div className={cls.dropdown}>
-            <div className={"flex items-center justify-between"} onClick={handleOpen}>
+            <div className={"flex items-center justify-between cursor-pointer w-48"} onClick={handleOpen}>
                 {trigger}
                 <BsChevronDown />
             </div>
