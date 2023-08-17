@@ -1,20 +1,19 @@
 import React from "react";
-import styles from "./Header.module.scss";
 import logo from "../../assets/svg/logo.svg";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBag } from "react-icons/bs";
 import { BiUser } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import styles from "./Header.module.scss";
 import { Turn as Hamburger } from "hamburger-react";
 
-const Header: React.FC = () => {
+export default function Header() {
   const [isOpen, setOpen] = React.useState(false);
 
   const onClickMenu = () => {
     setOpen(!isOpen);
   };
 
-  //Элементы navbar
   const navItems = [
     { id: 1, text: "Каталог", link: "#" },
     { id: 2, text: "Бренды", link: "#" },
@@ -29,52 +28,89 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className={styles.header}>
+    <div className={styles.header}>
+      <ul className={`DESKTOP-MENU ${styles.header__list}`}>
+        {navItems.map((item) => (
+          <li key={item.id}>
+            <Link to={item.link} aria-current="page">
+              {item.text}
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <Link to="/">
+        <img src={logo} alt="lamoda logo" />
+      </Link>
       <nav>
-        <div className={styles.nav__body}>
+        <section className="MOBILE-MENU flex lg:hidden">
+          <Hamburger
+            size={25}
+            color="black"
+            toggled={isOpen}
+            toggle={onClickMenu}
+          />
+
           <div
-            className={isOpen ? styles.nav__list_open : styles.nav__list}
-            id="navbar-solid-bg"
+            className={
+              isOpen ? `${styles.showMenuNav}` : `${styles.hideMenuNav}`
+            }
           >
-            <ul>
+            <div
+              className="absolute top-0 right-0 px-8 py-8"
+              onClick={onClickMenu}
+            >
+              <svg
+                className="h-8 w-8 text-gray-900"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </div>
+            <ul className={styles.header__mobile_list}>
               {navItems.map((item) => (
-                <li key={item.id}>
+                <li className={isOpen ? styles.list_text : ""} key={item.id}>
                   <Link to={item.link} aria-current="page">
                     {item.text}
                   </Link>
                 </li>
               ))}
-            </ul>
-          </div>
-          <Link to="#" className="flex items-center">
-            <img
-              src={logo}
-              className={` ${isOpen ? "hidden" : ""} h-8 mr-3`}
-              alt="Lamoda logo"
-            />
-          </Link>
-          <div
-            className={isOpen ? styles.nav__list_open : styles.nav__list}
-            id="navbar-solid-bg"
-          >
-            <ul>
               {navLinks.map((item) => (
-                <li className={styles.nav__icons} key={item.id}>
-                  <Link to={item.link} aria-current="page">
-                    <p className="px-2 pb-1">{item.icon}</p>
+                <li className={isOpen ? styles.list_text : ""} key={item.id}>
+                  <Link
+                    className={styles.icon_center}
+                    to={item.link}
+                    aria-current="page"
+                  >
+                    {item.icon}
                     <span className={styles.icon__text}>{item.text}</span>
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
-          <span onClick={onClickMenu} className={styles.burger}>
-            <Hamburger size={25} />
-          </span>
-        </div>
-      </nav>
-    </header>
-  );
-};
+        </section>
 
-export default Header;
+        <ul className={`DESKTOP-MENU ${styles.header__list}`}>
+          {navLinks.map((item) => (
+            <li className={styles.nav__icons} key={item.id}>
+              <Link
+                className={styles.icon_center}
+                to={item.link}
+                aria-current="page"
+              >
+                {item.icon}
+                <span className={styles.icon__text}>{item.text}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  );
+}
