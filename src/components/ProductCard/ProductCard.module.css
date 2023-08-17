@@ -26,10 +26,6 @@
     @apply mt-1 font-bold text-xl text-black;
 }
 
-.quickIcons {
-    @apply absolute  flex flex-col gap-2;
-}
-
 .button {
     @apply border border-black rounded-full bg-white hover:bg-red-100 hover:text-red-500
     transition-all duration-150 ease-in-out;
