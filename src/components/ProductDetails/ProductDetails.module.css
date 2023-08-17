@@ -15,7 +15,7 @@
 }
 
 .productDetails__information {
-    @apply lg:w-[48%] w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 flex flex-col gap-2;
+    @apply lg:w-[40%] w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 flex flex-col gap-2;
 }
 
 .productDetails__brandName {
