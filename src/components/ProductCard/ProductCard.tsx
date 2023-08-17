@@ -2,7 +2,6 @@ import cls from './ProductCard.module.css'
 import {MdFavorite, MdFavoriteBorder} from 'react-icons/md'
 import {PiBagSimpleLight, PiBagSimpleFill} from 'react-icons/pi'
 import {useState} from "react";
-import FavoriteButton from "../FavoriteButton/FavoriteButton.tsx";
 
 const ProductCard = () => {
     const [liked, setLiked] = useState(false)
@@ -18,20 +17,31 @@ const ProductCard = () => {
                 <h2 className={cls.title}>Тоник Babor Thermal Toning Essence </h2>
                 <p className={cls.prices}>$16.00</p>
             </div>
-            <FavoriteButton
-                active={liked}
-                setActive={setLiked}
-                DefaultImage={<MdFavoriteBorder/>}
-                ActiveImage={<MdFavorite/>}
-                className={`${cls.button} ${liked ? cls.liked : ''} right-8 top-10`}
-            />
-            <FavoriteButton
-                active={addCart}
-                setActive={setAddCart}
-                DefaultImage={<PiBagSimpleLight/>}
-                ActiveImage={<PiBagSimpleFill/>}
-                className={`${cls.button} ${addCart ? cls.addedToCart : ''} right-8 top-24`}
-            />
+            <div className={cls.quickIcons}>
+                <div className={cls.button}>
+                    <div
+                        onClick={() => setLiked(!liked)}
+                        className={`${cls.favouriteBtn} ${liked ? `${cls.liked}` : ''}`}>
+                        {liked ?
+                            <MdFavorite/>
+                            :
+                            <MdFavoriteBorder />
+                        }
+                    </div>
+                </div>
+                <div className={cls.button}>
+                    <div
+                        onClick={() => setAddCart(!addCart)}
+                        className={`${cls.favouriteBtn} ${addCart ? `${cls.addedToCart}` : ''}`}
+                    >
+                        {addCart ?
+                            <PiBagSimpleFill/>
+                            :
+                            <PiBagSimpleLight/>
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
