@@ -3,21 +3,11 @@
 }
 
 .menu {
-    position: absolute;
-
-    list-style-type: none;
-    margin: 5px 0;
-    padding: 0;
-
-    border: 1px solid grey;
-    width: 150px;
-    z-index: 100;
+    @apply absolute list-none my-2 -left-[21px] border border-gray-500  z-50;
 }
 
 .menu > li {
-    margin: 0;
-
-    background-color: white;
+    @apply m-0 px-4 py-1 bg-white w-[14.5rem];
 }
 
 .menu > li:hover {
