@@ -11,7 +11,7 @@
 }
 
 .productDetails__image {
-    @apply lg:w-[50%] w-full lg:h-auto h-64 object-cover object-center rounded;
+    @apply lg:w-[50%] w-full lg:h-2/3 h-64 object-cover object-center rounded;
 }
 
 .productDetails__information {
@@ -35,7 +35,7 @@
 }
 
 .productDetails__addCart {
-    @apply flex mt-8;
+    @apply flex my-8;
 }
 
 .productDetails__counter {

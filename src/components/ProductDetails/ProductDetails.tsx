@@ -2,6 +2,7 @@ import {MdFavorite, MdFavoriteBorder} from 'react-icons/md'
 import {useState} from "react";
 import cls from './ProductDetails.module.css'
 import Accordion from "../Accordion/Accordion.tsx";
+import FavoriteButton from "../FavoriteButton/FavoriteButton.tsx";
 
 const ProductDetails = () => {
     const [liked, setLiked] = useState(false);
@@ -33,20 +34,14 @@ const ProductDetails = () => {
                                 Добавить в корзину
                             </button>
                         </div>
-
-                        <div className={"absolute right-0 top-5"}>
-                            <button
-                                className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4"
-                                onClick={() => setLiked(!liked)}
-                            >
-                                {liked ?
-                                    <MdFavorite/>
-                                    :
-                                    <MdFavoriteBorder/>
-                                }
-                            </button>
-                        </div>
                         <Accordion />
+                        <FavoriteButton
+                            active={liked}
+                            setActive={setLiked}
+                            DefaultImage={<MdFavoriteBorder />}
+                            ActiveImage={<MdFavorite />}
+                            className={'lg:top-8 lg:right-16 top-5 right-5'}
+                        />
                     </div>
                 </div>
             </div>
