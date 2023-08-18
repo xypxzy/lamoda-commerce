@@ -2,7 +2,7 @@ import { Dropdown } from 'flowbite-react';
 
 export default function MyDropdown() {
     return (
-        <Dropdown inline label="Сортировать по">
+        <Dropdown inline placement={"bottom"} label="Сортировать">
             <Dropdown.Item onClick={()=>alert("Dashboard!")}>
                 По убыванию
             </Dropdown.Item>

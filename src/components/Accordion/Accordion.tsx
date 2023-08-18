@@ -6,7 +6,7 @@ const Accordion = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     //accordion
     return (
-        <div className={cls.accadion}>
+        <div className={cls.accordion}>
             <AccordionLayout
                 title="Описание"
                 index={1}

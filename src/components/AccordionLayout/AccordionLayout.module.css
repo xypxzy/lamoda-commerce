@@ -3,11 +3,11 @@
 }
 
 .accordion__header {
-    @apply flex py-4;
+    @apply flex py-4 cursor-pointer;
 }
 
 .accordion__title {
-    @apply text-black text-xl font-medium uppercase;
+    @apply text-black text-lg uppercase;
 }
 
 .accordion__buttons {
@@ -15,7 +15,7 @@
 }
 
 .accordion__btn {
-    @apply w-6 h-6 cursor-pointer;
+    @apply w-5 h-5 cursor-pointer text-gray-600 font-extralight;
 }
 
 .accordion__description {

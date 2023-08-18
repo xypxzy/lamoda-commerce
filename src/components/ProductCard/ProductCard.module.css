@@ -19,7 +19,7 @@
 }
 
 .title {
-    @apply text-gray-900 text-lg font-medium;
+    @apply text-gray-900 text-lg font-medium text-start;
 }
 
 .prices {
@@ -31,20 +31,11 @@
 }
 
 .button {
-    @apply border border-black rounded-full bg-white hover:bg-gray-200 hover:text-red-500
-    transition-all duration-150 ease-in-out
-    ;
+    @apply border border-black rounded-full bg-white hover:bg-gray-200
+    transition-all duration-150 ease-in-out;
 
 }
 
 .favouriteBtn {
     @apply p-2 text-xl cursor-pointer ;
-}
-
-.liked svg{
-    @apply fill-red-500
-}
-
-.addedToCart svg{
-    @apply fill-red-500
 }
