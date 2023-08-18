@@ -4,11 +4,11 @@ import Footer from "../components/Footer/index.tsx";
 
 const Layout = () => {
   return (
-    <div>
+    <>
       <Header />
       <Outlet />
       <Footer />
-    </div>
+    </>
   );
 };
 

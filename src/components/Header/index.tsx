@@ -24,7 +24,7 @@ export default function Header() {
   ];
 
   const navLinks = [
-    { id: 1, icon: <BiUser />, link: "#", text: "Профиль" },
+    { id: 1, icon: <BiUser />, link: "/user", text: "Профиль" },
     { id: 2, icon: <AiOutlineHeart />, link: "#", text: "Избранное" },
     { id: 3, icon: <BsBag />, link: "#", text: "Корзина" },
   ];

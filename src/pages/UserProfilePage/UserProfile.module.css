@@ -1,0 +1,11 @@
+.user {
+  @apply mb-10;
+}
+
+.user__container {
+  @apply flex flex-wrap justify-around w-full max-w-5xl mx-auto p-6 bg-white rounded-lg shadow;
+}
+
+.user__info {
+  @apply flex justify-center;
+}
