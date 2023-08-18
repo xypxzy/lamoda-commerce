@@ -15,7 +15,7 @@ const ProductCard = () => {
             setIsLoading(false)
         }, 5000)
     },[]) // Нужно удалить
-
+    //Skeletons
     if(isLoading) {
         return (
             <div className={cls.container}>
@@ -50,14 +50,16 @@ const ProductCard = () => {
                 setActive={setLiked}
                 DefaultImage={<MdFavoriteBorder/>}
                 ActiveImage={<MdFavorite/>}
-                className={`${cls.button} ${liked ? cls.liked : ''} right-8 top-10`}
+                className={`${cls.button} hover:text-red-500 right-8 top-8`}
+                color={"red"}
             />
             <FavoriteButton
                 active={addCart}
                 setActive={setAddCart}
                 DefaultImage={<PiBagSimpleLight/>}
                 ActiveImage={<PiBagSimpleFill/>}
-                className={`${cls.button} ${addCart ? cls.addedToCart : ''} right-8 top-24`}
+                className={`${cls.button} hover:text-green-500 right-8 top-[72px]`}
+                color={"green"}
             />
         </div>
     );
