@@ -1,5 +1,6 @@
 import SearchProducts from "../SearchProducts/SearchProducts.tsx";
 import FilterProducts from "../FilterProducts/FilterProducts.tsx";
+
 //
 // interface ResultProps {
 //     id: number,
@@ -7,25 +8,13 @@ import FilterProducts from "../FilterProducts/FilterProducts.tsx";
 // }
 
 const ContentControls = () => {
-    // const [searchResults, setSearchResults] = useState<ResultProps[]>([]);
 
-    // const handleSearch = () => {
-    //     // Здесь вы можете выполнить логику поиска, например, запрос к API или другую обработку
-    //     // и затем обновить состояние searchResults с полученными результатами.
-    //     // Ниже просто симулируем результаты поиска.
-    //
-    //     const fakeResults = [
-    //         { id: 1, title: 'Result 1' },
-    //         { id: 2, title: 'Result 2' },
-    //         // ...
-    //     ];
-    //
-    //     setSearchResults(fakeResults);
-    // };
     return (
-        <div className={"py-10 flex justify-center items-center flex-wrap"}>
-            <SearchProducts />
-            <FilterProducts />
+        <div className={"py-10 flex justify-center flex-col flex-wrap"}>
+            <div className={"flex w-full lg:justify-center  items-center md:flex-nowrap flex-wrap"}>
+                <SearchProducts />
+                <FilterProducts />
+            </div>
         </div>
     );
 };

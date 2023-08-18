@@ -19,7 +19,7 @@
 }
 
 .title {
-    @apply text-gray-900 text-lg font-medium;
+    @apply text-gray-900 text-lg font-medium text-start;
 }
 
 .prices {

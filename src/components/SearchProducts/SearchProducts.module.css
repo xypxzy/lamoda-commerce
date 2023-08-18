@@ -1,5 +1,5 @@
 .wrap{
-    @apply w-3/4 border border-gray-400;
+    @apply md:w-3/4 w-full md:mb-0 mb-2 border border-gray-400;
 }
 
 .search {
@@ -11,5 +11,5 @@
 }
 
 .searchButton {
-    @apply w-10 h-8 flex items-center justify-center text-xl bg-white cursor-pointer;
+    @apply w-10 h-8 flex items-center justify-center text-xl  cursor-pointer;
 }
