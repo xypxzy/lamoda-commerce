@@ -1,0 +1,42 @@
+.cart {
+	max-width: 1280px;
+	border: 1px solid red;
+	margin: 0 auto;
+	&__wrap {
+		@apply pt-14 flex gap-x-28;
+	}
+	&__left,
+	&__right {
+		@apply flex-1;
+	}
+	&__item {
+		@apply flex items-center gap-x-6 mb-6;
+		&_name {
+			@apply text-lg w-72;
+		}
+		&_actions {
+			@apply flex flex-1 justify-end items-center gap-x-1;
+		}
+		&_btn {
+			@apply py-1 px-3 border;
+		}
+	}
+	&__total {
+		@apply border-t border-b border-black flex items-center gap-x-2  py-7;
+		&_inputCode {
+			@apply py-3 px-4 border border-zinc-400 rounded-3xl  w-80 font-bold text-base/4;
+		}
+		&_btnApply {
+			@apply rounded-3xl bg-stone-600	 py-3 px-5 text-white	font-bold;
+		}
+		&_intermediateTotal {
+			@apply pt-7 pb-6 border-b border-black;
+			> div {
+				@apply flex justify-between first:mb-6;
+			}
+		}
+		// &_ {
+		// 	@apply flex justify-between	pb-6 border-b border-black;
+		// }
+	}
+}
