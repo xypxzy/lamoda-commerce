@@ -1,0 +1,41 @@
+.container {
+    @apply lg:w-1/3 md:w-1/2 p-4 w-full relative;
+}
+
+.imageWrapper {
+    @apply block relative h-96 rounded overflow-hidden;
+}
+
+.image {
+    @apply object-cover object-center w-full h-full block;
+}
+
+.information {
+    @apply mt-4;
+}
+
+.category {
+    @apply text-gray-500 text-xs tracking-widest  mb-1;
+}
+
+.title {
+    @apply text-gray-900 text-lg font-medium text-start;
+}
+
+.prices {
+    @apply mt-1 font-bold text-xl text-black;
+}
+
+.quickIcons {
+    @apply absolute right-8 top-8 flex flex-col gap-2;
+}
+
+.button {
+    @apply border border-black rounded-full bg-white hover:bg-gray-200
+    transition-all duration-150 ease-in-out;
+
+}
+
+.favouriteBtn {
+    @apply p-2 text-xl cursor-pointer ;
+}

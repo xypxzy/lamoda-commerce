@@ -1,0 +1,15 @@
+.user {
+  @apply mb-10;
+}
+
+.user__container {
+  @apply flex flex-wrap justify-around w-full max-w-5xl mx-auto p-6 bg-white rounded-lg shadow;
+}
+
+.user__info {
+  @apply flex justify-center;
+}
+
+.user__btn {
+  @apply text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800;
+}

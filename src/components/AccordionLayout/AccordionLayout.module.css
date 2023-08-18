@@ -1,0 +1,23 @@
+.accordion__wrapper {
+    @apply flex w-full items-center justify-between rounded text-black border-t-[1px] border-gray-400;
+}
+
+.accordion__header {
+    @apply flex py-4 cursor-pointer;
+}
+
+.accordion__title {
+    @apply text-black text-lg uppercase;
+}
+
+.accordion__buttons {
+    @apply flex items-center justify-center;
+}
+
+.accordion__btn {
+    @apply w-5 h-5 cursor-pointer text-gray-600 font-extralight;
+}
+
+.accordion__description {
+    @apply  rounded-2xl shadow-cyan-500/50 p-4 mb-6;
+}
