@@ -38,10 +38,7 @@ const UserProfilePage: React.FC = () => {
               placeholder="john.doe@company.com"
             ></input>
           </div>
-          <button
-            type="submit"
-            className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-          >
+          <button type="submit" className={styles.user__btn}>
             Обновить профиль
           </button>
         </form>

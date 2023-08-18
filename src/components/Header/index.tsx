@@ -44,7 +44,7 @@ export default function Header() {
         <img src={logo} alt="lamoda logo" />
       </Link>
       <nav>
-        <section className="MOBILE-MENU flex lg:hidden">
+        <section className="MOBILE-MENU mt-0 flex lg:hidden">
           <Hamburger
             size={25}
             color="black"
