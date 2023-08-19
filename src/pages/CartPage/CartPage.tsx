@@ -75,12 +75,11 @@ const CartPage = () => {
 
 export default CartPage;
 
-const imgUrl: string = "https://fastly.picsum.photos/id/131/130/130.jpg?hmac=03RnqpG8XlD2bDScOv7eSQafafSv8tHCn8Wq177XVDM"
 
 const CartItem = () => {
   return (
     <div className={cls.cart__item}>
-      <img src={imgUrl} alt="" />
+      <img src="https://dummyimage.com/130x130" alt="" />
       <h4 className={cls.cart__item_name}>Маска для светящейся маски AHA-ENZYME </h4>
       <div className={cls.cart__item_actions}>
         <button className={cls.cart__item_btn}>-</button>
