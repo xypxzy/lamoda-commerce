@@ -8,6 +8,7 @@ import Login from "../pages/login/Login.tsx";
 import CatalogPage from "../pages/CatalogPage/CatalogPage.tsx";
 import ProductDetails from "../pages/ProductDetailsPage/ProductDetails.tsx";
 import UserProfilePage from "../pages/UserProfilePage/UserProfilePage.tsx";
+import CartPage from "../pages/CartPage/CartPage.tsx";
 
 export default function Root() {
   const checkAuth = false;
@@ -27,6 +28,7 @@ export default function Root() {
             <Route path={"product/:id"} element={<ProductDetails />} />
             <Route path={"user"} element={<UserProfilePage />} />
           </Route>
+          <Route path="cart" element={<CartPage />} />
           <Route path="*" element={<NotFoundPage />}></Route>
         </>
       )}
