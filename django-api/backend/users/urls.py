@@ -9,7 +9,7 @@ urlpatterns = [
     path('token/', obtain_auth_token),
     path('auth/', include('rest_framework.urls')),
 
-    path('user/<int:pk>/', views.UserRetrieveUpdateAPIView.as_view()),
-    path('user/favourite/', FavouriteProductListAPIView.as_view()),
-    path('user/favourite/<int:pk>/delete/', FavouriteProductDestroyAPIView.as_view())
+    path('', views.UserRetrieveUpdateAPIView.as_view()),
+    path('favourite/', FavouriteProductListAPIView.as_view()),
+    path('favourite/<int:pk>/delete/', FavouriteProductDestroyAPIView.as_view())
 ]

@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 from backend.users.models import User
 
@@ -19,8 +20,10 @@ class Product(models.Model):
     name = models.CharField(max_length=80, null=False, blank=False)
     serial_number = models.CharField(max_length=10, unique=True)
     description = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.PROTECT, default=None, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
     categories = models.ManyToManyField('Category')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -34,3 +37,7 @@ class ProductImage(models.Model):
 class FavouriteProduct(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favourite_products')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='favourite_products')
+
+    class Meta:
+        unique_together = ('user', 'product')
+        

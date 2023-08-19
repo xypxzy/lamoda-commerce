@@ -29,3 +29,11 @@ class IsAdminOrReadOnly(BasePermission):
             # is_staff to check if the user is admin
             request.user.is_staff
         )
+
+class IsAuthorOrReadOnly(IsAuthor):
+    def has_object_permission(self, request, view, obj):
+        return bool(
+            request.method in SAFE_METHODS or
+            (request.user.is_authenticated and
+            request.user == obj.user)
+        )
