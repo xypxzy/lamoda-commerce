@@ -1,16 +1,33 @@
+from django.db import IntegrityError
 from rest_framework import generics, viewsets, permissions
 from rest_framework.response import Response
 
 from . import models
 from . import serializers
-from .permissions import IsAuthor, IsAdminOrReadOnly, IsAuthorImages
+from .permissions import IsAuthor, IsAdminOrReadOnly, IsAuthorImages, IsAuthorOrReadOnly
 
 
-class ProductViewSet(viewsets.ModelViewSet):
+class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductSerializer
-    # user can't create products without logging in
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, ]
+
+    def perform_create(self, serializer):
+        if self.request.user.is_authenticated:
+            instance = serializer.save(user=self.request.user)
+
+
+class ProductRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Product.objects.all()
+    serializer_class = serializers.ProductSerializer
+    permission_classes = [IsAuthorOrReadOnly, ]
+
+    def perform_update(self, serializer):
+        if self.request.user.is_authenticated:
+            serializer.save(
+                user=self.request.user,
+                product=self.queryset.get(id=self.kwargs['pk'])
+            )    
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -23,7 +40,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class ProductImagesListCreateAPIView(generics.ListCreateAPIView):
     queryset = models.ProductImage.objects.all()
     serializer_class = serializers.ProductImageSerializer
-    permission_classes = [IsAuthorImages]
+    permission_classes = [IsAuthorImages, ]
 
 
 class FavouriteProductCreateAPIView(generics.CreateAPIView):
@@ -31,20 +48,32 @@ class FavouriteProductCreateAPIView(generics.CreateAPIView):
     serializer_class = serializers.FavouriteProductSerializer
     permission_classes = [permissions.IsAuthenticated, ]
 
+    def perform_create(self, serializer):
+        if self.request.user.is_authenticated:
+            try:
+                serializer.save(
+                    user=self.request.user,
+                    product=models.Product.objects.get(id=self.kwargs['product_id'])
+                )
+            except IntegrityError:
+                existing_favourite = models.FavouriteProduct.objects.filter(
+                    user=self.request.user,
+                    product_id=self.kwargs['product_id']
+                )
+                existing_favourite.delete()
+
 
 class FavouriteProductListAPIView(generics.ListAPIView):
     queryset = models.FavouriteProduct.objects.all()
     serializer_class = serializers.FavouriteProductSerializer
     permission_classes = [IsAuthor, ]
 
-    def get(self, request, *args, **kwargs):
-        queryset = self.queryset.filter(user=request.user.id)  # filtering the queryset for user
-        serializer = self.get_serializer(queryset, many=True)
-
-        return Response(serializer.data)
-
+    def get_queryset(self):
+        return self.queryset.filter(user=self.request.user)
+    
 
 class FavouriteProductDestroyAPIView(generics.DestroyAPIView):
     queryset = models.FavouriteProduct.objects.all()
     serializer_class = serializers.FavouriteProductSerializer
     permission_classes = [IsAuthor, ]
+

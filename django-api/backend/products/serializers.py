@@ -20,12 +20,13 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Product
-        fields = ('id', 'name', 'serial_number',
-                  'description', 'categories', 'images')
+        fields = '__all__'
+        read_only_fields = ['user', 'created_at', 'updated_at']
 
 
 class FavouriteProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.FavouriteProduct
-        fields = ('id', 'user', 'product')
+        fields = '__all__'
+        read_only_fields = ['user', 'product']
         unique_together = ('user', 'product')
