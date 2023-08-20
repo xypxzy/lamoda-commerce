@@ -21,10 +21,10 @@ const CartPage = () => {
           <div className='mb-11'>
             <nav className="flex justify-center" aria-label="Breadcrumb">
               <ol className="inline-flex items-center space-x-1 md:space-x-3">
-                {breadcrumbs.map((item: string, index: number) => (<li className="inline-flex items-center">
+                {breadcrumbs.map((item: string, index: number) => (<li key={index} className="inline-flex items-center">
                   {index !== 0 && (
                     <svg className="w-4 h-4 text-gray-500 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                     </svg>
                   )}
                   <a href="#" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
@@ -61,8 +61,8 @@ const CartPage = () => {
               <span className='text-sm'>Сохраните эту информацию для следующего раза </span>
             </span>
             <p className='pt-9 flex justify-end items-center text-sm text-slate-600'>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
               </svg>
               <a href="">Вернуться в корзину</a>
             </p>
