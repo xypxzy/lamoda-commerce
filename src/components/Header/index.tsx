@@ -3,9 +3,10 @@ import logo from "../../assets/svg/logo.svg";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBag } from "react-icons/bs";
 import { BiUser } from "react-icons/bi";
-import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
 import { Turn as Hamburger } from "hamburger-react";
+import { Link as ScrollLink } from "react-scroll";
+import { Link as RouterLink } from "react-router-dom";
 
 export default function Header() {
   const [isOpen, setOpen] = React.useState(false);
@@ -15,12 +16,17 @@ export default function Header() {
     setOpen(!isOpen);
   };
 
+  const closeMenu = () => {
+    setOpen(false);
+  };
+
   //Страницы и иконки из Navbar
   const navItems = [
     { id: 1, text: "Каталог", link: "/catalog" },
-    { id: 2, text: "Бренды", link: "#" },
-    { id: 3, text: "Новинки", link: "#" },
-    { id: 4, text: "Контакты", link: "#" },
+    { id: 2, text: "Новинки", link: "newcollection" },
+    { id: 3, text: "Преимущества", link: "features" },
+    { id: 4, text: "О нас", link: "aboutus" },
+    { id: 5, text: "Бренды", link: "brands" },
   ];
 
   const navLinks = [
@@ -34,15 +40,30 @@ export default function Header() {
       <ul className={`DESKTOP-MENU ${styles.header__list}`}>
         {navItems.map((item) => (
           <li key={item.id}>
-            <Link to={item.link} aria-current="page">
-              {item.text}
-            </Link>
+            {item.link.startsWith("/") ? (
+              <RouterLink to={item.link} aria-current="page">
+                {item.text}
+              </RouterLink>
+            ) : (
+              <ScrollLink
+                to={item.link}
+                target={item.link}
+                spy={true}
+                smooth={true}
+                offset={50}
+                duration={1000}
+                aria-current="page"
+                onClick={closeMenu}
+              >
+                {item.text}
+              </ScrollLink>
+            )}
           </li>
         ))}
       </ul>
-      <Link to="/">
+      <RouterLink to="/">
         <img src={logo} alt="lamoda logo" />
-      </Link>
+      </RouterLink>
       <nav>
         <section className="MOBILE-MENU mt-0 flex lg:hidden">
           <Hamburger
@@ -65,6 +86,7 @@ export default function Header() {
                 className="h-8 w-8 text-gray-900"
                 viewBox="0 0 24 24"
                 fill="none"
+                cursor="pointer"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
@@ -76,22 +98,37 @@ export default function Header() {
             </div>
             <ul className={styles.header__mobile_list}>
               {navItems.map((item) => (
-                <li className={isOpen ? styles.list_text : ""} key={item.id}>
-                  <Link to={item.link} aria-current="page">
-                    {item.text}
-                  </Link>
+                <li className={styles.list_text} key={item.id}>
+                  {item.link.startsWith("/") ? (
+                    <RouterLink to={item.link} aria-current="page">
+                      {item.text}
+                    </RouterLink>
+                  ) : (
+                    <ScrollLink
+                      to={item.link}
+                      spy={true}
+                      smooth={true}
+                      offset={50}
+                      duration={1000}
+                      aria-current="page"
+                      onClick={closeMenu}
+                    >
+                      {item.text}
+                    </ScrollLink>
+                  )}
                 </li>
               ))}
               {navLinks.map((item) => (
                 <li className={isOpen ? styles.list_text : ""} key={item.id}>
-                  <Link
+                  <RouterLink
                     className={styles.icon_center}
                     to={item.link}
                     aria-current="page"
+                    onClick={closeMenu}
                   >
                     {item.icon}
                     <span className={styles.icon__text}>{item.text}</span>
-                  </Link>
+                  </RouterLink>
                 </li>
               ))}
             </ul>
@@ -101,14 +138,14 @@ export default function Header() {
         <ul className={`DESKTOP-MENU ${styles.header__list}`}>
           {navLinks.map((item) => (
             <li className={styles.nav__icons} key={item.id}>
-              <Link
+              <RouterLink
                 className={styles.icon_center}
                 to={item.link}
                 aria-current="page"
               >
                 {item.icon}
                 <span className={styles.icon__text}>{item.text}</span>
-              </Link>
+              </RouterLink>
             </li>
           ))}
         </ul>

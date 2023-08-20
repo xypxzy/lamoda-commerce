@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const NewCollection: React.FC = () => {
   return (
-    <section className={styles.collection}>
+    <section id="newcollection" className={styles.collection}>
       <h2 className="mb-20 font-bold text-3xl">Новая коллекция</h2>
       <div className={styles.col_grid}>
         <div className={styles.col_card}>

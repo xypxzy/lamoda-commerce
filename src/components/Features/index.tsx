@@ -6,7 +6,7 @@ import feature3 from "../../assets/svg/Frame 16.svg";
 
 const Features: React.FC = () => {
   return (
-    <section className={styles.features}>
+    <section id="features" className={styles.features}>
       <h2 className="mb-20 font-bold text-3xl">Что для нас важно</h2>
       <div className={styles.features_grid}>
         <div className={styles.features_card}>

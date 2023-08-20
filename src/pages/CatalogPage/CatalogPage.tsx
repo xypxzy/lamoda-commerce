@@ -1,9 +1,11 @@
 import Products from "../../components/Products/Products.tsx";
 
 const CatalogPage = () => {
-    return (
-        <Products/>
-    );
+  return (
+    <div id="catalog">
+      <Products />
+    </div>
+  );
 };
 
 export default CatalogPage;
