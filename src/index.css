@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  position: relative;
+}
+
 body {
   font-family: "Comfortaa", cursive;
 }

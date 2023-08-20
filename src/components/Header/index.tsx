@@ -53,9 +53,9 @@ export default function Header() {
           />
 
           <div
-            className={
-              isOpen ? `${styles.showMenuNav}` : `${styles.hideMenuNav}`
-            }
+            className={`${styles.navbar} ${
+              isOpen ? styles["slidein"] : styles["slideout"]
+            }`}
           >
             <div
               className="absolute top-0 right-0 px-8 py-8"

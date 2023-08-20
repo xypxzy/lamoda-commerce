@@ -1,0 +1,22 @@
+.about {
+  @apply max-w-screen-xl mx-auto px-4 mb-52;
+}
+
+.about_grid {
+  display: grid;
+  grid-template-columns: 70% 25%;
+  gap: 30px;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.about_carousel {
+  @apply bg-transparent;
+}
+
+.about_text {
+  @apply font-semibold;
+}
