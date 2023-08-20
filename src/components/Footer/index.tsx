@@ -55,7 +55,6 @@ const Footer: React.FC = () => {
               <img src={logo} className="mr-3" alt="FlowBite Logo" />
             </Link>
           </div>
-          <div className="border-l-2 border-gray-400 h-48 hidden md:block"></div>
 
           <div className={styles.info}>
             <h2 className={styles.footer__title}>Информация</h2>
@@ -72,7 +71,6 @@ const Footer: React.FC = () => {
               </ul>
             ))}
           </div>
-          <div className="border-l-2 border-gray-400 h-48 hidden md:block"></div>
 
           <div className="">
             <h2 className={styles.footer__contacts}>Социальные сети</h2>
