@@ -4,7 +4,7 @@ from rest_framework.response import Response
 
 from . import models
 from . import serializers
-from .permissions import IsAuthor, IsAdminOrReadOnly, IsAuthorImages, IsAuthorOrReadOnly
+from .permissions import IsAuthor, IsAdminOrReadOnly, IsProductAuthor, IsAuthorOrReadOnly
 
 
 class ProductListCreateAPIView(generics.ListCreateAPIView):
@@ -37,10 +37,16 @@ class CategoryViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAdminOrReadOnly]
 
 
-class ProductImagesListCreateAPIView(generics.ListCreateAPIView):
+class ProductImagesCreateAPIView(generics.CreateAPIView):
     queryset = models.ProductImage.objects.all()
     serializer_class = serializers.ProductImageSerializer
-    permission_classes = [IsAuthorImages, ]
+    permission_classes = [IsProductAuthor, ]
+
+    def perform_create(self, serializer):
+        serializer.save(
+            product=models.Product.objects.get(id=self.kwargs['product_id'])
+        )
+        
 
 
 class FavouriteProductCreateAPIView(generics.CreateAPIView):
