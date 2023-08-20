@@ -36,7 +36,7 @@ const CartPage = () => {
           </div>
           <div className={cls.cart__contact}>
             <h2 className='mb-3 text-xl'>Контактная информация</h2>
-            <input type="email" className='w-full px-3 pt-4 pb-3 mb-2 text-sm text-black placeholder-black ' placeholder='Электронная почта' />
+            <input type="email" className={cls.cart__contact_input} placeholder='Электронная почта' />
             <span className='flex items-center gap-x-2'>
               <input type="checkbox" className='w-6 h-6' />
               <span className='text-sm'>Пишите мне с новостями и предложениями </span>
