@@ -17,9 +17,9 @@ const ProductDetails = () => {
     // Skeletons
     if (isLoading) {
         return (
-            <div className={cls.productDetails}>
-                <div className={cls.productDetails__container}>
-                    <div className={cls.productDetails__wrapper}>
+            <div className={cls.product_details}>
+                <div className={cls.product_details__container}>
+                    <div className={cls.product_details__wrapper}>
                         <div role="status"
                              className="w-full h-full space-y-8 animate-pulse md:space-y-0 md:space-x-8 md:flex md:items-center">
                             <div
@@ -50,26 +50,26 @@ const ProductDetails = () => {
     }
 
     return (
-        <section className={cls.productDetails}>
-            <div className={cls.productDetails__container}>
-                <div className={cls.productDetails__wrapper}>
-                    <img alt="product" className={cls.productDetails__image} src="https://dummyimage.com/400x400"/>
-                    <div className={cls.productDetails__information}>
-                        <h1 className={cls.productDetails__title}>Title</h1>
-                        <span className={cls.productDetails__price}>$58.00</span>
-                        <h2 className={cls.productDetails__brandName}>BRAND NAME</h2>
-                        <p className={cls.productDetails__description}>
+        <section className={cls.product_details}>
+            <div className={cls.product_details__container}>
+                <div className={cls.product_details__wrapper}>
+                    <img alt="product" className={cls.product_details__image} src="https://dummyimage.com/400x400"/>
+                    <div className={cls.product_details__information}>
+                        <h1 className={cls.product_details__title}>Title</h1>
+                        <span className={cls.product_details__price}>$58.00</span>
+                        <h2 className={cls.product_details__brandName}>BRAND NAME</h2>
+                        <p className={cls.product_details__description}>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, earum voluptate.
                             Accusantium aliquam dicta dolor, doloribus ducimus excepturi iure magni maxime neque quo
                             recusandae sapiente sint soluta, suscipit totam vitae.
                         </p>
-                        <div className={cls.productDetails__addCart}>
-                            <div className={cls.productDetails__counter}>
-                                <button className="">-</button>
+                        <div className={cls.product_details__add_cart}>
+                            <div className={cls.product_details__counter}>
+                                <button >-</button>
                                 <span>1</span>
                                 <button>+</button>
                             </div>
-                            <button className={cls.productDetails__addCartBtn}>
+                            <button className={cls.product_details__btn}>
                                 Добавить в корзину
                             </button>
                         </div>

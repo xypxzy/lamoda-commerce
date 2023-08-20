@@ -2,15 +2,15 @@
     @apply text-gray-600 my-5;
 }
 
-.productsContainer {
+.products__container {
     @apply container px-5 py-10 mx-auto;
 }
 
-.productsTitle {
+.products__title {
     @apply text-5xl text-start;
 }
 
-.productsWrapper {
+.products__wrapper {
     @apply flex flex-wrap -m-4;
 }
 
