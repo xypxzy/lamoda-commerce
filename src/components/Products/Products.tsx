@@ -4,7 +4,7 @@ import cls from './Products.module.css'
 import {useGetProductsQuery} from "../../store/products/productsApi.ts";
 
 const Products = () => {
-    const {data = [], isLoading, isError} = useGetProductsQuery('');
+    const {data = [], isLoading} = useGetProductsQuery('products');
 
     console.log(data)
     return (
@@ -13,12 +13,15 @@ const Products = () => {
                 <h1 className={cls.products__title}>Каталог</h1>
                 <ContentControls/>
                 <div className={cls.products__wrapper}>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
+                    {
+                        data.map((product) => (
+                            <ProductCard
+                                key={product.id}
+                                isLoading={isLoading}
+                                product={product}
+                            />
+                        ))
+                    }
                 </div>
             </div>
         </section>

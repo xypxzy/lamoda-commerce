@@ -1,9 +1,12 @@
 import Products from "../../components/Products/Products.tsx";
+import {Suspense} from "react";
 
 const CatalogPage = () => {
   return (
     <div id="catalog">
-      <Products />
+        <Suspense fallback={<div>Loading...</div>}>
+            <Products />
+        </Suspense>
     </div>
   );
 };
