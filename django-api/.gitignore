@@ -22,7 +22,7 @@ var/
 wheels/
 share/python-wheels/
 *.egg-info/
-media/
+# media/
 .installed.cfg
 *.egg
 MANIFEST
