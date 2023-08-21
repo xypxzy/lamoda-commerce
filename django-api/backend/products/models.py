@@ -20,6 +20,8 @@ class Product(models.Model):
     name = models.CharField(max_length=80, null=False, blank=False)
     serial_number = models.CharField(max_length=10, unique=True)
     description = models.TextField()
+    way_to_use = models.TextField()
+    compound = models.ManyToManyField('Compound', related_name='compounds')
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     categories = models.ManyToManyField('Category')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -41,3 +43,9 @@ class FavouriteProduct(models.Model):
     class Meta:
         unique_together = ('user', 'product')
         
+
+class Compound(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return self.name
