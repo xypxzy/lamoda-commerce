@@ -30,7 +30,7 @@ SECRET_KEY = env('SECRET_KEY')
 # DEBUG = env("DEBUG")
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
+ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')[::1]
 
 
 # Application definition
@@ -65,9 +65,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'core.urls'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
+CORS_ORIGIN_WHITELIST=[
+    'http://localhost:5002',
+    'http://0.0.0.0:5002',
+    'http://localhost:8002',
+    'http://0.0.0.0:8002',
 ]
 
 TEMPLATES = [
@@ -150,9 +152,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
