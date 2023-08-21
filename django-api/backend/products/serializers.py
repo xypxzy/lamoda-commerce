@@ -31,3 +31,9 @@ class FavouriteProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['user', 'product']
         unique_together = ('user', 'product')
+
+
+class CompoundSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Compound
+        fields = '__all__'
