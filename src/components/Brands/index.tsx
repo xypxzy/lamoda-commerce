@@ -11,7 +11,7 @@ const Brands: React.FC = () => {
   const brandsImages = [brands1, brands2, brands3, brands4, brands5, brands6];
 
   return (
-    <section className={styles.brands}>
+    <section className={styles.brands} id="brands">
       <h1 className={styles.brands__title}>Брэнды</h1>
       <div className={styles.brands__grid}>
         {brandsImages.map((imageUrl, index) => (

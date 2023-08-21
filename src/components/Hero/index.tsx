@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Hero.module.scss";
 import { Link } from "react-router-dom";
-import heroImg from "../../assets/img/hero-img.png";
+import heroImg from "../../assets/img/herologo.png";
 
 const Hero: React.FC = () => {
   return (
