@@ -1,14 +1,14 @@
 import ProductCard from "../ProductCard/ProductCard.tsx";
-import cls from './Products.module.css'
 import ContentControls from "../ContentControls/ContentControls.tsx";
+import cls from './Products.module.css'
 
 const Products = () => {
     return (
         <section className={cls.products}>
-            <div className={cls.productsContainer}>
-                <h1 className={cls.productsTitle}>Каталог</h1>
+            <div className={cls.products__container}>
+                <h1 className={cls.products__title}>Каталог</h1>
                 <ContentControls/>
-                <div className={cls.productsWrapper}>
+                <div className={cls.products__wrapper}>
                     <ProductCard/>
                     <ProductCard/>
                     <ProductCard/>
