@@ -1,7 +1,15 @@
+.imageBackground{
+    margin-top: 0px;
+    img{
+        height: 1000px;
+    }
+}
+
 section{
-    margin-top: 100px;
     display: flex;
     flex-direction: column;
+    width: -moz-available;
+    justify-content: center;
     h1{
         color: #000;
         text-align: center;
@@ -34,7 +42,7 @@ section{
             }
 
             .imgEye{
-                margin-left: 70px;
+                margin-left: 34px;  
             }
 
         }
@@ -49,3 +57,13 @@ section{
     }
     
 }
+
+
+@media  (max-width: 1002px) { 
+    .imageBackground{
+        display: none
+    }
+    section{
+        margin-top: 150px;
+    }
+};

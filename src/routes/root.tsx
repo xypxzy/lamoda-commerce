@@ -3,15 +3,15 @@ import Layout from "../layout/Layout.tsx";
 import { Counter } from "../components/Counter.tsx";
 import HomePage from "../pages/HomePage.tsx";
 import NotFoundPage from "../pages/NotFoundPage/index.tsx";
-import Regist from "../pages/regist/Regist.tsx";
-import Login from "../pages/login/Login.tsx";
+import Regist from "../pages/Regist/Regist.tsx";
+import Login from "../pages/Login/Login.tsx";
 import CatalogPage from "../pages/CatalogPage/CatalogPage.tsx";
 import ProductDetails from "../pages/ProductDetailsPage/ProductDetails.tsx";
 import UserProfilePage from "../pages/UserProfilePage/UserProfilePage.tsx";
 import CartPage from "../pages/CartPage/CartPage.tsx";
 
 export default function Root() {
-  const checkAuth = false;
+  const checkAuth = true;
   return (
     <Routes>
       {checkAuth ? (
