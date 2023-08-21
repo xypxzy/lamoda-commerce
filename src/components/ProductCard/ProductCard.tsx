@@ -1,20 +1,23 @@
 import cls from './ProductCard.module.css'
 import {MdFavorite, MdFavoriteBorder} from 'react-icons/md'
-import {PiBagSimpleLight, PiBagSimpleFill} from 'react-icons/pi'
-import {useEffect, useState} from "react";
+import {PiBagSimpleFill, PiBagSimpleLight} from 'react-icons/pi'
+import {useState} from "react";
 import FavoriteButton from "../FavoriteButton/FavoriteButton.tsx";
 import {Link} from "react-router-dom";
+import {ProductProps} from "../../consts/consts.ts";
 
-const ProductCard = () => {
+interface ProductCardProps {
+    product: ProductProps;
+    isLoading: boolean;
+    isError?: string,
+}
+
+const ProductCard = (props: ProductCardProps) => {
+    const {product, isLoading } = props;
+
     const [liked, setLiked] = useState(false)
     const [addCart, setAddCart] = useState(false)
-    const [isLoading, setIsLoading] = useState(true)
 
-    useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 5000)
-    },[]) // Нужно удалить
     //Skeletons
     if(isLoading) {
         return (
@@ -39,11 +42,11 @@ const ProductCard = () => {
                 <img alt="ecommerce" className={cls.card__image} src="https://dummyimage.com/420x260"/>
             </Link>
             <div className={cls.card__information}>
-                <h3 className={cls.card__category}>CATEGORY</h3>
+                <h3 className={cls.card__category}>{product.categories}</h3>
                 <Link to={'/product/1'} className={cls.card__title}>
-                    <h2 >Тоник Babor Thermal Toning Essence </h2>
+                    <h2>{product.name}</h2>
                 </Link>
-                <p className={cls.card__prices}>$16.00</p>
+                <p className={cls.card__prices}>{product.price} som</p>
             </div>
             <FavoriteButton
                 active={liked}
