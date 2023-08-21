@@ -1,41 +1,32 @@
-.container {
+.card {
     @apply lg:w-1/3 md:w-1/2 p-4 w-full relative;
 }
 
-.imageWrapper {
+.card__image_wrap {
     @apply block relative h-96 rounded overflow-hidden;
 }
 
-.image {
+.card__image {
     @apply object-cover object-center w-full h-full block;
 }
 
-.information {
+.card__information {
     @apply mt-4;
 }
 
-.category {
+.card__category {
     @apply text-gray-500 text-xs tracking-widest  mb-1;
 }
 
-.title {
+.card__title {
     @apply text-gray-900 text-lg font-medium text-start;
 }
 
-.prices {
+.card__prices {
     @apply mt-1 font-bold text-xl text-black;
 }
 
-.quickIcons {
-    @apply absolute right-8 top-8 flex flex-col gap-2;
-}
-
-.button {
+.card__button {
     @apply border border-black rounded-full bg-white hover:bg-gray-200
     transition-all duration-150 ease-in-out;
-
-}
-
-.favouriteBtn {
-    @apply p-2 text-xl cursor-pointer ;
 }

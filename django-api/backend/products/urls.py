@@ -11,6 +11,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('product/', views.ProductListCreateAPIView.as_view()),
     path('product/<int:pk>/', views.ProductRetrieveUpdateDestroyAPIView.as_view()),
-    path('images/', views.ProductImagesListCreateAPIView.as_view()),
+    path('product/<int:product_id>/images/', views.ProductImagesCreateAPIView.as_view()),
     path('product/<int:product_id>/favourite/', views.FavouriteProductCreateAPIView.as_view()),
 ]

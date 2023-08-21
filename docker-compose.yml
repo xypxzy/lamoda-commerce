@@ -1,0 +1,18 @@
+version: '3'
+services:
+#  django-api:
+#    build:
+#      context: ./django-api
+#    ports:
+#      - "8000:8000"  # Проброс порта для бэкенда
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/react-docker:delegated
+      - /node_modules
+    ports:
+      - "5002:5002"  # Проброс порта для фронтенда
+    environment:
+      - CHOKIDAR_USEPOLLING=true

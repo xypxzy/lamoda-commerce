@@ -10,7 +10,7 @@ import FilterProducts from "../FilterProducts/FilterProducts.tsx";
 const ContentControls = () => {
 
     return (
-        <div className={"py-10 flex justify-center flex-col flex-wrap"}>
+        <div className={"py-10 flex justify-center flex-col flex-wrap gap-5"}>
             <div className={"flex w-full lg:justify-center  items-center md:flex-nowrap flex-wrap"}>
                 <SearchProducts />
                 <FilterProducts />

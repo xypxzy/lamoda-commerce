@@ -1,6 +1,6 @@
 import Root from "./routes/root.tsx";
 
 function App() {
-  return (<Root />)
+  return <Root />;
 }
-export default App
+export default App;

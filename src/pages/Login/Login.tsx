@@ -21,7 +21,7 @@ const Login = () => {
     const {register, handleSubmit, formState: { errors }} = useForm();
     const [booleanPassword, setBooleanPassword] = useState(true); 
 
-    const onClickProvider = (provider) => {
+    const onClickProvider = (provider: string) => {
         socialMediaAuth(provider)
         .then(user => {
             console.log("Authenticated user:", user);

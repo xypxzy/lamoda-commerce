@@ -17,13 +17,13 @@ const Regist = () => {
     const [booleanPassword, setBooleanPassword] = useState(true); 
     const [booleanConfirmPassword, setBooleanConfirmPassword] = useState(true); 
 
-    const addUser = async() => {
-        try {
-            await some
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    // const addUser = async() => {
+    //     try {
+    //         await some
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
 
     return(

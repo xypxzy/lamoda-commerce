@@ -6,11 +6,11 @@
   }
 
   &__content {
-    @apply flex flex-wrap justify-evenly;
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
   }
 
   &__logo {
-    @apply flex items-center mb-6 md:mb-5;
+    @apply flex justify-center items-center mb-6 md:mb-5;
 
     @media (max-width: 425px) {
       margin-bottom: 40px;
