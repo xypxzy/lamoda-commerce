@@ -1,8 +1,12 @@
 import ProductCard from "../ProductCard/ProductCard.tsx";
 import ContentControls from "../ContentControls/ContentControls.tsx";
 import cls from './Products.module.css'
+import {useGetProductsQuery} from "../../store/products/productsApi.ts";
 
 const Products = () => {
+    const {data = [], isLoading, isError} = useGetProductsQuery('');
+
+    console.log(data)
     return (
         <section className={cls.products}>
             <div className={cls.products__container}>
