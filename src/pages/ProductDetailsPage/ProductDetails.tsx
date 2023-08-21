@@ -1,18 +1,19 @@
 import {MdFavorite, MdFavoriteBorder} from 'react-icons/md'
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import cls from './ProductDetails.module.css'
 import FavoriteButton from "../../components/FavoriteButton/FavoriteButton.tsx";
 import Accordion from "../../components/Accordion/Accordion.tsx";
+import {useGetProductQuery} from "../../store/products/productsApi.ts";
+import {useParams} from "react-router-dom";
 
 const ProductDetails = () => {
     const [liked, setLiked] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    const { id } = useParams<string>();
+    if(!id) {
+        return;
+    }
 
-    useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 5000)
-    }, []) // Нужно удалить
+    const {data , isLoading} = useGetProductQuery(id);
 
     // Skeletons
     if (isLoading) {
@@ -53,19 +54,17 @@ const ProductDetails = () => {
         <section className={cls.product_details}>
             <div className={cls.product_details__container}>
                 <div className={cls.product_details__wrapper}>
-                    <img alt="product" className={cls.product_details__image} src="https://dummyimage.com/400x400"/>
+                    <img alt="product" className={cls.product_details__image} src={data?.images[0].image}/>
                     <div className={cls.product_details__information}>
-                        <h1 className={cls.product_details__title}>Title</h1>
-                        <span className={cls.product_details__price}>$58.00</span>
-                        <h2 className={cls.product_details__brandName}>BRAND NAME</h2>
+                        <h1 className={cls.product_details__title}>{data?.name}</h1>
+                        <span className={cls.product_details__price}>{data?.price} som</span>
+                        <h2 className={cls.product_details__brandName}>{data?.categories}</h2>
                         <p className={cls.product_details__description}>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, earum voluptate.
-                            Accusantium aliquam dicta dolor, doloribus ducimus excepturi iure magni maxime neque quo
-                            recusandae sapiente sint soluta, suscipit totam vitae.
+                            {data?.description}
                         </p>
                         <div className={cls.product_details__add_cart}>
                             <div className={cls.product_details__counter}>
-                                <button >-</button>
+                                <button>-</button>
                                 <span>1</span>
                                 <button>+</button>
                             </div>
@@ -73,7 +72,7 @@ const ProductDetails = () => {
                                 Добавить в корзину
                             </button>
                         </div>
-                        <Accordion/>
+                        <Accordion />
                         <FavoriteButton
                             active={liked}
                             setActive={setLiked}

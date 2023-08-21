@@ -39,7 +39,7 @@ const ProductCard = (props: ProductCardProps) => {
     return (
         <div className={cls.card}>
             <Link to={'/product/1'} className={cls.card__image_wrap}>
-                <img alt="ecommerce" className={cls.card__image} src="https://dummyimage.com/420x260"/>
+                <img alt="ecommerce" className={cls.card__image} src={product.images[0].image}/>
             </Link>
             <div className={cls.card__information}>
                 <h3 className={cls.card__category}>{product.categories}</h3>
