@@ -4,13 +4,17 @@ import {useState} from "react";
 
 type filteredType = 'asc' | 'desc' | 'rel'
 
-const ContentControls = () => {
+interface ContentControlsProps {
+    onSearch : (arg: string) => void
+}
+
+const ContentControls = ({onSearch} : ContentControlsProps) => {
     const [_, setFilteredBy] = useState<filteredType>('rel') // Для запроса на сервер
 
     return (
         <div className={"py-10 flex justify-center flex-col flex-wrap gap-3"}>
             <div className={"flex w-full lg:justify-center  items-center md:flex-nowrap flex-wrap"}>
-                <SearchProducts/>
+                <SearchProducts onSearch={onSearch}/>
                 <FilterProducts
                     contents={[
                         {content: 'По убыванию', onClick: () => setFilteredBy('asc')},
