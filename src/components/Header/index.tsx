@@ -6,10 +6,15 @@ import { BiUser } from "react-icons/bi";
 import styles from "./Header.module.scss";
 import { Turn as Hamburger } from "hamburger-react";
 import { Link as ScrollLink } from "react-scroll";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+
+import { toggle } from "../../store/auth/authSlice";
+import { useAppDispatch } from "../../store/hooks";
+
 
 export default function Header() {
   const [isOpen, setOpen] = React.useState(false);
+  const navigate = useNavigate()
 
   //Логика burger menu
   const onClickMenu = () => {
@@ -19,6 +24,15 @@ export default function Header() {
   const closeMenu = () => {
     setOpen(false);
   };
+
+  // logOut Button and refresh token
+  const dispatch = useAppDispatch()
+
+  const logOut = (state: any) => {
+    dispatch(toggle(state))
+    localStorage.removeItem('token')
+    navigate('/login')
+  }
 
   //Страницы и иконки из Navbar
   const navItems = [
@@ -150,6 +164,7 @@ export default function Header() {
           ))}
         </ul>
       </nav>
+      <button onClick={() => logOut(false)}>log out</button>
     </div>
   );
 }
