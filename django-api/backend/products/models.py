@@ -22,6 +22,8 @@ class Product(models.Model):
     description = models.TextField()
     way_to_use = models.TextField()
     compound = models.ManyToManyField('Compound', related_name='compounds')
+    price = models.DecimalField(decimal_places=2, max_digits=10)
+    
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     categories = models.ManyToManyField('Category')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -29,6 +31,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_price(self):
+        return self.price + '$'
 
 
 class ProductImage(models.Model):
