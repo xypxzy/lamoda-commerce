@@ -9,6 +9,7 @@ import CatalogPage from "../pages/CatalogPage/CatalogPage.tsx";
 import ProductDetails from "../pages/ProductDetailsPage/ProductDetails.tsx";
 import UserProfilePage from "../pages/UserProfilePage/UserProfilePage.tsx";
 import CartPage from "../pages/CartPage/CartPage.tsx";
+import FavouritePage from "../pages/FavouritePage/FavouritePage.tsx";
 
 export default function Root() {
   const checkAuth = false;
@@ -27,7 +28,8 @@ export default function Root() {
             <Route path={"catalog"} element={<CatalogPage />} />
             <Route path={"product/:id"} element={<ProductDetails />} />
             <Route path={"user"} element={<UserProfilePage />} />
-            <Route path="cart" element={<CartPage />} />
+            <Route path={"favourites"} element={<FavouritePage />} />
+            <Route path={"cart"} element={<CartPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />}></Route>
         </>

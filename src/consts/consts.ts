@@ -11,5 +11,10 @@ export interface ProductProps {
     price: number,
     id: number,
     images: ImagesProps[];
-    categories: string;
+    categories: string[];
+}
+
+export interface CategoriesProps {
+    name: string,
+    id: number,
 }

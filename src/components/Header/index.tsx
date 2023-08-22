@@ -3,6 +3,7 @@ import logo from "../../assets/svg/logo.svg";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBag } from "react-icons/bs";
 import { BiUser } from "react-icons/bi";
+import { MdProductionQuantityLimits } from "react-icons/md";
 import styles from "./Header.module.scss";
 import { Turn as Hamburger } from "hamburger-react";
 import { Link as ScrollLink } from "react-scroll";
@@ -22,17 +23,17 @@ export default function Header() {
 
   //Страницы и иконки из Navbar
   const navItems = [
-    { id: 1, text: "Каталог", link: "/catalog" },
-    { id: 2, text: "Новинки", link: "newcollection" },
-    { id: 3, text: "Преимущества", link: "features" },
-    { id: 4, text: "О нас", link: "aboutus" },
-    { id: 5, text: "Бренды", link: "brands" },
+    { id: 1, text: "Новинки", link: "newcollection" },
+    { id: 2, text: "Преимущества", link: "features" },
+    { id: 3, text: "О нас", link: "aboutus" },
+    { id: 4, text: "Бренды", link: "brands" },
   ];
 
   const navLinks = [
-    { id: 1, icon: <BiUser />, link: "/user", text: "Профиль" },
-    { id: 2, icon: <AiOutlineHeart />, link: "#", text: "Избранное" },
-    { id: 3, icon: <BsBag />, link: "/cart", text: "Корзина" },
+    { id: 1, icon: <MdProductionQuantityLimits /> ,text: "Каталог", link: "/catalog" },
+    { id: 2, icon: <BiUser />, link: "/user", text: "Профиль" },
+    { id: 3, icon: <AiOutlineHeart />, link: "/favourites", text: "Избранное" },
+    { id: 4, icon: <BsBag />, link: "/cart", text: "Корзина" },
   ];
 
   return (

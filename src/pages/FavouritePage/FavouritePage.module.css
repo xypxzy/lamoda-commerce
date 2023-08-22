@@ -1,0 +1,19 @@
+.favourite_page {
+    @apply text-gray-600 my-5;
+}
+
+.favourite_page__container {
+    @apply container px-5 py-10 mx-auto;
+}
+
+.favourite_page__title {
+    @apply text-5xl text-start;
+}
+
+.favourite_page__wrapper {
+    @apply flex flex-wrap -m-4;
+}
+
+.productsLink {
+    @apply lg:w-1/3 md:w-1/2 p-4 w-full relative
+}
