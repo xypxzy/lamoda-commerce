@@ -1,6 +1,7 @@
 from django.db import IntegrityError
 from rest_framework import generics, viewsets, permissions
 from rest_framework.response import Response
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 from . import models
 from . import serializers
@@ -11,10 +12,15 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, ]
+    filter_backends = [SearchFilter, OrderingFilter]
+
+    # спецификация полей, по которым будет выполняться поиск и сортировка.
+    search_fields = ['name', 'serial_number__iexact', 'user__username__iexact', 'compounds__name__iexact']
+    ordering_fields = ['created_at', 'updated_at', 'price']
 
     def perform_create(self, serializer):
         if self.request.user.is_authenticated:
-            instance = serializer.save(user=self.request.user)
+            serializer.save(user=self.request.user)
 
 
 class ProductRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
@@ -35,6 +41,9 @@ class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.CategorySerializer
     # only admin user can create categories
     permission_classes = [IsAdminOrReadOnly]
+    filter_backends = [SearchFilter, ]
+
+    search_fields = ['name', ]
 
 
 class ProductImagesCreateAPIView(generics.CreateAPIView):
@@ -83,3 +92,8 @@ class FavouriteProductDestroyAPIView(generics.DestroyAPIView):
     serializer_class = serializers.FavouriteProductSerializer
     permission_classes = [IsAuthor, ]
 
+
+class CompoundViewSet(viewsets.ModelViewSet):
+    queryset = models.Compound.objects.all()
+    serializer_class = serializers.CompoundSerializer
+    permission_classes = [permissions.IsAdminUser, ]
