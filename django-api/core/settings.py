@@ -68,10 +68,10 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'core.urls'
 
 CORS_ORIGIN_WHITELIST=[
-    'http://localhost:5002',
-    'http://0.0.0.0:5002',
-    'http://localhost:8002',
-    'http://0.0.0.0:8002',
+    'http://localhost:8082',
+    'http://0.0.0.0:8082',
+    'http://localhost:8082',
+    'http://0.0.0.0:8082',
 ]
 
 TEMPLATES = [
