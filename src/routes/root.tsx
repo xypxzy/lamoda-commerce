@@ -27,13 +27,15 @@ export default function Root() {
         <Route path={"product/:id"} element={<ProductDetails />} />
         <Route path={"user"} element={<UserProfilePage />} />
         <Route path={"favourites"} element={<FavouritePage />} />
+        <Route path={"cart"} element={<CartPage />} />
+
       </Route>
       {isAuth.isToggled ? (<></>) : (<>
         <Route path="registration" element={<Regist />} />
         <Route path="login" element={<Login />} />
       </>)}
-      <Route path="cart" element={<CartPage />} />
       <Route path="*" element={<NotFoundPage />}></Route>
+
     </Routes>
   );
 }

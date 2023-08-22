@@ -1,27 +1,128 @@
-# React + TypeScript + Vite
+# Документация для GitHub Репозитория: Магазин Одежды
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Добро пожаловать в документацию для репозитория "Магазин Одежды". В этом репозитории разрабатывается полнофункциональный интернет-магазин одежды, используя современные технологии для фронтенда и бэкенда.
 
-Currently, two official plugins are available:
+## Описание проекта
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Магазин Одежды - это веб-приложение, разработанное для продажи модной одежды онлайн. Основная цель проекта - предоставить пользователям удобную платформу для выбора и покупки одежды. Проект разделен на фронтенд и бэкенд, использующие следующие технологии:
 
-## Expanding the ESLint configuration
+### Фронтенд
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Фреймворк: React
+- Инструмент для быстрого старта: Vite
+- Язык программирования: TypeScript
+- Управление состоянием: Redux Toolkit (RTK)
+- Запросы к бэкенду: RTK Query
+- Стилизация: Tailwind CSS
 
-- Configure the top-level `parserOptions` property like this:
+### Бэкенд
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+- Фреймворк: Django REST Framework
+- База данных: PostgreSQL
+
+## Установка
+
+Для запуска проекта локально, выполните следующие шаги:
+
+1. Клонируйте репозиторий:
+
+```bash
+git clone https://github.com/your-username/your-repository.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Перейдите в директорию проекта:
+
+```bash
+cd your-repository
+```
+
+### Фронтенд
+
+3. Установите зависимости:
+
+```bash
+npm install
+```
+
+4. Запустите разработческий сервер:
+
+```bash
+npm run dev
+```
+
+### Бэкенд
+
+5. Перейдите в папку бэкенда:
+
+```bash
+cd django-api
+```
+
+6. Добавьте .env окружение:
+
+7. Установите зависимости:
+
+```bash
+pip install -r requirements.txt
+```
+
+7. Примените миграции:
+
+```bash
+python manage.py migrate
+```
+
+8. Запустите сервер:
+
+```bash
+python manage.py runserver
+```
+
+## Запуск с использованием Docker Compose
+
+Docker Compose позволяет управлять множеством контейнеров как единым приложением. Для запуска проекта с использованием Docker Compose выполните следующие шаги:
+
+1. Убедитесь, что у вас установлен Docker и Docker Compose на вашей машине.
+
+2. Клонируйте репозиторий, если вы еще этого не сделали:
+
+```bash
+git clone https://github.com/xypxzy/lamoda-commerce
+```
+
+3. Перейдите в директорию проекта:
+
+```bash
+cd your-repository
+```
+4. Для подключению бд
+
+```bash
+cd ./django-api
+```
+```bash
+docker-compose run api sh
+```
+```sh
+python manage.py makemigrations
+```
+```sh
+python manage.py migrate
+```
+```sh
+exit
+```
+```bash
+cd ../
+```
+5. Запустите контейнеры с помощью Docker Compose:
+
+```bash
+docker-compose up
+```
+
+Проект будет собран и запущен в контейнерах. Фронтенд будет доступен по адресу `http://localhost:8082`, а бэкенд по адресу `http://localhost:8002`.
+
+## Примечание
+
+Обратите внимание, что это общая инструкция, и она может потребовать доработок в зависимости от ваших специфических настроек и требований. Пожалуйста, ознакомьтесь с официальной документацией Docker Compose для более подробной информации о настройке и использовании контейнеров.

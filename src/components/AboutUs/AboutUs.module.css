@@ -1,5 +1,5 @@
 .about {
-  @apply max-w-screen-xl mx-auto px-4 mb-52;
+  @apply max-w-screen-xl mx-auto px-4 mb-52 h-screen;
 }
 
 .about_grid {
