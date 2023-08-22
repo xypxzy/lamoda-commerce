@@ -1,0 +1,122 @@
+[
+    {
+      "model": "products.productimage",
+      "pk": 1,
+      "fields": {
+        "product": "1",
+        "image": "media/painter.jpg"
+      }
+    },
+    {
+      "model": "products.productimage",
+      "pk": 2,
+      "fields": {
+        "product": "2",
+        "image": "media/condicioner.jpg"
+      }
+    },
+    {
+      "model": "products.productimage",
+      "pk": 3,
+      "fields": {
+        "product": "3",
+        "image": "media/elixir.jpg"
+      }
+    },
+    {
+      "model": "products.productimage",
+      "pk": 4,
+      "fields": {
+        "product": "4",
+        "image": "media/shampoo.jpg"
+      }
+    },
+    {
+      "model": "products.productimage",
+      "pk": 5,
+      "fields": {
+        "product": "5",
+        "image": "media/polish.jpg"
+      }
+    },
+    {
+      "model": "products.productimage",
+      "pk": 6,
+      "fields": {
+        "product": "6",
+        "image": "media/nail_fil.jpg"
+      }
+    },
+    {
+      "model": "products.productimage",
+      "pk": 7,
+      "fields": {
+        "product": "7",
+        "image": "media/multi_concentrate.jpg"
+      }
+    },
+    {
+      "model": "products.productimage",
+      "pk": 8,
+      "fields": {
+        "product": "8",
+        "image": "media/syvorotka.jpg"
+      }
+    },
+    {
+      "model": "products.productimage",
+      "pk": 9,
+      "fields": {
+        "product": "9",
+        "image": "media/mic_water.jpg"
+      }
+    },
+    {
+      "model": "products.productimage",
+      "pk": 10,
+      "fields": {
+        "product": "10",
+        "image": "media/gel_mask.jpg"
+      }
+    },
+    {
+      "model": "products.productimage",
+      "pk": 11,
+      "fields": {
+        "product": "11",
+        "image": "media/deodorant.jpg"
+      }
+    },
+    {
+      "model": "products.productimage",
+      "pk": 12,
+      "fields": {
+        "product": "12",
+        "image": "media/oil_for_pregn.jpg"
+      }
+    },
+    {
+      "model": "products.productimage",
+      "pk": 13,
+      "fields": {
+        "product": "13",
+        "image": "media/frier.jpg"
+      }
+    },
+    {
+      "model": "products.productimage",
+      "pk": 14,
+      "fields": {
+        "product": "14",
+        "image": "media/sponge.jpg"
+      }
+    },
+    {
+      "model": "products.productimage",
+      "pk": 15,
+      "fields": {
+        "product": "15",
+        "image": "media/contour_stick.jpg"
+      }
+    },
+]
