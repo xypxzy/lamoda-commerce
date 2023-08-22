@@ -15,12 +15,7 @@ export default function Root() {
   return (
     <Routes>
       {checkAuth ? (
-        <>
-          <Route path="registration" element={<Regist />} />
-          <Route path="login" element={<Login />} />
-        </>
-      ) : (
-        <>
+       <>
           <Route path={"/"} element={<Layout />}>
             <Route path="/" element={<HomePage />} />
             <Route path={"counter"} element={<Counter />} />
@@ -31,6 +26,11 @@ export default function Root() {
           <Route path="cart" element={<CartPage />} />
           <Route path="*" element={<NotFoundPage />}></Route>
         </>
+      ) : (
+         <>
+            <Route path="registration" element={<Regist />} />
+            <Route path="login" element={<Login />} />
+          </>
       )}
     </Routes>
   );
