@@ -20,7 +20,7 @@ const productsSlice = createSlice({
         },
         setSearchResults: (state, action: PayloadAction<ProductProps[]>) => {
             state.searchResults = action.payload;
-        },
+        }
     },
 });
 

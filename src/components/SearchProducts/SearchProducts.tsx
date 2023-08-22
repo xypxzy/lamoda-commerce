@@ -4,21 +4,16 @@ import {useEffect, useState} from "react";
 import {useGetProductsQuery} from "../../store/products/productsApi.ts";
 import {useAppDispatch, useAppSelector} from "../../store/hooks.ts";
 import {setProducts, setSearchResults} from "../../store/products/productsSlice.ts";
+import {ProductProps} from "../../consts/consts.ts";
 
 interface SearchProductsProps {
+    products: ProductProps[]
     onSearch: (arg: string) => void
 }
 
-const SearchProducts = ({onSearch}: SearchProductsProps) => {
+const SearchProducts = ({onSearch, products}: SearchProductsProps) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const {data} = useGetProductsQuery('productsApi');
-    const products = useAppSelector(state => state.products.items)
     const dispatch = useAppDispatch()
-
-    useEffect(() => {
-        if (data)
-            dispatch(setProducts(data))
-    }, [data]);
 
     const handleSearch = () => {
         onSearch(searchTerm);
