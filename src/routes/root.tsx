@@ -29,8 +29,8 @@ export default function Root() {
             <Route path={"product/:id"} element={<ProductDetails />} />
             <Route path={"user"} element={<UserProfilePage />} />
             <Route path={"favourites"} element={<FavouritePage />} />
+            <Route path={"cart"} element={<CartPage />} />
           </Route>
-          <Route path="cart" element={<CartPage />} />
           <Route path="*" element={<NotFoundPage />}></Route>
         </>
       )}
