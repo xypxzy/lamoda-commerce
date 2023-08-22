@@ -3,7 +3,7 @@
 }
 
 .products__container {
-    @apply container px-5 py-10 mx-auto;
+    @apply container px-5 mx-auto;
 }
 
 .products__title {
