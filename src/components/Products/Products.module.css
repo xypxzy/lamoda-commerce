@@ -1,5 +1,5 @@
 .products {
-    @apply text-gray-600 my-5;
+    @apply text-gray-600 my-20;
 }
 
 .products__container {

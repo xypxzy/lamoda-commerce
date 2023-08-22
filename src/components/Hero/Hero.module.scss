@@ -1,5 +1,5 @@
 .hero {
-  @apply bg-transparent max-w-screen-xl mx-auto px-4;
+  @apply bg-transparent max-w-screen-xl mx-auto px-4 h-screen;
 
   &__title {
     @apply max-w-2xl text-left mb-10 text-4xl font-extrabold tracking-tight leading-none md:text-5xl   xl:text-6xl text-black;
