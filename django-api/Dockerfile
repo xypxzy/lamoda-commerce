@@ -38,4 +38,4 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Ждет запуска базы и делает миграцию
-ENTRYPOINT ["./entrypoint.sh"]
+#ENTRYPOINT ["./entrypoint.sh"]
