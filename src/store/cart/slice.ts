@@ -2,16 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { CartItems, CartSliceState } from "./types";
 
 const initialState: CartSliceState = {
-  cartItems: [
-    {
-      id: 1,
-      title: "Product Name",
-      price: 19.99,
-      imageUrl:
-        "https://www.sephora.com/productimages/sku/s2421519-main-zoom.jpg?pb=clean-planet-positive-badge-2021&imwidth=150",
-      count: 2,
-    },
-  ],
+  cartItems: [],
   totalPrice: 0,
 };
 

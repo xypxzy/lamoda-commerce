@@ -18,7 +18,7 @@ const CartInput: FC<TCartInputProps> = ({ type, hint }) => {
 const CartPage = () => {
   const { cartItems } = useSelector(selectCart);
 
-  if (!cartItems) {
+  if (!cartItems.length) {
     return (
       <>
         <CartEmpty />
