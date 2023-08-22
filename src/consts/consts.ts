@@ -13,3 +13,18 @@ export interface ProductProps {
     images: ImagesProps[];
     categories: string;
 }
+
+///user interface props
+
+export interface UserProps {
+    name: string,
+    email: string,
+    password: string,
+    comfirmPasssword: string;
+}
+
+export interface AuthProps {
+    email: string,
+    password: string;
+}
+
