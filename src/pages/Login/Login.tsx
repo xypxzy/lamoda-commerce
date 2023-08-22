@@ -26,9 +26,10 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const [booleanPassword, setBooleanPassword] = useState(true);
 
-  const onClickProvider = (provider: string) => {
+  const onClickProvider = (provider) => {
     socialMediaAuth(provider)
       .then((user) => {
         console.log("Authenticated user:", user);
@@ -38,6 +39,14 @@ const Login = () => {
       });
   };
 
+//   const onSubmit = async() => {
+//     try {
+        
+//     } catch (error) {
+//         console.log(error)
+//     }
+//   }
+
   return (
     <main>
       <section className={styles.imageBackground}>
@@ -45,7 +54,7 @@ const Login = () => {
       </section>
       <section>
         <h1>Вход в личный кабинет</h1>
-        <form onSubmit={handleSubmit()}>
+        <form >
           <div className="mb-6">
             <img src={mail} />
             <input

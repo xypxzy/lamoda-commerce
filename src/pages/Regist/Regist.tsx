@@ -12,18 +12,35 @@ import backG from '../../assets/IMG_7286 1.png'
 
 import { useState } from "react"
 
+import { useAddAuthMutation } from "../../store/auth/authApi"
+
 const Regist = () => {
     const {register, handleSubmit, formState: { errors }} = useForm();
     const [booleanPassword, setBooleanPassword] = useState(true); 
     const [booleanConfirmPassword, setBooleanConfirmPassword] = useState(true); 
+    const [addAuth] = useAddAuthMutation()
 
-    // const addUser = async() => {
-    //     try {
-    //         await some
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+    const onSubmit = async(data: any) => {
+        const authData = {
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            comfirmPasssword: data.onfirm_password
+        }
+        if(authData.password === authData.comfirmPasssword){
+            await addAuth(authData)
+            .unwrap()
+            .then((response: any) => {
+                response.data
+            })
+            .catch((error: any) => {
+                console.log(error)
+            });
+        }else{
+            console.log('your password not exsist')
+        }
+        
+    }
 
 
     return(
@@ -33,7 +50,7 @@ const Regist = () => {
             </section>
             <section>
                 <h1>Регистрация</h1>
-                <form action="POST" onSubmit={handleSubmit()}>
+                <form action="POST" onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-6">
                         <img src={person} />
                         <input 
