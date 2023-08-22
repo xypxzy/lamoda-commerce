@@ -6,7 +6,6 @@ import {useGetProductsQuery} from "../../store/products/productsApi.ts";
 const Products = () => {
     const {data = [], isLoading} = useGetProductsQuery('products');
 
-    console.log(data)
     return (
         <section className={cls.products}>
             <div className={cls.products__container}>

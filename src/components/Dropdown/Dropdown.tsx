@@ -1,14 +1,23 @@
-import { Dropdown } from 'flowbite-react';
+import {Dropdown} from 'flowbite-react';
 
-export default function MyDropdown() {
+interface MyDropdownContentProps {
+    content: string,
+    onClick: () => void;
+}
+
+interface MyDropdownProps {
+    label: string;
+    contents: MyDropdownContentProps[]
+}
+
+export default function MyDropdown({label, contents}: MyDropdownProps) {
     return (
-        <Dropdown inline placement={"bottom"} label="Сортировать">
-            <Dropdown.Item onClick={()=>alert("Dashboard!")}>
-                По убыванию
-            </Dropdown.Item>
-            <Dropdown.Item onClick={()=>alert("Settings!")}>
-                По возрастанию
-            </Dropdown.Item>
+        <Dropdown inline placement={"bottom"} label={label}>
+            {contents.map(item => (
+                <Dropdown.Item onClick={item.onClick}>
+                    {item.content}
+                </Dropdown.Item>
+            ))}
         </Dropdown>
     )
 }

@@ -2,6 +2,8 @@ import cls from './SearchProducts.module.css'
 import {CiSearch} from 'react-icons/ci'
 
 const SearchProducts = () => {
+
+
     return (
         <div className={cls.wrap}>
             <div className={cls.search}>
