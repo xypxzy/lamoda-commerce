@@ -47,7 +47,8 @@ const ProductCard = (props: ProductCardProps) => {
     return (
         <div className={cls.card}>
             <Link to={'/product/1'} className={cls.card__image_wrap}>
-                <img alt="ecommerce" className={cls.card__image} src={product.images.length > 0 ? product.images[0].image : ''}/>
+                {/*<img alt="ecommerce" className={cls.card__image} src={product.images.length > 0 ? product.images[0].image : ''}/>*/}
+                <img alt="ecommerce" className={cls.card__image} src="http://localhost:8002/media/django-api/media/hangbag.jpg"/>
             </Link>
             <div className={cls.card__information}>
                 <h3 className={cls.card__category}>{product.categories}</h3>
