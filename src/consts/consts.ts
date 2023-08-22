@@ -13,3 +13,8 @@ export interface ProductProps {
     images: ImagesProps[];
     categories: string;
 }
+
+export interface CategoriesProps {
+    name: string,
+    id: number,
+}

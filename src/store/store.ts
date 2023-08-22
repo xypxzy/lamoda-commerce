@@ -3,7 +3,7 @@ import counterReducer from './counter/counterSlice.ts'
 import {productsApi} from "./products/productsApi.ts";
 import { authApi } from './auth/authApi.ts'; 
 import authReduser from '../store/auth/authSlice.ts'
-
+import {usersApi} from "./users/usersApi.ts";
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +14,9 @@ export const store = configureStore({
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(productsApi.middleware)
     // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware)
+        [usersApi.reducerPath]: usersApi.reducer,
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(productsApi.middleware).concat(usersApi.middleware)
 })
 
 export type RootState = ReturnType<typeof store.getState>

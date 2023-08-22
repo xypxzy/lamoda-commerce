@@ -16,7 +16,7 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
 
     # спецификация полей, по которым будет выполняться поиск и сортировка.
     search_fields = ['name', 'serial_number__iexact', 'user__username__iexact', 'compounds__name__iexact']
-    ordering_fields = ['created_at', 'updated_at']
+    ordering_fields = ['created_at', 'updated_at', 'price']
 
     def perform_create(self, serializer):
         if self.request.user.is_authenticated:

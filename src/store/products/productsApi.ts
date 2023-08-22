@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import {ProductProps} from "../../consts/consts.ts";
 
 export const productsApi = createApi({
@@ -10,7 +10,7 @@ export const productsApi = createApi({
         }),
         getProduct: builder.query<ProductProps, string>({
             query: (id: string) => `/products/product/${id}`
-        })
+        }),
     }),
 })
 
