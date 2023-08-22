@@ -1,5 +1,8 @@
 .header {
-  @apply flex items-center justify-evenly border-b border-gray-400 py-5;
+  @apply flex items-center justify-evenly border-b border-gray-400 py-5 mb-32;
+  @media screen and (max-width: 1024px) {
+    margin-bottom: 0;
+  }
   &__list {
     @apply hidden space-x-8 lg:flex;
   }
