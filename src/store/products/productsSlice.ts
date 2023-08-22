@@ -15,9 +15,8 @@ const productsSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
-        addProduct: (state, action: PayloadAction<ProductProps>) => {
-            // Добавляем продукт в состояние
-            state.items.push(action.payload);
+        setProducts: (state, action: PayloadAction<ProductProps[]>) => {
+            state.items = action.payload;
         },
         setSearchResults: (state, action: PayloadAction<ProductProps[]>) => {
             state.searchResults = action.payload;
@@ -25,7 +24,7 @@ const productsSlice = createSlice({
     },
 });
 
-export const {addProduct, setSearchResults} = productsSlice.actions;
+export const {setProducts, setSearchResults} = productsSlice.actions;
 
 export default productsSlice.reducer;
 
