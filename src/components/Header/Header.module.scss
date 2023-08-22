@@ -1,5 +1,6 @@
 .header {
-  @apply flex items-center justify-evenly border-b border-gray-400 py-5;
+  @apply fixed -top-1 bg-white z-50 w-full flex items-center justify-evenly border-b border-gray-400 py-5 p-0 m-0;
+
   &__list {
     @apply hidden space-x-8 lg:flex;
   }
