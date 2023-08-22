@@ -1,5 +1,5 @@
 .hero {
-  @apply bg-transparent max-w-screen-xl mx-auto px-4 mb-44;
+  @apply bg-transparent max-w-screen-xl mx-auto px-4 mb-44 mt-20;
   @media screen and (max-width: 1024px) {
     margin-top: 0;
   }
