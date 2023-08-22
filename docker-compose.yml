@@ -20,7 +20,7 @@ services:
     build:
       context: ./django-api
     ports:
-      - "8002:8000" # Проброс порта для бэкенда
+      - "8002:8002" # Проброс порта для бэкенда
     command: bash -c "python manage.py runserver 0.0.0.0:8002"
     depends_on:
       - postgres
