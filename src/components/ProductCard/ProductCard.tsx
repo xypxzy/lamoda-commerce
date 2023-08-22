@@ -5,6 +5,7 @@ import {useState} from "react";
 import FavoriteButton from "../FavoriteButton/FavoriteButton.tsx";
 import {Link} from "react-router-dom";
 import {ProductProps} from "../../consts/consts.ts";
+import {useSetFavouritesMutation} from "../../store/users/usersApi.ts";
 
 interface ProductCardProps {
     product: ProductProps;
@@ -17,6 +18,13 @@ const ProductCard = (props: ProductCardProps) => {
 
     const [liked, setLiked] = useState(false)
     const [addCart, setAddCart] = useState(false)
+
+    const [setFavourites] = useSetFavouritesMutation();
+
+    const handleAddToFavourites = () => {
+        setFavourites(product.id);
+        setLiked(!liked)
+    };
 
     //Skeletons
     if(isLoading) {
@@ -39,7 +47,7 @@ const ProductCard = (props: ProductCardProps) => {
     return (
         <div className={cls.card}>
             <Link to={'/product/1'} className={cls.card__image_wrap}>
-                <img alt="ecommerce" className={cls.card__image} src={product.images[0].image}/>
+                <img alt="ecommerce" className={cls.card__image} src={product.images.length > 0 ? product.images[0].image : ''}/>
             </Link>
             <div className={cls.card__information}>
                 <h3 className={cls.card__category}>{product.categories}</h3>
@@ -50,7 +58,7 @@ const ProductCard = (props: ProductCardProps) => {
             </div>
             <FavoriteButton
                 active={liked}
-                setActive={setLiked}
+                setActive={handleAddToFavourites}
                 DefaultImage={<MdFavoriteBorder/>}
                 ActiveImage={<MdFavorite/>}
                 className={`${cls.card__button} hover:text-red-500 right-8 top-8`}
