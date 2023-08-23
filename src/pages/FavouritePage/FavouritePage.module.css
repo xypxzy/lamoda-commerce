@@ -1,5 +1,5 @@
 .favourite_page {
-    @apply text-gray-600 my-5;
+    @apply text-gray-600 my-5 h-screen items-center;
 }
 
 .favourite_page__container {
