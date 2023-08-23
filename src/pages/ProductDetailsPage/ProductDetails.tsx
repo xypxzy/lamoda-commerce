@@ -1,10 +1,12 @@
 import {MdFavorite, MdFavoriteBorder} from 'react-icons/md'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import cls from './ProductDetails.module.css'
 import FavoriteButton from "../../components/FavoriteButton/FavoriteButton.tsx";
 import Accordion from "../../components/Accordion/Accordion.tsx";
 import {useGetProductQuery} from "../../store/products/productsApi.ts";
 import {useParams} from "react-router-dom";
+import {addItem} from "../../store/cart/slice.ts";
+import {useAppDispatch} from "../../store/hooks.ts";
 
 const ProductDetails = () => {
     const [liked, setLiked] = useState(false);
@@ -13,7 +15,26 @@ const ProductDetails = () => {
         return;
     }
 
-    const {data , isLoading} = useGetProductQuery(id);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    const {data: product , isLoading} = useGetProductQuery(id);
+    const [count, setCount] = useState<number>(1)
+    const dispatch = useAppDispatch();
+
+    const handleAddToCart = () => {
+        if(product) {
+            dispatch(addItem({
+                id: product.id,
+                title: product.name,
+                price: product.price,
+                imageUrl: product.images[0].image ,
+                count: count,
+                isSelected: true
+            }))
+        }
+    };
 
     // Skeletons
     if (isLoading) {
@@ -54,21 +75,29 @@ const ProductDetails = () => {
         <section className={cls.product_details}>
             <div className={cls.product_details__container}>
                 <div className={cls.product_details__wrapper}>
-                    <img alt="product" className={cls.product_details__image} src={data?.images[0] ? data.images[0].image : ''} />
+                    <img alt="product" className={cls.product_details__image} src={product?.images[0] ? product.images[0].image : ''} />
                     <div className={cls.product_details__information}>
-                        <h1 className={cls.product_details__title}>{data?.name}</h1>
-                        <span className={cls.product_details__price}>{data?.price} som</span>
-                        <h2 className={cls.product_details__brandName}>{data?.categories}</h2>
+                        <h1 className={cls.product_details__title}>{product?.name}</h1>
+                        <span className={cls.product_details__price}>{product?.price} som</span>
+                        <h2 className={cls.product_details__brandName}>{product?.categories}</h2>
                         <p className={cls.product_details__description}>
-                            {data?.description}
+                            {product?.description}
                         </p>
                         <div className={cls.product_details__add_cart}>
                             <div className={cls.product_details__counter}>
-                                <button>-</button>
-                                <span>1</span>
-                                <button>+</button>
+                                <button onClick={() => {
+                                    if (count > 1) {
+                                        setCount(prev => prev - 1)
+                                    }
+                                }}>
+                                    -
+                                </button>
+                                <span>{count}</span>
+                                <button onClick={() => setCount(prev => prev + 1)}>
+                                    +
+                                </button>
                             </div>
-                            <button className={cls.product_details__btn}>
+                            <button className={cls.product_details__btn} onClick={handleAddToCart}>
                                 Добавить в корзину
                             </button>
                         </div>

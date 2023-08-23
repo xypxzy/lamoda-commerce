@@ -86,7 +86,7 @@ const ProductCard = (props: ProductCardProps) => {
                         setActive={handleAddToFavourites}
                         DefaultImage={<MdFavoriteBorder/>}
                         ActiveImage={<MdFavorite/>}
-                        className={`${cls.card__button} hover:text-red-500 right-8 top-8`}
+                        className={`${cls.card__button} hover:text-red-500 right-12 top-8`}
                         color={"red"}
                     />
                     <FavoriteButton
@@ -94,7 +94,7 @@ const ProductCard = (props: ProductCardProps) => {
                         setActive={setAddCart}
                         DefaultImage={<PiBagSimpleLight/>}
                         ActiveImage={<PiBagSimpleFill/>}
-                        className={`${cls.card__button} hover:text-green-500 right-8 top-[72px]`}
+                        className={`${cls.card__button} hover:text-green-500 right-12 top-[72px]`}
                         color={"green"}
                         onClick={handleAddToCart}
                     />

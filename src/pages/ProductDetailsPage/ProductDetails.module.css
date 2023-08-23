@@ -1,5 +1,5 @@
 .product_details {
-    @apply text-gray-600 overflow-hidden h-screen;
+    @apply text-gray-600 overflow-hidden h-screen flex items-center;
 }
 
 .product_details__container {
@@ -11,7 +11,7 @@
 }
 
 .product_details__image {
-    @apply lg:w-[50%] w-full lg:h-2/3 h-64 object-cover object-center rounded;
+    @apply lg:w-[50%] w-full lg:h-96 h-72 object-contain object-center rounded;
 }
 
 .product_details__information {
