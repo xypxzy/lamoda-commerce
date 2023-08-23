@@ -122,7 +122,7 @@ const Regist = () => {
                             {errors?.name && (<span className="error" role="alert">{errors?.name?.message?.toString()}</span>)}
                     </div>
                     <div className="mb-6">
-                        <img src={mail} alt="" />
+                        {/*<img src={} alt="" />*/}
                         <input 
                             type="email" 
                             id="email" 
