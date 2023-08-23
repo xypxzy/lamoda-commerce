@@ -1,9 +1,8 @@
 import cls from './SearchProducts.module.css'
 import {CiSearch} from 'react-icons/ci'
-import {useEffect, useState} from "react";
-import {useGetProductsQuery} from "../../store/products/productsApi.ts";
-import {useAppDispatch, useAppSelector} from "../../store/hooks.ts";
-import {setProducts, setSearchResults} from "../../store/products/productsSlice.ts";
+import {useState} from "react";
+import {useAppDispatch} from "../../store/hooks.ts";
+import {setSearchResults} from "../../store/products/productsSlice.ts";
 import {ProductProps} from "../../consts/consts.ts";
 
 interface SearchProductsProps {

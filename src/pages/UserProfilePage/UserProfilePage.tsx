@@ -9,7 +9,7 @@ import { useAppSelector } from "../../store/hooks.ts";
 const UserProfilePage: React.FC = () => {
   const navigate = useNavigate()
 
-  const chechAuth = () => {
+  const handleToLogin = () => {
       navigate('/login')
   }
   const isAuth = useAppSelector((state) => state.auth)
@@ -59,11 +59,11 @@ const UserProfilePage: React.FC = () => {
             </div>
           </section>
         </>) : 
-        (<>
+        (<div className={'h-[50vh] flex flex-col justify-center'}>
           <div id="snter-m">
-            <button id="button-auth" className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800" onClick={() => chechAuth()}>SingIn</button>
+            <button id="button-auth" className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800" onClick={handleToLogin}>SingIn</button>
           </div>
-        </>)
+        </div>)
       }
     </>
     

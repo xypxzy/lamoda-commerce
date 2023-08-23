@@ -18,7 +18,6 @@ import socialMediaAuth from "../../service/auth";
 import google from "../../assets/image 2.svg";
 import facebook from "../../assets/image 3.svg";
 import apple from "../../assets/image 4.svg";
-import backG from "../../assets/IMG_7286 1.png";
 import { useAppDispatch } from "../../store/hooks";
 import { useGetAuthQuery, useGetTokenQuery } from "../../store/auth/authApi";
 import { useNavigate } from "react-router-dom";
@@ -70,14 +69,11 @@ const Login = () => {
 
   return (
     <main>
-      <section className={styles.imageBackground}>
-        <img src={backG} alt="" />
-      </section>
       <section>
         <h1>Вход в личный кабинет</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
-            <img src={mail} />
+            <img src={mail} alt={'mail'}/>
             <input
               type="mail"
               id="mail"

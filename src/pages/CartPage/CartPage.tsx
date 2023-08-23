@@ -19,11 +19,8 @@ const CartInput: FC<TCartInputProps> = ({ type, hint }) => {
 };
 
 const CartPage = () => {
-
   const isAuth = useAppSelector((state) => state.auth)
   const { cartItems } = useSelector(selectCart);
-
-  const auth = true
 
   const navigate = useNavigate()
 
@@ -38,7 +35,7 @@ const CartPage = () => {
 
   return (
     <>
-    {auth ?
+    {isAuth ?
       (<>
         <div className={cls.cart}>
             <div className={cls.cart__wrap}>

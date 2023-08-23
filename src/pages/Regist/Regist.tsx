@@ -8,7 +8,6 @@ import mail from '../../assets/mail.svg'
 import lock from '../../assets/lock.svg'
 import eye from '../../assets/eye.svg'
 import eyeblock from '../../assets/eyeslash.svg'
-import backG from '../../assets/IMG_7286 1.png'
 import { useAddAuthMutation } from "../../store/auth/authApi"
 import { useNavigate } from "react-router-dom"
 
@@ -52,15 +51,12 @@ const Regist = () => {
 
     return(
         <main>
-            <section className={styles.imageBackground}>
-                <img src={backG} alt="" />
-            </section>
             <section>
             <button>на главную</button>
                 <h1>Регистрация</h1>
                 <form action="POST" onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-6">
-                        <img src={person} />
+                        <img src={person} alt={'person'}/>
                         <input 
                             type="name" 
                             id="name" 

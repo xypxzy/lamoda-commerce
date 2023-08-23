@@ -4,6 +4,7 @@ export type CartItems = {
   price: number;
   imageUrl: string;
   count: number;
+  isSelected?: boolean;
 };
 
 export interface CartSliceState {
