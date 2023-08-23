@@ -4,7 +4,7 @@
       "pk": 1,
       "fields": {
         "product": "1",
-        "image": "media/painter.jpg"
+        "image": "painter.jpg"
       }
     },
     {
@@ -12,7 +12,7 @@
       "pk": 2,
       "fields": {
         "product": "2",
-        "image": "media/condicioner.jpg"
+        "image": "condicioner.jpg"
       }
     },
     {
@@ -20,7 +20,7 @@
       "pk": 3,
       "fields": {
         "product": "3",
-        "image": "media/elixir.jpg"
+        "image": "elixir.jpg"
       }
     },
     {
@@ -28,7 +28,7 @@
       "pk": 4,
       "fields": {
         "product": "4",
-        "image": "media/shampoo.jpg"
+        "image": "shampoo.jpg"
       }
     },
     {
@@ -36,7 +36,7 @@
       "pk": 5,
       "fields": {
         "product": "5",
-        "image": "media/polish.jpg"
+        "image": "polish.jpg"
       }
     },
     {
@@ -44,7 +44,7 @@
       "pk": 6,
       "fields": {
         "product": "6",
-        "image": "media/nail_fil.jpg"
+        "image": "nail_fil.jpg"
       }
     },
     {
@@ -52,7 +52,7 @@
       "pk": 7,
       "fields": {
         "product": "7",
-        "image": "media/multi_concentrate.jpg"
+        "image": "multi_concentrate.jpg"
       }
     },
     {
@@ -60,7 +60,7 @@
       "pk": 8,
       "fields": {
         "product": "8",
-        "image": "media/syvorotka.jpg"
+        "image": "syvorotka.jpg"
       }
     },
     {
@@ -68,7 +68,7 @@
       "pk": 9,
       "fields": {
         "product": "9",
-        "image": "media/mic_water.jpg"
+        "image": "mic_water.jpg"
       }
     },
     {
@@ -76,7 +76,7 @@
       "pk": 10,
       "fields": {
         "product": "10",
-        "image": "media/gel_mask.jpg"
+        "image": "gel_mask.jpg"
       }
     },
     {
@@ -84,7 +84,7 @@
       "pk": 11,
       "fields": {
         "product": "11",
-        "image": "media/deodorant.jpg"
+        "image": "deodorant.jpg"
       }
     },
     {
@@ -92,7 +92,7 @@
       "pk": 12,
       "fields": {
         "product": "12",
-        "image": "media/oil_for_pregn.jpg"
+        "image": "oil_for_pregn.jpg"
       }
     },
     {
@@ -100,7 +100,7 @@
       "pk": 13,
       "fields": {
         "product": "13",
-        "image": "media/frier.jpg"
+        "image": "frier.jpg"
       }
     },
     {
@@ -108,7 +108,7 @@
       "pk": 14,
       "fields": {
         "product": "14",
-        "image": "media/sponge.jpg"
+        "image": "sponge.jpg"
       }
     },
     {
@@ -116,7 +116,7 @@
       "pk": 15,
       "fields": {
         "product": "15",
-        "image": "media/contour_stick.jpg"
+        "image": "contour_stick.jpg"
       }
-    },
+    }
 ]
