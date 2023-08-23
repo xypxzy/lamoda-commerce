@@ -1,5 +1,5 @@
 .features {
-  @apply flex  h-screen  max-w-screen-xl mx-auto px-4 mb-52;
+  @apply flex flex-col h-screen  max-w-screen-xl mx-auto px-4 mb-52;
 }
 
 .features_grid {

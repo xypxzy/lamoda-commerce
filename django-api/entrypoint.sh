@@ -12,7 +12,9 @@ then
 fi
 
 python manage.py flush --no-input
-python manage.py makemigrations
 python manage.py migrate
+python manage.py createsuperuser --noinput --username admin --email admin@example.com
+python manage.py loaddata backend/products/fixtures/goods_w.json
+python manage.py loaddata backend/products/fixtures/images_w.json
 
 exec "$@"

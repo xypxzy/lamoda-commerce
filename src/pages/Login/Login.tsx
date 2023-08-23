@@ -18,9 +18,8 @@ import socialMediaAuth from "../../service/auth";
 import google from "../../assets/image 2.svg";
 import facebook from "../../assets/image 3.svg";
 import apple from "../../assets/image 4.svg";
-import backG from "../../assets/IMG_7286 1.png";
 import { useAppDispatch } from "../../store/hooks";
-import { useGetAuthQuery, useGetTokenQuery } from "../../store/auth/authApi";
+import { useGetAuthQuery, useAddTokenMutation } from "../../store/auth/authApi";
 import { useNavigate } from "react-router-dom";
 import { toggle } from "../../store/auth/authSlice";
 
@@ -33,14 +32,16 @@ const Login = () => {
   } = useForm();
   const [booleanPassword, setBooleanPassword] = useState(true);
   const dispatch = useAppDispatch()
-  const {data: authData} = useGetAuthQuery()
-  const {data: token, isSuccess} = useGetTokenQuery('')
+  const {data: authData, isSuccess: isLoginSuccess} = useGetAuthQuery()
+  const [addToken, {data, isError, error}] = useAddTokenMutation()
   const navigate = useNavigate()
 
   const onClickProvider = (provider: any) => {
     socialMediaAuth(provider)
       .then((user) => {
         console.log("Authenticated user:", user);
+        dispatch(toggle(true))
+        navigate('/')
       })
       .catch((error) => {
         console.error("Authentication error:", error);
@@ -49,18 +50,22 @@ const Login = () => {
 
   const onSubmit = (data: any) => {
     try {
-      if(data.email === authData?.email && data.password === authData?.password){
+        const token = addToken({email: data.email, password: data.password})
         localStorage.setItem('token', JSON.stringify(token))
-        dispatch(toggle(true))
-      }
+        console.log(token)
     } catch (error) {
       console.log(error)
     }
   }
 
+  if(isError){
+    console.log(error)
+  }
+
   useEffect(() => {
-    if(isSuccess){
+    if(isLoginSuccess){
       console.log('you singed in')
+      dispatch(toggle(true))
       navigate('/')
     }
     
@@ -70,14 +75,11 @@ const Login = () => {
 
   return (
     <main>
-      <section className={styles.imageBackground}>
-        <img src={backG} alt="" />
-      </section>
       <section>
         <h1>Вход в личный кабинет</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
-            <img src={mail} />
+            <img src={mail} alt={'mail'}/>
             <input
               type="mail"
               id="mail"

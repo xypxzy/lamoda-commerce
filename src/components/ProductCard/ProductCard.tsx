@@ -6,7 +6,8 @@ import FavoriteButton from "../FavoriteButton/FavoriteButton.tsx";
 import {Link} from "react-router-dom";
 import {ProductProps} from "../../consts/consts.ts";
 import {useSetFavouritesMutation} from "../../store/users/usersApi.ts";
-import {useAppSelector} from "../../store/hooks.ts";
+import {useAppDispatch, useAppSelector} from "../../store/hooks.ts";
+import {addItem} from "../../store/cart/slice.ts";
 
 interface ProductCardProps {
     product: ProductProps;
@@ -16,18 +17,28 @@ interface ProductCardProps {
 
 const ProductCard = (props: ProductCardProps) => {
     const {product, isLoading} = props;
-
     const [liked, setLiked] = useState(false);
     const [addCart, setAddCart] = useState(false);
-
     const [setFavourites] = useSetFavouritesMutation();
+
+    const dispatch = useAppDispatch();
+    const isAuth = useAppSelector((state) => state.auth)
 
     const handleAddToFavourites = () => {
         setFavourites(product.id);
         setLiked(!liked);
     };
 
-    const isAuth = useAppSelector((state) => state.auth)
+    const handleAddToCart = () => {
+        dispatch(addItem({
+            id: product.id,
+            title: product.name,
+            price: product.price,
+            imageUrl: product.images[0].image ,
+            count: 1,
+            isSelected: true
+        }))
+    };
 
     //Skeletons
     if (isLoading) {
@@ -57,13 +68,13 @@ const ProductCard = (props: ProductCardProps) => {
 
     return (
         <div className={cls.card}>
-            <Link to={'/product/1'} className={cls.card__image_wrap}>
+            <Link to={`/product/${product.id}`} className={cls.card__image_wrap}>
                 <img alt="ecommerce" className={cls.card__image}
                      src={product.images.length > 0 ? product.images[0].image : ''}/>
             </Link>
             <div className={cls.card__information}>
                 <h3 className={cls.card__category}>{product.categories}</h3>
-                <Link to={'/product/1'} className={cls.card__title}>
+                <Link to={`/product/${product.id}`} className={cls.card__title}>
                     <h2>{product.name}</h2>
                 </Link>
                 <p className={cls.card__prices}>{product.price} som</p>
@@ -71,7 +82,6 @@ const ProductCard = (props: ProductCardProps) => {
             {isAuth ?
                 <>
                     <FavoriteButton
-
                         active={liked}
                         setActive={handleAddToFavourites}
                         DefaultImage={<MdFavoriteBorder/>}
@@ -86,6 +96,7 @@ const ProductCard = (props: ProductCardProps) => {
                         ActiveImage={<PiBagSimpleFill/>}
                         className={`${cls.card__button} hover:text-green-500 right-8 top-[72px]`}
                         color={"green"}
+                        onClick={handleAddToCart}
                     />
                 </>
                 :

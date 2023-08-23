@@ -1,8 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { CartItems, CartSliceState } from "./types";
 
+const storedCartData = sessionStorage.getItem("cartData");
+const initialCartItems: CartItems[] = storedCartData ? JSON.parse(storedCartData) : [];
+
 const initialState: CartSliceState = {
-  cartItems: [],
+  cartItems: initialCartItems.map(item => ({
+    ...item,
+    isSelected: true,
+  })),
   totalPrice: 0,
 };
 
@@ -23,6 +29,8 @@ export const cartSlice = createSlice({
       state.totalPrice = state.cartItems.reduce((acc, item) => {
         return acc + item.price * item.count;
       }, 0);
+      sessionStorage.setItem("cartData", JSON.stringify(state.cartItems));
+
     },
     minusItem(state, action: PayloadAction<number>) {
       const findItem = state.cartItems.find((obj) => obj.id === action.payload);
@@ -34,6 +42,7 @@ export const cartSlice = createSlice({
       state.totalPrice = state.cartItems.reduce((acc, item) => {
         return acc + item.price * item.count;
       }, 0);
+      sessionStorage.setItem("cartData", JSON.stringify(state.cartItems));
     },
   },
 });
