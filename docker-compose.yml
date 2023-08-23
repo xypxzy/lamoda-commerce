@@ -19,21 +19,17 @@ services:
     build:
       context: ./django-api
     ports:
-      - "8002:8002"  # Проброс порта для бэкенда
+      - "8002:8002"
     command: python manage.py runserver 0.0.0.0:8002
     depends_on:
       - postgres
     restart: always
-
   frontend:
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - ./:/react-docker:delegated
-      - /node_modules
     ports:
-      - "8082:8082"  # Проброс порта для фронтенда
+      - "8082:8082"
     environment:
       - CHOKIDAR_USEPOLLING=true
     depends_on:
