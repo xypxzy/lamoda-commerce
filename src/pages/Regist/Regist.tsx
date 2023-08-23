@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
 import styles from './Regist.module.scss'
 import person from '../../assets/person_filled.svg'
-import mail from '../../assets/mail.svg'
 import lock from '../../assets/lock.svg'
 import eye from '../../assets/eye.svg'
 import eyeblock from '../../assets/eyeslash.svg'
