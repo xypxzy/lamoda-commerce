@@ -1,7 +1,7 @@
 .hero {
   @apply bg-transparent max-w-screen-xl mx-auto px-4 h-screen flex items-center;
   @media screen and (max-width: 1024px) {
-    margin-top: 0;
+    margin-top: 20vh;
   }
   &__title {
     @apply max-w-2xl text-left mb-10 text-4xl font-extrabold tracking-tight leading-none md:text-5xl   xl:text-6xl text-black;
