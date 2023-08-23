@@ -54,7 +54,7 @@ const ProductDetails = () => {
         <section className={cls.product_details}>
             <div className={cls.product_details__container}>
                 <div className={cls.product_details__wrapper}>
-                    <img alt="product" className={cls.product_details__image} src={data?.images[0].image}/>
+                    <img alt="product" className={cls.product_details__image} src={data?.images[0] ? data.images[0].image : ''} />
                     <div className={cls.product_details__information}>
                         <h1 className={cls.product_details__title}>{data?.name}</h1>
                         <span className={cls.product_details__price}>{data?.price} som</span>
