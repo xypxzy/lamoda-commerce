@@ -29,9 +29,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - ./:/react-docker:delegated
-      - /node_modules
+#    volumes:
+#      - ./:/react-docker:delegated
+#      - /node_modules
     ports:
       - "8082:8082"  # Проброс порта для фронтенда
     environment:
