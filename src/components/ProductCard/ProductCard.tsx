@@ -3,9 +3,13 @@ import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import { PiBagSimpleFill, PiBagSimpleLight } from "react-icons/pi";
 import { useState } from "react";
 import FavoriteButton from "../FavoriteButton/FavoriteButton.tsx";
-import { Link } from "react-router-dom";
-import { ProductProps } from "../../consts/consts.ts";
-import { useSetFavouritesMutation } from "../../store/users/usersApi.ts";
+import {Link} from "react-router-dom";
+import {ProductProps} from "../../consts/consts.ts";
+import {useSetFavouritesMutation} from "../../store/users/usersApi.ts";
+import { useAppSelector } from "../../store/hooks.ts";
+import { useNavigate } from "react-router-dom";
+import profile from '../../assets/profile.png'
+
 
 interface ProductCardProps {
   product: ProductProps;
@@ -25,6 +29,13 @@ const ProductCard = (props: ProductCardProps) => {
     setFavourites(product.id);
     setLiked(!liked);
   };
+
+    const navigate = useNavigate()
+
+    const chechAuth = () => {
+        navigate('/login')
+    }
+    const isAuth = useAppSelector((state) => state.auth)
 
   //Skeletons
   if (isLoading) {
@@ -75,38 +86,41 @@ const ProductCard = (props: ProductCardProps) => {
   }
 
   return (
-    <div className={cls.card}>
-      <Link to={"/product/1"} className={cls.card__image_wrap}>
-        <img
-          alt="ecommerce"
-          className={cls.card__image}
-          src={product.images[0].image}
-        />
+     <div className={cls.card}>
+      <Link to={'/product/1'} className={cls.card__image_wrap}>
+          <img alt="ecommerce" className={cls.card__image} src={product.images.length > 0 ? product.images[0].image : ''}/>
       </Link>
       <div className={cls.card__information}>
-        <h3 className={cls.card__category}>{product.categories}</h3>
-        <Link to={"/product/1"} className={cls.card__title}>
-          <h2>{product.name}</h2>
-        </Link>
-        <p className={cls.card__prices}>{product.price} som</p>
+          <h3 className={cls.card__category}>{product.categories}</h3>
+          <Link to={'/product/1'} className={cls.card__title}>
+              <h2>{product.name}</h2>
+          </Link>
+          <p className={cls.card__prices}>{product.price} som</p>
       </div>
-      <FavoriteButton
-        active={liked}
-        setActive={setLiked}
-        DefaultImage={<MdFavoriteBorder />}
-        ActiveImage={<MdFavorite />}
-        className={`${cls.card__button} hover:text-red-500 right-8 top-8`}
-        color={"red"}
-      />
-      <FavoriteButton
-        active={addCart}
-        setActive={setAddCart}
-        DefaultImage={<PiBagSimpleLight />}
-        ActiveImage={<PiBagSimpleFill />}
-        className={`${cls.card__button} hover:text-green-500 right-8 top-[72px]`}
-        color={"green"}
-      />
-    </div>
+      {isAuth.isToggled ? 
+          (<>
+              <FavoriteButton
+              active={liked}
+              setActive={handleAddToFavourites}
+              DefaultImage={<MdFavoriteBorder/>}
+              ActiveImage={<MdFavorite/>}
+              className={`${cls.card__button} hover:text-red-500 right-8 top-8`}
+              color={"red"}
+              />
+              <FavoriteButton
+                  active={addCart}
+                  setActive={setAddCart}
+                  DefaultImage={<PiBagSimpleLight/>}
+                  ActiveImage={<PiBagSimpleFill/>}
+                  className={`${cls.card__button} hover:text-green-500 right-8 top-[72px]`}
+                  color={"green"}
+              />
+          </>) : 
+          (<>
+              <div id="snter-m">
+                  <button onClick={() => chechAuth()}> <img src={profile} alt="" /> </button>
+              </div>
+          </>)}
   );
 };
 

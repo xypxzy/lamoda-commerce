@@ -7,11 +7,12 @@ import eyeblock from "../../assets/eyeslash.svg";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import styles from "./Login.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   googleProvider,
   facebookProvider,
   githubProvider,
+  auth,
 } from "../../config/firebase-config";
 import socialMediaAuth from "../../service/auth";
 
@@ -19,6 +20,11 @@ import google from "../../assets/image 2.svg";
 import facebook from "../../assets/image 3.svg";
 import apple from "../../assets/image 4.svg";
 import backG from "../../assets/IMG_7286 1.png";
+import { useAppDispatch } from "../../store/hooks";
+import { useGetAuthQuery, useGetTokenQuery } from "../../store/auth/authApi";
+import { useNavigate } from "react-router-dom";
+import { toggle } from "../../store/auth/authSlice";
+
 
 const Login = () => {
   const {
@@ -27,8 +33,12 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const [booleanPassword, setBooleanPassword] = useState(true);
+  const dispatch = useAppDispatch()
+  const {data: authData} = useGetAuthQuery()
+  const {data: token, isSuccess} = useGetTokenQuery()
+  const navigate = useNavigate()
 
-  const onClickProvider = (provider: string) => {
+  const onClickProvider = (provider: any) => {
     socialMediaAuth(provider)
       .then((user) => {
         console.log("Authenticated user:", user);
@@ -38,6 +48,27 @@ const Login = () => {
       });
   };
 
+  const onSubmit = (data: any) => {
+    try {
+      if(data.email === authData?.email && data.password === authData?.password){
+        localStorage.setItem('token', JSON.stringify(token))
+        dispatch(toggle(true))
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if(isSuccess){
+      console.log('you singed in')
+      navigate('/')
+    }
+    
+  },[])
+
+
+
   return (
     <main>
       <section className={styles.imageBackground}>
@@ -45,7 +76,7 @@ const Login = () => {
       </section>
       <section>
         <h1>Вход в личный кабинет</h1>
-        <form onSubmit={handleSubmit()}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
             <img src={mail} />
             <input
@@ -65,7 +96,7 @@ const Login = () => {
               })}
               required
             ></input>
-            {errors.name && <span className="error" role="alert"></span>}
+            {errors.name && <span className="error" role="alert">errors.name</span>}
           </div>
           <div className="mb-6">
             <img src={lock} alt="" />
@@ -109,12 +140,9 @@ const Login = () => {
             Войти
           </button>
         </form>
-        <Link
-          to="/registration"
-          className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-        >
-          нет аккаунта !!!
-        </Link>
+
+        <Link to='/login'><button className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">нет аккаунта !!!</button></Link>
+
 
         <section className={styles.giveChoose}>
           <div className={styles.line}></div>
