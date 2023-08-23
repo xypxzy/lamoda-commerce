@@ -1,5 +1,5 @@
 .brands {
-  @apply m-10 text-center max-w-screen-xl mx-auto px-4 h-screen;
+  @apply m-10 text-center max-w-screen-xl mx-auto px-4 h-screen flex flex-col justify-center;
 
   &__title {
     @apply text-center text-4xl mb-5;

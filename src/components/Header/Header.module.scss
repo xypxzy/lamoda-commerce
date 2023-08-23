@@ -1,5 +1,5 @@
 .header {
-  @apply flex items-center justify-evenly border-b border-gray-400 py-5;
+  @apply fixed w-full bg-white  flex items-center justify-evenly border-b border-gray-400 py-5;
   @media screen and (max-width: 1024px) {
     margin-bottom: 0;
   }
