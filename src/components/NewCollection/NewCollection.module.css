@@ -1,5 +1,5 @@
 .collection {
-  @apply flex  max-w-screen-xl mx-auto px-4 mb-52 md:h-screen;
+  @apply flex flex-col max-w-screen-xl mx-auto px-4 mb-52 md:h-screen;
 }
 
 .col_grid {
