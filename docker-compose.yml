@@ -15,6 +15,7 @@ services:
     restart: always
 
   api:
+    entrypoint: /entrypoint.sh
     container_name: djangoapp
     build:
       context: ./django-api

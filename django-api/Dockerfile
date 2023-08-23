@@ -12,6 +12,9 @@ RUN apt-get update
 WORKDIR /django-api
 COPY ./requirements.txt ./
 
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 RUN python3 -m pip install --upgrade --no-cache-dir setuptools==58.0
 RUN pip install -r requirements.txt
 COPY . .
