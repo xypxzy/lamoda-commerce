@@ -15,3 +15,5 @@ COPY ./requirements.txt ./
 RUN python3 -m pip install --upgrade --no-cache-dir setuptools==58.0
 RUN pip install -r requirements.txt
 COPY . .
+
+ENTRYPOINT ["./entrypoint.sh"]
