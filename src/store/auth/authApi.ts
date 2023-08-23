@@ -1,25 +1,21 @@
 
-import { AuthProps } from "../../consts/auths";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 
 export const authApi = createApi({
     reducerPath: 'authApi',
-    baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:8002' }),
+    baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:8002/users/' }),
     endpoints: (builder) => ({
         addAuth: builder.mutation({
             query: (body) => ({
-                url: '/users/register',
+                url: 'register/',
                 method: 'POST',
                 body
             }),
         }),
-        getAuth: builder.query<AuthProps[], void>({
-            query: () => '/users',
-        }),
         addToken:builder.mutation({
             query: (body) => ({
-                url: '/users/token',
+                url: 'token/',
                 method: 'POST',
                 body
             }),
@@ -29,6 +25,5 @@ export const authApi = createApi({
 
 export const {
     useAddAuthMutation,
-    useGetAuthQuery,
     useAddTokenMutation
   } = authApi;

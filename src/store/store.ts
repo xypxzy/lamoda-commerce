@@ -1,10 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit";
-import cartReducer from "./cart/slice.ts";
-import productsReducer from "./products/productsSlice.ts";
 import {usersApi} from "./users/usersApi.ts";
-import authReducer from './auth/authSlice.ts'
 import {productsApi} from "./products/productsApi.ts";
 import {authApi} from "./auth/authApi.ts";
+
+import cartReducer from "./cart/slice.ts";
+import productsReducer from "./products/productsSlice.ts";
+import authReducer from './auth/authSlice.ts'
 
 export const store = configureStore({
   reducer: {

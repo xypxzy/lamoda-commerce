@@ -18,13 +18,14 @@ import socialMediaAuth from "../../service/auth";
 import google from "../../assets/image 2.svg";
 import facebook from "../../assets/image 3.svg";
 import apple from "../../assets/image 4.svg";
-import { useAppDispatch } from "../../store/hooks";
-import { useGetAuthQuery, useAddTokenMutation } from "../../store/auth/authApi";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAddTokenMutation } from "../../store/auth/authApi";
 import { useNavigate } from "react-router-dom";
 import { toggle } from "../../store/auth/authSlice";
 
 
 const Login = () => {
+
   const {
     register,
     handleSubmit,
@@ -32,10 +33,10 @@ const Login = () => {
   } = useForm();
   const [booleanPassword, setBooleanPassword] = useState(true);
   const dispatch = useAppDispatch()
-  const {data: authData, isSuccess: isLoginSuccess} = useGetAuthQuery()
-  const [addToken, {data, isError, error}] = useAddTokenMutation()
+  const [addToken, {data, isError, error, isSuccess}] = useAddTokenMutation()
   const navigate = useNavigate()
 
+/////
   const onClickProvider = (provider: any) => {
     socialMediaAuth(provider)
       .then((user) => {
@@ -48,11 +49,15 @@ const Login = () => {
       });
   };
 
-  const onSubmit = (data: any) => {
+////
+  const onSubmit = async(data: any) => {
+
     try {
-        const token = addToken({email: data.email, password: data.password})
-        localStorage.setItem('token', JSON.stringify(token))
-        console.log(token)
+        await addToken({username: data?.name, password: data?.password})
+        .then((res) => localStorage.setItem('token', JSON.stringify({accesss_token:res?.data?.access, refresh_token: res?.data?.refresh}))) 
+        .catch((err) => console.log(err))
+        
+        console.log()
     } catch (error) {
       console.log(error)
     }
@@ -62,17 +67,9 @@ const Login = () => {
     console.log(error)
   }
 
-  useEffect(() => {
-    if(isLoginSuccess){
-      console.log('you singed in')
-      dispatch(toggle(true))
-      navigate('/')
-    }
-    
-  },[])
+///
 
-
-
+      
   return (
     <main>
       <section>
@@ -81,10 +78,10 @@ const Login = () => {
           <div className="mb-6">
             <img src={mail} alt={'mail'}/>
             <input
-              type="mail"
-              id="mail"
-              placeholder="mail"
-              {...register("mail", {
+              type="name"
+              id="name"
+              placeholder="name"
+              {...register("name", {
                 required: "Параметр обязателен",
                 maxLength: {
                   value: 15,
