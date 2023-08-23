@@ -12,6 +12,9 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { toggle } from "../../store/auth/authSlice";
 import { useAppDispatch } from "../../store/hooks";
 
+import { auth } from "../../config/firebase-config";
+import { signOut } from "firebase/auth";
+
 
 export default function Header() {
   const [isOpen, setOpen] = React.useState(false);
@@ -29,9 +32,17 @@ export default function Header() {
   // logOut Button and refresh token
   const dispatch = useAppDispatch()
 
-  const logOut = (state: any) => {
+  const logOut = async(state: any) => {
+    if(auth){
+      try {
+        await signOut(auth)
+      } catch (error) {
+        console.log(error)
+      }
+    }else{
+      localStorage.removeItem('token')
+    }
     dispatch(toggle(state))
-    localStorage.removeItem('token')
     navigate('/login')
   }
 
