@@ -1,8 +1,7 @@
 import React from "react";
 import cls from "./CartPage.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCart } from "../../store/cart/selectors";
 import { addItem, minusItem } from "../../store/cart/slice";
+import {useAppDispatch, useAppSelector} from "../../store/hooks.ts";
 
 type CartItemProps = {
   id: number;
@@ -19,15 +18,11 @@ const CartItem: React.FC<CartItemProps> = ({
   price,
   count,
 }) => {
-  const { totalPrice } = useSelector(selectCart);
-  const dispatch = useDispatch();
+  const { totalPrice } = useAppSelector(state => state.cart);
+  const dispatch = useAppDispatch();
 
   const onClickPlus = () => {
-    dispatch(
-      addItem({
-        id,
-      })
-    );
+    dispatch(addItem({id, count, imageUrl, price, title}));
   };
 
   const onClickMinus = () => {

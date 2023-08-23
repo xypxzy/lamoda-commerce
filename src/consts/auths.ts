@@ -4,4 +4,3 @@ export interface AuthProps {
     password: string;
 }
 
-export interface Auth

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 const storedRole = localStorage.getItem('role');
 const initialRole = storedRole ? JSON.parse(storedRole) : false;
@@ -11,7 +11,8 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-      toggle: (state) => {
+      toggle: (state, action: PayloadAction<boolean>) => {
+          state.isToggled = action.payload;
         localStorage.setItem('role', JSON.stringify(state.isToggled))
       },
     },
