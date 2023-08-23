@@ -19,18 +19,18 @@ const Regist = () => {
     const {register, handleSubmit, formState: { errors }} = useForm();
     const [booleanPassword, setBooleanPassword] = useState(true); 
     const [booleanConfirmPassword, setBooleanConfirmPassword] = useState(true);
-    const [addUser, {isSuccess, error}] = useAddAuthMutation()
+    const [addUser, {isSuccess, error, isError}] = useAddAuthMutation()
     const navigate = useNavigate()
 
-    const onSubmit = (data: any) => {
+    const onSubmit = async(data: any) => {
 
         if(data.password === data.confirm_password){
             try {
-                const res =  addUser({
-                    first_name: data.name,
-                    email: data.email,
-                    password: data.password
-                })
+                const res = await addUser({
+                    first_name: data?.name,
+                    email: data?.email,
+                    password: data?.password
+                }).unwrap();
                 console.log(res)
             } catch (error) {
                 console.log(error)
@@ -39,12 +39,15 @@ const Regist = () => {
         
         
     }
-    console.log(error)
+    if(isError){
+        console.log(error)
+    }
+    
 
 
     useEffect(() => {
         if(isSuccess){
-            console.log('is login success')
+            console.log('login is success')
             navigate('/login')
         }
     }, [])
@@ -78,9 +81,9 @@ const Regist = () => {
                             })}
                             required
                             ></input>
-                            {errors?.name && (<span className="error" role="alert">{errors?.root?.message}</span>)}
+                            {errors?.name && (<span className="error" role="alert">{errors?.name?.message?.toString()}</span>)}
                     </div>
-                    <div className="mb-6">
+                    {/* <div className="mb-6">
                         <img src={mail} alt="" />
                         <input 
                             type="email" 
@@ -88,18 +91,11 @@ const Regist = () => {
                             placeholder="john.doe@company.com"
                             {...register('email', {
                                 required: "Параметр обязателен",
-                                maxLength: {
-                                    value: 15,
-                                    message: 'Ваше имя должно быть меньше 20 символов'
-                                },
-                                minLength: {
-                                    value: 3,
-                                    message: 'Ваше имя должно быть больше 3 символов'
-                                },
                             })}
                             required
                         ></input>
-                    </div>
+                        {errors?.name && (<span className="error" role="alert">{errors?.name?.message?.toString()}</span>)}
+                    </div> */}
                     <div className="mb-6">
                         <img src={lock} alt="" />
                         <input 
@@ -109,13 +105,9 @@ const Regist = () => {
                             placeholder="•••••••••"
                             {...register('password', {
                                 required: "Параметр обязателен",
-                                maxLength: {
-                                    value: 15,
-                                    message: 'Ваше имя должно быть меньше 20 символов'
-                                },
                                 minLength: {
                                     value: 3,
-                                    message: 'Ваше имя должно быть больше 3 символов'
+                                    message: 'Ваш пароль должен быть больше 5 символов.'
                                 },
                             })}
                             required
@@ -126,6 +118,7 @@ const Regist = () => {
                                 <img src={eyeblock} alt="" className={styles.imgEye} onClick={() => setBooleanPassword(true)}/>
                             )
                         }
+                        {errors?.name && (<span className="error" role="alert">{errors?.name?.message?.toString()}</span>)}
                         
                     </div>
                     <div className="mb-6">
@@ -136,13 +129,9 @@ const Regist = () => {
                             placeholder="•••••••••"
                             {...register('confirm_password', {
                                 required: "Параметр обязателен",
-                                maxLength: {
-                                    value: 15,
-                                    message: 'Ваше имя должно быть меньше 20 символов'
-                                },
                                 minLength: {
                                     value: 3,
-                                    message: 'Ваше имя должно быть больше 3 символов'
+                                    message: 'Ваш пароль должен быть больше 5 символов.'
                                 },
                             })}
                             required
@@ -153,6 +142,7 @@ const Regist = () => {
                                 <img src={eyeblock} alt="" className={styles.imgEye} onClick={() => setBooleanConfirmPassword(true)}/>
                             )
                         }
+                        {errors?.name && (<span className="error" role="alert">{errors?.name?.message?.toString()}</span>)}
                         
                     </div>
 

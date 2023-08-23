@@ -14,11 +14,15 @@ export const authApi = createApi({
                 body
             }),
         }),
-        getAuth: builder.query<AuthProps, void>({
+        getAuth: builder.query<AuthProps[], void>({
             query: () => '/users',
         }),
-        getToken: builder.query({
-            query: () => '/users/token',
+        addToken:builder.mutation({
+            query: (body) => ({
+                url: '/users/token',
+                method: 'POST',
+                body
+            }),
         }),
     })
 })
@@ -26,5 +30,5 @@ export const authApi = createApi({
 export const {
     useAddAuthMutation,
     useGetAuthQuery,
-    useGetTokenQuery
+    useAddTokenMutation
   } = authApi;
