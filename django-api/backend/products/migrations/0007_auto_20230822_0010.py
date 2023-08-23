@@ -43,6 +43,6 @@ class Migration(migrations.Migration):
         ('users', '0001_initial')
     ]
 
-    operations = [
-        migrations.RunPython(models_population), 
-    ]
+    # operations = [
+    #     migrations.RunPython(models_population),
+    # ]

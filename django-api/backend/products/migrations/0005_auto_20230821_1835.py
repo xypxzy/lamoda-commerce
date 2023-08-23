@@ -17,8 +17,8 @@ def populate_models(apps, schema_editor):
     c2 = Category.objects.create(name='Средства гигиены')
     c3 = Category.objects.create(name='Косметика')
     c4 = Category.objects.create(name='Одежда')
-    c5 = Category.objects.create(name='Обувь')    
-    
+    c5 = Category.objects.create(name='Обувь')
+
     p1 = Product.objects.create(name='Сумка', serial_number='A1234', description='Бежевая сумка.', user=user1)
     p2 = Product.objects.create(name='Шампунь', serial_number='H1234', description='Шампунь для волос 2в1.', user=user2)
     p3 = Product.objects.create(name='Губная помада', serial_number='COS1234', description='Красная помада.', user=user1)
@@ -48,6 +48,6 @@ class Migration(migrations.Migration):
         ('users', '0001_initial')
     ]
 
-    operations = [
-        migrations.RunPython(populate_models), 
-    ]
+    # operations = [
+    #     migrations.RunPython(populate_models),
+    # ]

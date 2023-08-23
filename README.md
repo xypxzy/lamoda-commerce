@@ -72,7 +72,14 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
-8. Запустите сервер:
+8. Загрузите фикстуры:
+
+```bash
+python manage.py loaddata backend/products/fixtures/goods_w.json
+python manage.py loaddata backend/products/fixtures/images_w.json
+```
+
+9. Запустите сервер:
 
 ```bash
 python manage.py runserver
