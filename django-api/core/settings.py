@@ -47,7 +47,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'drf_yasg',
-    'django_extensions',
+    'rest_framework_simplejwt',
     'corsheaders',
 
     'backend.products.apps.ProductsConfig',
@@ -113,6 +113,7 @@ AUTH_USER_MODEL = 'users.User'
 # Designating Rest framework authentication classes
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
