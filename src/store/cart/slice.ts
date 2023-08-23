@@ -44,8 +44,19 @@ export const cartSlice = createSlice({
       }, 0);
       sessionStorage.setItem("cartData", JSON.stringify(state.cartItems));
     },
+    removeItem: (state, action: PayloadAction<number>) => {
+      const indexToRemove = state.cartItems.findIndex(item => item.id === action.payload);
+
+      if (indexToRemove !== -1) {
+        state.cartItems.splice(indexToRemove, 1);
+        state.totalPrice = state.cartItems.reduce((acc, item) => {
+          return acc + item.price * item.count;
+        }, 0);
+        sessionStorage.setItem("cartData", JSON.stringify(state.cartItems));
+      }
+    },
   },
 });
 
-export const { addItem, minusItem } = cartSlice.actions;
+export const { addItem, minusItem,removeItem } = cartSlice.actions;
 export default cartSlice.reducer;
