@@ -19,7 +19,7 @@ export const authApi = createApi({
         }),
         getToken: builder.query({
             query: () => '/users/token',
-        }),
+                        }),
     })
 })
 

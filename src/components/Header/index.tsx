@@ -30,12 +30,12 @@ export default function Header() {
   const dispatch = useAppDispatch()
 
   const logOut = (state: any) => {
-    dispatch(toggle(state))
-    localStorage.removeItem('token')
-    navigate('/login')
-  }
+          dispatch(toggle(state))
+      localStorage.removeItem('token')
+      navigate('/login')
+    }
 
-  //Страницы и иконки из Navbar
+    //Страницы и иконки из Navbar
   const navItems = [
     { id: 1, text: "Новинки", link: "newcollection" },
     { id: 2, text: "Преимущества", link: "features" },

@@ -101,7 +101,7 @@ const Regist = () => {
                             })}
                             required
                         ></input>
-                    </div>
+                        </div>
                     <div className="mb-6">
                         <img src={lock} alt="" />
                         <input 
@@ -111,7 +111,7 @@ const Regist = () => {
                             placeholder="•••••••••"
                             {...register('password', {
                                 required: "Параметр обязателен",
-                                maxLength: {
+                               maxLength: {
                                     value: 15,
                                     message: 'Ваше имя должно быть меньше 20 символов'
                                 },
@@ -138,7 +138,7 @@ const Regist = () => {
                             placeholder="•••••••••"
                             {...register('confirm_password', {
                                 required: "Параметр обязателен",
-                                maxLength: {
+                               maxLength: {
                                     value: 15,
                                     message: 'Ваше имя должно быть меньше 20 символов'
                                 },

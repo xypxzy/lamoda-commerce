@@ -121,7 +121,7 @@ const ProductCard = (props: ProductCardProps) => {
                   <button onClick={() => chechAuth()}> <img src={profile} alt="" /> </button>
               </div>
           </>)}
-  );
+        );
 };
 
 export default ProductCard;
