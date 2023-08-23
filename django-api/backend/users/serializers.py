@@ -4,7 +4,7 @@ from .models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
-    password2 = serializers.CharField(write_only=True)
+    password2 = serializers.CharField(write_only=True, required=True)
 
     class Meta:
         model = User
@@ -18,7 +18,10 @@ class UserSerializer(serializers.ModelSerializer):
 
     # checking if passwords match
     def validate(self, data):
-        if data['password'] != data['password2']:
+        password1 = data.get('password')
+        password2 = data.pop('password2')
+
+        if password1 != password2:
             raise serializers.ValidationError('Passwords do not match.')
         return data
 
@@ -40,19 +43,6 @@ class UserSerializer(serializers.ModelSerializer):
 
     # overwriting create method to save the model properly
     def create(self, validated_data):
-        user = User(
-            username=validated_data['username'],
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name'],
-            email=validated_data['email'],
-        )
-        profile_image = validated_data.get('profile_image')
-        if profile_image:
-            user.profile_image = profile_image
-
-        # password hashing
-        user.set_password(validated_data['password'])
-        user.save()
-
+        user = User.objects.create_user(**validated_data)
         return user
     
