@@ -102,27 +102,7 @@ git clone https://github.com/xypxzy/lamoda-commerce
 ```bash
 cd your-repository
 ```
-4. Для подключению бд
-
-```bash
-cd ./django-api
-```
-```bash
-docker-compose run api sh
-```
-```sh
-python manage.py makemigrations
-```
-```sh
-python manage.py migrate
-```
-```sh
-exit
-```
-```bash
-cd ../
-```
-5. Запустите контейнеры с помощью Docker Compose:
+4. Запустите контейнеры с помощью Docker Compose:
 
 ```bash
 docker-compose up
