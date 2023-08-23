@@ -12,7 +12,6 @@ import {
   googleProvider,
   facebookProvider,
   githubProvider,
-  auth,
 } from "../../config/firebase-config";
 import socialMediaAuth from "../../service/auth";
 
@@ -35,7 +34,7 @@ const Login = () => {
   const [booleanPassword, setBooleanPassword] = useState(true);
   const dispatch = useAppDispatch()
   const {data: authData} = useGetAuthQuery()
-  const {data: token, isSuccess} = useGetTokenQuery()
+  const {data: token, isSuccess} = useGetTokenQuery('')
   const navigate = useNavigate()
 
   const onClickProvider = (provider: any) => {
@@ -141,7 +140,7 @@ const Login = () => {
           </button>
         </form>
 
-        <Link to='/login'><button className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">нет аккаунта !!!</button></Link>
+        <Link to='/registration'><button className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">нет аккаунта !!!</button></Link>
 
 
         <section className={styles.giveChoose}>

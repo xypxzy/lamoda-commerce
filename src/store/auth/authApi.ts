@@ -14,7 +14,7 @@ export const authApi = createApi({
                 body
             }),
         }),
-        getAuth: builder.query<AuthProps[], void>({
+        getAuth: builder.query<AuthProps, void>({
             query: () => '/users',
         }),
         getToken: builder.query({

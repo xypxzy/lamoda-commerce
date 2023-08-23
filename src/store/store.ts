@@ -5,6 +5,7 @@ import productsReducer from "./products/productsSlice.ts";
 import {usersApi} from "./users/usersApi.ts";
 import authReducer from './auth/authSlice.ts'
 import { productsApi } from "./products/productsApi.ts";
+import {authApi} from "./auth/authApi.ts";
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
@@ -14,9 +15,10 @@ export const store = configureStore({
 
     [productsApi.reducerPath]: productsApi.reducer,
     [usersApi.reducerPath]: usersApi.reducer,
+    [authApi.reducerPath]: authApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(productsApi.middleware),concat(usersApi.middleware),
+    getDefaultMiddleware().concat(productsApi.middleware).concat(usersApi.middleware).concat(authApi.middleware)
 });
 
 export type RootState = ReturnType<typeof store.getState>;

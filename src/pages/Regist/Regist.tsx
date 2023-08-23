@@ -19,7 +19,6 @@ const Regist = () => {
     const {register, handleSubmit, formState: { errors }} = useForm();
     const [booleanPassword, setBooleanPassword] = useState(true); 
     const [booleanConfirmPassword, setBooleanConfirmPassword] = useState(true);
-    const [checkComfirmPass, setCheckComfirmPass] = useState('')
     const [addUser, {isSuccess, error}] = useAddAuthMutation()
     const navigate = useNavigate()
 
@@ -32,7 +31,6 @@ const Regist = () => {
                     email: data.email,
                     password: data.password
                 })
-                
                 console.log(res)
             } catch (error) {
                 console.log(error)
@@ -80,7 +78,7 @@ const Regist = () => {
                             })}
                             required
                             ></input>
-                            {errors?.name && (<span className="error" role="alert">{errors?.name?.message}</span>)}
+                            {errors?.name && (<span className="error" role="alert">{errors?.root?.message}</span>)}
                     </div>
                     <div className="mb-6">
                         <img src={mail} alt="" />
