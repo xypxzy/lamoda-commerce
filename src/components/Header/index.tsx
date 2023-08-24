@@ -14,7 +14,7 @@ import { useAppDispatch } from "../../store/hooks";
 
 import { auth } from "../../config/firebase-config";
 import { signOut } from "firebase/auth";
-
+import { CiLogout } from "react-icons/ci";
 
 export default function Header() {
   const [isOpen, setOpen] = React.useState(false);
@@ -32,7 +32,7 @@ export default function Header() {
   // logOut Button and refresh token
   const dispatch = useAppDispatch()
 
-  const logOut = async(state: any) => {
+  const logOut = async(state: boolean) => {
     if(auth){
       try {
         await signOut(auth)
@@ -42,7 +42,8 @@ export default function Header() {
     }else{
       localStorage.removeItem('token')
     }
-    dispatch(toggle(state))
+    localStorage.removeItem('token')
+    dispatch(toggle(false))
     navigate('/login')
   }
 
@@ -176,7 +177,7 @@ export default function Header() {
           ))}
         </ul>
       </nav>
-      <button onClick={() => logOut(false)}>log out</button>
+      <button onClick={() => logOut(false)}> <CiLogout className={styles.logoutIc}/> </button>
     </div>
   );
 }

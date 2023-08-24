@@ -17,18 +17,21 @@ const Regist = () => {
     const {register, handleSubmit, formState: { errors }} = useForm();
     const [booleanPassword, setBooleanPassword] = useState(true); 
     const [booleanConfirmPassword, setBooleanConfirmPassword] = useState(true);
-    const [addUser, {isSuccess, error, isError}] = useAddAuthMutation()
+    const [addUser, {isSuccess, error, isError, isLoading}] = useAddAuthMutation()
     const navigate = useNavigate()
-
     const onSubmit = async(data: any) => {
 
         if(data.password === data.confirm_password){
+
             try {
                 const res = await addUser({
-                    first_name: data?.name,
-                    email: data?.email,
-                    password: data?.password
-                }).unwrap();
+                    first_name: data.first_name,
+                    username: data.name,
+                    email: data.email,
+                    password: data.password,
+                    password2: data.confirm_password,
+                    last_name: data.last_name,
+                })
                 console.log(res)
             } catch (error) {
                 console.log(error)
@@ -40,15 +43,13 @@ const Regist = () => {
     if(isError){
         console.log(error)
     }
+
     
 
-
-    useEffect(() => {
-        if(isSuccess){
-            console.log('login is success')
-            navigate('/login')
-        }
-    }, [])
+    if(isSuccess){
+        console.log('login is success')
+        navigate('/login')
+    }
 
 
     return(
@@ -78,8 +79,50 @@ const Regist = () => {
                             ></input>
                             {errors?.name && (<span className="error" role="alert">{errors?.name?.message?.toString()}</span>)}
                     </div>
-                    {/* <div className="mb-6">
-                        <img src={mail} alt="" />
+                    <div className="mb-6">
+                        <img src={person} alt={'person'}/>
+                        <input 
+                            type="first_name" 
+                            id="first_name" 
+                            placeholder="first_name"
+                            {...register('first_name', {
+                                required: "Параметр обязателен",
+                                maxLength: {
+                                    value: 15,
+                                    message: 'Ваше имя должно быть меньше 20 символов'
+                                },
+                                minLength: {
+                                    value: 3,
+                                    message: 'Ваше имя должно быть больше 3 символов'
+                                },
+                            })}
+                            required
+                            ></input>
+                            {errors?.name && (<span className="error" role="alert">{errors?.name?.message?.toString()}</span>)}
+                    </div>
+                    <div className="mb-6">
+                        <img src={person} alt={'person'}/>
+                        <input 
+                            type="last_name" 
+                            id="last_name" 
+                            placeholder="last_name"
+                            {...register('last_name', {
+                                required: "Параметр обязателен",
+                                maxLength: {
+                                    value: 15,
+                                    message: 'Ваша фамилия должна быть меньше 20 символов'
+                                },
+                                minLength: {
+                                    value: 3,
+                                    message: 'Ваше фамилия должна быть больше 3 символов'
+                                },
+                            })}
+                            required
+                            ></input>
+                            {errors?.name && (<span className="error" role="alert">{errors?.name?.message?.toString()}</span>)}
+                    </div>
+                    <div className="mb-6">
+                        {/*<img src={} alt="" />*/}
                         <input 
                             type="email" 
                             id="email" 
@@ -90,7 +133,7 @@ const Regist = () => {
                             required
                         ></input>
                         {errors?.name && (<span className="error" role="alert">{errors?.name?.message?.toString()}</span>)}
-                    </div> */}
+                    </div>
                     <div className="mb-6">
                         <img src={lock} alt="" />
                         <input 

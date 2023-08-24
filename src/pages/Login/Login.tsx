@@ -4,27 +4,23 @@ import mail from "../../assets/mail.svg";
 import lock from "../../assets/lock.svg";
 import eye from "../../assets/eye.svg";
 import eyeblock from "../../assets/eyeslash.svg";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import {useForm} from "react-hook-form";
+import {Link, useNavigate} from "react-router-dom";
 import styles from "./Login.module.scss";
-import { useEffect, useState } from "react";
-import {
-  googleProvider,
-  facebookProvider,
-  githubProvider,
-} from "../../config/firebase-config";
+import {useState} from "react";
+import {facebookProvider, githubProvider, googleProvider,} from "../../config/firebase-config";
 import socialMediaAuth from "../../service/auth";
 
 import google from "../../assets/image 2.svg";
 import facebook from "../../assets/image 3.svg";
 import apple from "../../assets/image 4.svg";
-import { useAppDispatch } from "../../store/hooks";
-import { useGetAuthQuery, useAddTokenMutation } from "../../store/auth/authApi";
-import { useNavigate } from "react-router-dom";
-import { toggle } from "../../store/auth/authSlice";
+import {useAppDispatch} from "../../store/hooks";
+import {useAddTokenMutation} from "../../store/auth/authApi";
+import {toggle} from "../../store/auth/authSlice";
 
 
 const Login = () => {
+
   const {
     register,
     handleSubmit,
@@ -32,10 +28,10 @@ const Login = () => {
   } = useForm();
   const [booleanPassword, setBooleanPassword] = useState(true);
   const dispatch = useAppDispatch()
-  const {data: authData, isSuccess: isLoginSuccess} = useGetAuthQuery()
-  const [addToken, {data, isError, error}] = useAddTokenMutation()
+  const [addToken, {data, isError, error, isSuccess}] = useAddTokenMutation()
   const navigate = useNavigate()
 
+/////
   const onClickProvider = (provider: any) => {
     socialMediaAuth(provider)
       .then((user) => {
@@ -48,11 +44,15 @@ const Login = () => {
       });
   };
 
-  const onSubmit = (data: any) => {
+////
+  const onSubmit = async(data: any) => {
+
     try {
-        const token = addToken({email: data.email, password: data.password})
-        localStorage.setItem('token', JSON.stringify(token))
-        console.log(token)
+        await addToken({username: data?.name, password: data?.password})
+        .then((res) => localStorage.setItem('token', JSON.stringify({accesss_token:res?.data?.access, refresh_token: res?.data?.refresh})))
+        .catch((err) => console.log(err))
+        
+        console.log()
     } catch (error) {
       console.log(error)
     }
@@ -62,17 +62,9 @@ const Login = () => {
     console.log(error)
   }
 
-  useEffect(() => {
-    if(isLoginSuccess){
-      console.log('you singed in')
-      dispatch(toggle(true))
-      navigate('/')
-    }
-    
-  },[])
+///
 
-
-
+      
   return (
     <main>
       <section>
@@ -81,10 +73,10 @@ const Login = () => {
           <div className="mb-6">
             <img src={mail} alt={'mail'}/>
             <input
-              type="mail"
-              id="mail"
-              placeholder="mail"
-              {...register("mail", {
+              type="name"
+              id="name"
+              placeholder="name"
+              {...register("name", {
                 required: "Параметр обязателен",
                 maxLength: {
                   value: 15,
@@ -142,7 +134,8 @@ const Login = () => {
           </button>
         </form>
 
-        <Link to='/registration'><button className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">нет аккаунта !!!</button></Link>
+        <Link to='/registration'>
+          <button className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">нет аккаунта !!!</button></Link>
 
 
         <section className={styles.giveChoose}>
