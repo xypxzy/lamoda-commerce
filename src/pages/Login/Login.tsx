@@ -1,20 +1,14 @@
-import eye from "../../assets/eye.svg";
-import logo from "../../assets/svg/logo.svg";
-import {SubmitHandler, useForm} from "react-hook-form";
 import {Link, useNavigate} from "react-router-dom";
-import cls from "./Login.module.css";
-import {useEffect, useState} from "react";
+import {useForm} from "react-hook-form";
 import {facebookProvider, githubProvider, googleProvider,} from "../../config/firebase-config";
-import socialMediaAuth from "../../service/auth";
-import {AiOutlineMail, AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
-import {CiLock} from 'react-icons/ci'
-
-import google from "../../assets/image 2.svg";
-import facebook from "../../assets/image 3.svg";
-import apple from "../../assets/image 4.svg";
-import {useAppDispatch} from "../../store/hooks";
-import {AuthResponse, useAddTokenMutation} from "../../store/auth/authApi";
 import {setAuthStatus} from "../../store/auth/authSlice";
+import {useAddTokenMutation} from "../../store/auth/authApi";
+import {useAppDispatch} from "../../store/hooks";
+import socialMediaAuth from "../../service/auth";
+import cls from "./Login.module.css";
+import {FcGoogle } from 'react-icons/fc';
+import {GrGithub, GrFacebook} from 'react-icons/gr';
+import logo from "../../assets/svg/logo.svg";
 
 type FormData = {
   username: string;
@@ -127,9 +121,26 @@ const Login = () => {
               </p>
             </form>
           </div>
+          <section className={cls.socialMediaButtons}>
+            <div>
+              <p className={'flex justify-center mb-5 text-sm text-gray-600'}>Можете войти через</p>
+              <div className={'flex items-center justify-center gap-4 mb-5'}>
+                <button onClick={() => onClickProvider(googleProvider)}>
+                  <FcGoogle className={'text-4xl transition-transform transform-gpu duration-200 hover:scale-105'}/>
+                </button>
+                <button onClick={() => onClickProvider(githubProvider)}>
+                  <GrGithub className={'text-4xl transition-transform transform-gpu duration-200 hover:scale-105'}/>
+                </button>
+                <button onClick={() => onClickProvider(facebookProvider)}>
+                  <GrFacebook className={'text-4xl transition-transform transform-gpu duration-200 hover:scale-105'}/>
+                </button>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </section>
+
   );
 };
 export default Login;
