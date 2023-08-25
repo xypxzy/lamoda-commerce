@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Brands.module.scss";
+import styles from "./Brands.module.css";
 import brands1 from "../../assets/img/brands-1.png";
 import brands2 from "../../assets/img/brands-2.png";
 import brands3 from "../../assets/img/brands-3.png";

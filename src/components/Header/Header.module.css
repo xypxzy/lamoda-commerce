@@ -1,22 +1,21 @@
 .header {
-  @apply fixed w-full bg-white z-50 -top-0 flex items-center justify-evenly border-b border-gray-400 py-5;
-  @media screen and (max-width: 1024px) {
-    margin-bottom: 0;
-  }
-  &__list {
-    @apply hidden space-x-8 lg:flex;
-  }
+  @apply fixed w-full  bg-white z-50 -top-0 flex items-center justify-evenly border-b border-gray-400 py-5;
+}
 
-  &__mobile_list {
-    @apply flex flex-col items-center justify-between min-h-[250px];
-  }
+.header__list {
+  @apply hidden space-x-8 lg:flex;
+}
+
+.header__mobile_list {
+  @apply flex flex-col items-center justify-between min-h-[250px];
 }
 
 .icon_center {
   @apply flex flex-col justify-center items-center;
-  & svg {
-    @apply mb-1;
-  }
+}
+
+.icon_center svg {
+  @apply mb-1;
 }
 
 .list_text {
@@ -48,6 +47,7 @@
   top: 0;
   transition: top 0.6s ease;
 }
+
 .slideout {
   top: -900px;
   transition: top 0.6s ease;
@@ -56,4 +56,3 @@
 a {
   cursor: pointer;
 }
-

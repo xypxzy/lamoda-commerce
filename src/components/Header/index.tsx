@@ -4,21 +4,19 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsBag } from "react-icons/bs";
 import { BiUser } from "react-icons/bi";
 import { MdProductionQuantityLimits } from "react-icons/md";
-import styles from "./Header.module.scss";
+import styles from "./Header.module.css";
 import { Turn as Hamburger } from "hamburger-react";
 import { Link as ScrollLink } from "react-scroll";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-
 import { toggle } from "../../store/auth/authSlice";
 import { useAppDispatch } from "../../store/hooks";
-
 import { auth } from "../../config/firebase-config";
 import { signOut } from "firebase/auth";
 import { CiLogout } from "react-icons/ci";
 
 export default function Header() {
   const [isOpen, setOpen] = React.useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   //Логика burger menu
   const onClickMenu = () => {
@@ -30,22 +28,22 @@ export default function Header() {
   };
 
   // logOut Button and refresh token
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-  const logOut = async(state: boolean) => {
-    if(auth){
+  const logOut = async (state: boolean) => {
+    if (auth) {
       try {
-        await signOut(auth)
+        await signOut(auth);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }else{
-      localStorage.removeItem('token')
+    } else {
+      localStorage.removeItem("token");
     }
-    localStorage.removeItem('token')
-    dispatch(toggle(false))
-    navigate('/login')
-  }
+    localStorage.removeItem("token");
+    dispatch(toggle(false));
+    navigate("/login");
+  };
 
   //Страницы и иконки из Navbar
   const navItems = [
@@ -56,14 +54,19 @@ export default function Header() {
   ];
 
   const navLinks = [
-    { id: 1, icon: <MdProductionQuantityLimits /> ,text: "Каталог", link: "/catalog" },
+    {
+      id: 1,
+      icon: <MdProductionQuantityLimits />,
+      text: "Каталог",
+      link: "/catalog",
+    },
     { id: 2, icon: <BiUser />, link: "/user", text: "Профиль" },
     { id: 3, icon: <AiOutlineHeart />, link: "/favourites", text: "Избранное" },
     { id: 4, icon: <BsBag />, link: "/cart", text: "Корзина" },
   ];
 
   return (
-    <div className={styles.header}>
+    <section className={styles.header}>
       <ul className={`DESKTOP-MENU ${styles.header__list}`}>
         {navItems.map((item) => (
           <li key={item.id}>
@@ -139,6 +142,7 @@ export default function Header() {
                       duration={1000}
                       aria-current="page"
                       onClick={closeMenu}
+                      className="text-xl"
                     >
                       {item.text}
                     </ScrollLink>
@@ -177,7 +181,9 @@ export default function Header() {
           ))}
         </ul>
       </nav>
-      <button onClick={() => logOut(false)}> <CiLogout className={styles.logoutIc}/> </button>
-    </div>
+      <button onClick={() => logOut(false)}>
+        <CiLogout className={styles.logoutIc} />{" "}
+      </button>
+    </section>
   );
 }

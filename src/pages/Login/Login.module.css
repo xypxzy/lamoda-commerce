@@ -1,0 +1,42 @@
+@use "../Regist/Regist.module.scss";
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+.main .imageBackground {
+  margin-top: 0px;
+}
+
+.main .imageBackground img {
+  height: 1050px;
+}
+
+.main .giveChoose {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.main .giveChoose .line {
+  border-bottom: 1px solid black;
+  width: 100%;
+}
+
+.main .giveChoose p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.main .socialMediaButtons {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.main .socialMediaButtons button {
+  margin: 0px 10px;
+}
