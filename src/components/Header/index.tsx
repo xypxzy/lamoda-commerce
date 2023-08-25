@@ -5,7 +5,6 @@ import { BsBag } from "react-icons/bs";
 import { BiUser } from "react-icons/bi";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import styles from "./Header.module.css";
-import { Turn as Hamburger } from "hamburger-react";
 import { Link as ScrollLink } from "react-scroll";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { toggle } from "../../store/auth/authSlice";
@@ -13,16 +12,21 @@ import { useAppDispatch } from "../../store/hooks";
 import { auth } from "../../config/firebase-config";
 import { signOut } from "firebase/auth";
 import { CiLogout } from "react-icons/ci";
+import HeaderMobile from "./HeaderMobile";
+import { cartItemsLength } from "../../store/cart/selectors";
+import { RootState } from "../../store/store";
+import { useSelector } from "react-redux";
 
 export default function Header() {
   const [isOpen, setOpen] = React.useState(false);
+  // Следит за изменением каоличества товаров в sessionStorage
+  const itemsCount = useSelector(
+    (state: RootState) => state.cart.cartItems.length
+  );
+
   const navigate = useNavigate();
 
   //Логика burger menu
-  const onClickMenu = () => {
-    setOpen(!isOpen);
-  };
-
   const closeMenu = () => {
     setOpen(false);
   };
@@ -51,18 +55,6 @@ export default function Header() {
     { id: 2, text: "Преимущества", link: "features" },
     { id: 3, text: "О нас", link: "aboutus" },
     { id: 4, text: "Бренды", link: "brands" },
-  ];
-
-  const navLinks = [
-    {
-      id: 1,
-      icon: <MdProductionQuantityLimits />,
-      text: "Каталог",
-      link: "/catalog",
-    },
-    { id: 2, icon: <BiUser />, link: "/user", text: "Профиль" },
-    { id: 3, icon: <AiOutlineHeart />, link: "/favourites", text: "Избранное" },
-    { id: 4, icon: <BsBag />, link: "/cart", text: "Корзина" },
   ];
 
   return (
@@ -95,94 +87,57 @@ export default function Header() {
         <img src={logo} alt="lamoda logo" />
       </RouterLink>
       <nav>
-        <section className="MOBILE-MENU mt-0 flex lg:hidden">
-          <Hamburger
-            size={25}
-            color="black"
-            toggled={isOpen}
-            toggle={onClickMenu}
-          />
-
-          <div
-            className={`${styles.navbar} ${
-              isOpen ? styles["slidein"] : styles["slideout"]
-            }`}
-          >
-            <div
-              className="absolute top-0 right-0 px-8 py-8"
-              onClick={onClickMenu}
-            >
-              <svg
-                className="h-8 w-8 text-gray-900"
-                viewBox="0 0 24 24"
-                fill="none"
-                cursor="pointer"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </div>
-            <ul className={styles.header__mobile_list}>
-              {navItems.map((item) => (
-                <li className={styles.list_text} key={item.id}>
-                  {item.link.startsWith("/") ? (
-                    <RouterLink to={item.link} aria-current="page">
-                      {item.text}
-                    </RouterLink>
-                  ) : (
-                    <ScrollLink
-                      to={item.link}
-                      spy={true}
-                      smooth={true}
-                      offset={50}
-                      duration={1000}
-                      aria-current="page"
-                      onClick={closeMenu}
-                      className="text-xl"
-                    >
-                      {item.text}
-                    </ScrollLink>
-                  )}
-                </li>
-              ))}
-              {navLinks.map((item) => (
-                <li className={isOpen ? styles.list_text : ""} key={item.id}>
-                  <RouterLink
-                    className={styles.icon_center}
-                    to={item.link}
-                    aria-current="page"
-                    onClick={closeMenu}
-                  >
-                    {item.icon}
-                    <span className={styles.icon__text}>{item.text}</span>
-                  </RouterLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
+        <HeaderMobile />
         <ul className={`DESKTOP-MENU ${styles.header__list}`}>
-          {navLinks.map((item) => (
-            <li className={styles.nav__icons} key={item.id}>
-              <RouterLink
-                className={styles.icon_center}
-                to={item.link}
-                aria-current="page"
-              >
-                {item.icon}
-                <span className={styles.icon__text}>{item.text}</span>
-              </RouterLink>
-            </li>
-          ))}
+          <li className={isOpen ? styles.list_text : ""}>
+            <RouterLink
+              className={styles.icon_center}
+              to="/catalog"
+              aria-current="page"
+              onClick={closeMenu}
+            >
+              <MdProductionQuantityLimits />
+              <span className={styles.icon__text}>Каталог</span>
+            </RouterLink>
+          </li>
+          <li className={isOpen ? styles.list_text : ""}>
+            <RouterLink
+              className={styles.icon_center}
+              to="/user"
+              aria-current="page"
+              onClick={closeMenu}
+            >
+              <BiUser />
+              <span className={styles.icon__text}>Профиль</span>
+            </RouterLink>
+          </li>
+          <li className={isOpen ? styles.list_text : ""}>
+            <RouterLink
+              className={styles.icon_center}
+              to="/favourites"
+              aria-current="page"
+              onClick={closeMenu}
+            >
+              <AiOutlineHeart />
+              <span className={styles.icon__text}>Избранное</span>
+            </RouterLink>
+          </li>
+          <li className={isOpen ? styles.list_text : styles.cart}>
+            <RouterLink
+              className={styles.icon_center}
+              to="/cart"
+              aria-current="page"
+              onClick={closeMenu}
+            >
+              <BsBag />
+              <span className={styles.icon__text}>Корзина</span>
+            </RouterLink>
+            <div className={styles.badge}>{itemsCount || 0}</div>
+          </li>
         </ul>
       </nav>
       <button onClick={() => logOut(false)}>
-        <CiLogout className={styles.logoutIc} />{" "}
+        <CiLogout className={styles.logoutIc} />
       </button>
     </section>
   );

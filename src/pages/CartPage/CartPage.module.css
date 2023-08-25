@@ -1,6 +1,5 @@
 .cart {
-  max-width: 1280px;
-  margin: 0 auto;
+  @apply flex flex-col  justify-center  max-w-screen-xl mx-auto px-4 mb-40 mt-40;
 }
 
 .cart__wrap {
@@ -25,7 +24,7 @@
 }
 
 .cart__item {
-  @apply flex items-center gap-x-6 mb-6;
+  @apply flex items-center gap-x-6;
 }
 
 .cart__item_name {

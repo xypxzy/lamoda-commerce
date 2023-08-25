@@ -2,10 +2,12 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { CartItems, CartSliceState } from "./types";
 
 const storedCartData = sessionStorage.getItem("cartData");
-const initialCartItems: CartItems[] = storedCartData ? JSON.parse(storedCartData) : [];
+const initialCartItems: CartItems[] = storedCartData
+  ? JSON.parse(storedCartData)
+  : [];
 
 const initialState: CartSliceState = {
-  cartItems: initialCartItems.map(item => ({
+  cartItems: initialCartItems.map((item) => ({
     ...item,
     isSelected: true,
   })),
@@ -17,7 +19,9 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action: PayloadAction<CartItems>) => {
-      const existingItem = state.cartItems.find((item) => item.id === action.payload.id);
+      const existingItem = state.cartItems.find(
+        (item) => item.id === action.payload.id
+      );
       if (existingItem) {
         existingItem.count += action.payload.count;
       } else {
@@ -30,7 +34,6 @@ export const cartSlice = createSlice({
         return acc + item.price * item.count;
       }, 0);
       sessionStorage.setItem("cartData", JSON.stringify(state.cartItems));
-
     },
     minusItem(state, action: PayloadAction<number>) {
       const findItem = state.cartItems.find((obj) => obj.id === action.payload);
@@ -45,7 +48,9 @@ export const cartSlice = createSlice({
       sessionStorage.setItem("cartData", JSON.stringify(state.cartItems));
     },
     removeItem: (state, action: PayloadAction<number>) => {
-      const indexToRemove = state.cartItems.findIndex(item => item.id === action.payload);
+      const indexToRemove = state.cartItems.findIndex(
+        (item) => item.id === action.payload
+      );
 
       if (indexToRemove !== -1) {
         state.cartItems.splice(indexToRemove, 1);
@@ -58,5 +63,5 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addItem, minusItem,removeItem } = cartSlice.actions;
+export const { addItem, minusItem, removeItem } = cartSlice.actions;
 export default cartSlice.reducer;

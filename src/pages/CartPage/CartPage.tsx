@@ -4,7 +4,6 @@ import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
 import { selectCart } from "../../store/cart/selectors";
 import CartEmpty from "../../components/CartEmpty";
-import logo from "../../assets/svg/logo.svg";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../store/hooks.ts";
 
@@ -40,7 +39,7 @@ const CartPage = () => {
             <div className={cls.cart__wrap}>
               <div className={cls.cart__left}>
                 {cartItems.map((item) => (
-                  <div key={item.id}>
+                  <div className="mb-24" key={item.id}>
                     <CartItem
                       id={item.id}
                       title={item.title}
@@ -66,9 +65,6 @@ const CartPage = () => {
                 </div>
               </div>
               <div className={cls.cart__right}>
-                <div className="flex justify-center mb-4">
-                  <img src={logo} alt="" />
-                </div>
                 <div className={cls.cart__contact}>
                   <h2 className="mb-3 text-xl">Контактная информация</h2>
                   <input
@@ -100,7 +96,7 @@ const CartPage = () => {
                   <span className="flex items-center gap-x-2">
                     <input type="checkbox" className="w-6 h-6" />
                     <span className="text-sm">
-                      Сохраните эту информацию для следующего раза{" "}
+                      Сохраните эту информацию для следующего раза
                     </span>
                   </span>
                   <p className="pt-9 flex justify-end items-center text-sm text-slate-600">
@@ -129,7 +125,7 @@ const CartPage = () => {
         <>
           <div id="snter-m" className={"flex-col items-center h-screen"}>
             <div>
-              <span>Ваша корзина пуста, пожалуйста, зарегистрируйтесь. ;)</span>
+              <span>Ваша корзина пуста, пожалуйста, зарегистрируйтесь.</span>
             </div>
             <button
               onClick={handleGoToCatalog}

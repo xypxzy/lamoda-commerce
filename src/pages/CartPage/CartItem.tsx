@@ -32,7 +32,7 @@ const CartItem: React.FC<CartItemProps> = ({
   };
 
   return (
-    <div>
+    <>
       <div className={"flex flex-col justify-center items-end"}>
         <div className={cls.cart__item}>
           <img src={imageUrl} alt="product image" />
@@ -57,7 +57,7 @@ const CartItem: React.FC<CartItemProps> = ({
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
