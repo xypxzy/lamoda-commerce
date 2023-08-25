@@ -1,42 +1,63 @@
-// login and token request
-
-import mail from "../../assets/mail.svg";
-import lock from "../../assets/lock.svg";
 import eye from "../../assets/eye.svg";
-import eyeblock from "../../assets/eyeslash.svg";
-import {useForm} from "react-hook-form";
+import logo from "../../assets/svg/logo.svg";
+import {SubmitHandler, useForm} from "react-hook-form";
 import {Link, useNavigate} from "react-router-dom";
-import styles from "./Login.module.scss";
-import {useState} from "react";
+import cls from "./Login.module.css";
+import {useEffect, useState} from "react";
 import {facebookProvider, githubProvider, googleProvider,} from "../../config/firebase-config";
 import socialMediaAuth from "../../service/auth";
+import {AiOutlineMail, AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
+import {CiLock} from 'react-icons/ci'
 
 import google from "../../assets/image 2.svg";
 import facebook from "../../assets/image 3.svg";
 import apple from "../../assets/image 4.svg";
 import {useAppDispatch} from "../../store/hooks";
-import {useAddTokenMutation} from "../../store/auth/authApi";
-import {toggle} from "../../store/auth/authSlice";
+import {AuthResponse, useAddTokenMutation} from "../../store/auth/authApi";
+import {setAuthStatus} from "../../store/auth/authSlice";
 
+type FormData = {
+  username: string;
+  password: string;
+};
 
 const Login = () => {
-
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const [booleanPassword, setBooleanPassword] = useState(true);
+    formState: {errors},
+  } = useForm<FormData>();
   const dispatch = useAppDispatch()
-  const [addToken, {data, isError, error, isSuccess}] = useAddTokenMutation()
+  const [addToken, {data, isError, error, isSuccess}] = useAddTokenMutation({})
   const navigate = useNavigate()
 
-/////
+  const onSubmit = async (data: FormData) => {
+    const res = await addToken({
+      username: data.username,
+      password: data.password,
+    })
+      .unwrap()
+      .then(((res) => {
+        localStorage.setItem('token', JSON.stringify({
+          'access_token': res.access,
+          'refresh_token': res.refresh,
+        }));
+        dispatch(setAuthStatus(true))
+        navigate('/');
+      }))
+      .catch((err) => console.log(err));
+    console.log(res)
+  }
+
+  if(isError){
+    console.log(error)
+  }
+
   const onClickProvider = (provider: any) => {
     socialMediaAuth(provider)
       .then((user) => {
         console.log("Authenticated user:", user);
-        dispatch(toggle(true))
+        dispatch(setAuthStatus(true))
         navigate('/')
       })
       .catch((error) => {
@@ -44,119 +65,71 @@ const Login = () => {
       });
   };
 
-////
-  const onSubmit = async(data: any) => {
-
-    try {
-        await addToken({username: data?.name, password: data?.password})
-        .then((res) => localStorage.setItem('token', JSON.stringify({accesss_token:res?.data?.access, refresh_token: res?.data?.refresh})))
-        .catch((err) => console.log(err))
-        
-        console.log()
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  if(isError){
-    console.log(error)
-  }
-
-///
-
-      
   return (
-    <main>
-      <section>
-        <h1>Вход в личный кабинет</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-6">
-            <img src={mail} alt={'mail'}/>
-            <input
-              type="name"
-              id="name"
-              placeholder="name"
-              {...register("name", {
-                required: "Параметр обязателен",
-                maxLength: {
-                  value: 15,
-                  message: "Ваше имя должно быть меньше 20 символов",
-                },
-                minLength: {
-                  value: 3,
-                  message: "Ваше имя должно быть больше 3 символов",
-                },
-              })}
-              required
-            ></input>
-            {errors.name && <span className="error" role="alert">errors.name</span>}
+    <section className={cls.login}>
+      <div className={cls.login__container}>
+        <Link to='/' className={cls.login__logo}>
+          <img className="w-20 h-20 mr-2" src={logo} alt="logo"/>
+        </Link>
+        <div className={cls.login__form_wrap}>
+          <div className={cls.login__form_wrapper}>
+            <h1 className={cls.login__form_title}>
+              Вход в личный кабинет
+            </h1>
+            <form className={cls.login__form_forms} onSubmit={handleSubmit(onSubmit)}>
+              <div>
+                <label htmlFor="username" className={cls.login__form_label}>Ваш username</label>
+                <input
+                  type="username"
+                  id="username"
+                  className={cls.login__form_input}
+                  placeholder="username"
+                  {...register('username', {required: 'Это поле обязательно'})}
+                />
+                {errors.username && <p className={cls.login__form_required__error}>{errors.username.message}</p>}
+              </div>
+              <div>
+                <label htmlFor="password" className={cls.login__form_label}>Пароль</label>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="••••••••"
+                  className={cls.login__form_input}
+                  {...register('password', { required: "Это поле обязательно" })}
+                />
+                {errors.password && <p className={cls.login__form_required__error}>{errors.password.message}</p>}
+              </div>
+              <div className={cls.login__form_options}>
+                {/*<div className={cls.login__form_options__wrapper}>*/}
+                {/*  <div className="flex items-center h-5">*/}
+                {/*    <input*/}
+                {/*      id="remember_password"*/}
+                {/*      aria-describedby="remember_password"*/}
+                {/*      type="checkbox"*/}
+                {/*      className={cls.login__form_options__checkbox}*/}
+                {/*      {...register('remember_password')}*/}
+                {/*    />*/}
+                {/*  </div>*/}
+                {/*  <div className="ml-3 text-sm">*/}
+                {/*    <label*/}
+                {/*      htmlFor="remember_password"*/}
+                {/*      className={cls.login__form_options__label}>*/}
+                {/*      Запомнить меня*/}
+                {/*    </label>*/}
+                {/*  </div>*/}
+                {/*</div>*/}
+                <a href="#" className={cls.login__form_options__password}>Забыли пароль?</a>
+              </div>
+              <button type="submit" className={cls.login__form_signin__button}>Войти</button>
+              <p className={cls.login__form_register__link}>
+                У вас нету аккаунта?
+                <Link to={'/registration'} className={cls.login__form_register__link__text}>Регистрация</Link>
+              </p>
+            </form>
           </div>
-          <div className="mb-6">
-            <img src={lock} alt="" />
-            <input
-              type={booleanPassword ? "password" : "text"}
-              id="password"
-              placeholder="•••••••••"
-              {...register("password", {
-                required: "Параметр обязателен",
-                maxLength: {
-                  value: 15,
-                  message: "Ваше имя должно быть меньше 20 символов",
-                },
-                minLength: {
-                  value: 3,
-                  message: "Ваше имя должно быть больше 3 символов",
-                },
-              })}
-              required
-            ></input>
-            {booleanPassword ? (
-              <img
-                src={eye}
-                alt=""
-                className={styles.imgEye}
-                onClick={() => setBooleanPassword(false)}
-              />
-            ) : (
-              <img
-                src={eyeblock}
-                alt=""
-                className={styles.imgEye}
-                onClick={() => setBooleanPassword(true)}
-              />
-            )}
-          </div>
-          <button
-            type="submit"
-            className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-          >
-            Войти
-          </button>
-        </form>
-
-        <Link to='/registration'>
-          <button className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">нет аккаунта !!!</button></Link>
-
-
-        <section className={styles.giveChoose}>
-          <div className={styles.line}></div>
-          <p>or</p>
-          <div className={styles.line}></div>
-        </section>
-
-        <section className={styles.socialMediaButtons}>
-          <button onClick={() => onClickProvider(googleProvider)}>
-            <img src={google} alt="" />
-          </button>
-          <button onClick={() => onClickProvider(githubProvider)}>
-            <img src={apple} alt="" />
-          </button>
-          <button onClick={() => onClickProvider(facebookProvider)}>
-            <img src={facebook} alt="" />
-          </button>
-        </section>
-      </section>
-    </main>
+        </div>
+      </div>
+    </section>
   );
 };
 export default Login;
