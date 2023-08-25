@@ -22,7 +22,7 @@ const Login = () => {
     formState: {errors},
   } = useForm<FormData>();
   const dispatch = useAppDispatch()
-  const [addToken, {data, isError, error, isSuccess}] = useAddTokenMutation({})
+  const [addToken, { isError, error}] = useAddTokenMutation({})
   const navigate = useNavigate()
 
   const onSubmit = async (data: FormData) => {
