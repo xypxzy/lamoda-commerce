@@ -40,6 +40,10 @@ const ProductCard = (props: ProductCardProps) => {
         }))
     };
 
+    const handleAddToFav = () => {
+        
+    }
+
     //Skeletons
     if (isLoading) {
         return (
