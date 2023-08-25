@@ -55,7 +55,7 @@ const Regist = () => {
     return(
         <main>
             <section>
-            <button>на главную</button>
+            <button >на главную</button>
                 <h1>Регистрация</h1>
                 <form action="POST" onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-6">
