@@ -3,7 +3,7 @@ import {ProductProps} from "../../consts/consts.ts";
 
 export const productsApi = createApi({
     reducerPath: 'productsApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8002' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://team2back.sanarip.org' }),
     endpoints: (builder) => ({
         getProducts: builder.query<ProductProps[], string>({
             query: () => '/products/product'
