@@ -1,8 +1,23 @@
 import {useState} from "react";
 import cls from './Accordion.module.css'
 import AccordionLayout from "../AccordionLayout/AccordionLayout.tsx";
+import React from "react";
+import { ProductProps } from "../../consts/consts.ts";
+import { useAppSelector } from "../../store/hooks.ts";
+import { useGetCompoundQuery } from "../../store/products/productsApi.ts";
+import { useParams } from "react-router-dom";
 
-const Accordion = () => {
+interface Discription{
+    product: ProductProps,
+    id: string
+}
+
+const Accordion: React.FC<Discription> = ({product, id}) => {
+    const {data: productd , isLoading} = useGetCompoundQuery(id);
+
+    console.log(productd)
+    
+    
     const [activeIndex, setActiveIndex] = useState(0);
     //accordion
     return (
@@ -13,7 +28,7 @@ const Accordion = () => {
                 activeIndex={activeIndex}
                 setActiveIndex={setActiveIndex}
             >
-                This is Accordion 1 Content
+                {product?.description}
             </AccordionLayout>
             <AccordionLayout
                 title="Способ применение"
@@ -21,7 +36,7 @@ const Accordion = () => {
                 activeIndex={activeIndex}
                 setActiveIndex={setActiveIndex}
             >
-                This is Accordion 2 Content
+                {product?.way_to_use}
             </AccordionLayout>
             <AccordionLayout
                 title="Состав"
@@ -29,7 +44,7 @@ const Accordion = () => {
                 activeIndex={activeIndex}
                 setActiveIndex={setActiveIndex}
             >
-                This is Accordion 3 Content
+                {}
             </AccordionLayout>
         </div>
     );
