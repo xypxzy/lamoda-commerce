@@ -6,12 +6,14 @@ import {authApi} from "./auth/authApi.ts";
 import cartReducer from "./cart/slice.ts";
 import productsReducer from "./products/productsSlice.ts";
 import authReducer from './auth/authSlice.ts'
+import favReducer from './favorits/favoritsSlice.ts'
 
 export const store = configureStore({
   reducer: {
     cart: cartReducer,
     auth: authReducer,
     products: productsReducer,
+    fav: favReducer,
 
     [productsApi.reducerPath]: productsApi.reducer,
     [usersApi.reducerPath]: usersApi.reducer,

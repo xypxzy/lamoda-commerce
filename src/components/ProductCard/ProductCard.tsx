@@ -8,6 +8,8 @@ import {ProductProps} from "../../consts/consts.ts";
 import {useSetFavouritesMutation} from "../../store/users/usersApi.ts";
 import {useAppDispatch, useAppSelector} from "../../store/hooks.ts";
 import {addItem} from "../../store/cart/slice.ts";
+import { addFav } from "../../store/favorits/favoritsSlice.ts";
+
 
 interface ProductCardProps {
     product: ProductProps;
@@ -41,7 +43,14 @@ const ProductCard = (props: ProductCardProps) => {
     };
 
     const handleAddToFav = () => {
-        
+        dispatch(addFav({
+            id: product.id,
+            title: product.name,
+            price: product.price,
+            imageUrl: product.images[0].image ,
+            count: 1,
+            isSelected: true
+        }))
     }
 
     //Skeletons
@@ -92,6 +101,7 @@ const ProductCard = (props: ProductCardProps) => {
                         ActiveImage={<MdFavorite/>}
                         className={`${cls.card__button} hover:text-red-500 right-12 top-8`}
                         color={"red"}
+                        onClick={handleAddToFav}
                     />
                     <FavoriteButton
                         active={addCart}

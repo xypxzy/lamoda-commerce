@@ -1,6 +1,7 @@
 import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {facebookProvider, githubProvider, googleProvider,} from "../../config/firebase-config";
+
 import {setAuthStatus} from "../../store/auth/authSlice";
 import {useAddTokenMutation} from "../../store/auth/authApi";
 import {useAppDispatch} from "../../store/hooks";
@@ -19,6 +20,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+
     formState: {errors},
   } = useForm<FormData>();
   const dispatch = useAppDispatch()
@@ -51,6 +53,7 @@ const Login = () => {
     socialMediaAuth(provider)
       .then((user) => {
         console.log("Authenticated user:", user);
+
         dispatch(setAuthStatus(true))
         navigate('/')
       })
@@ -141,6 +144,14 @@ const Login = () => {
       </div>
     </section>
 
+        <section className={styles.socialMediaButtons}>
+          
+          <button onClick={() => onClickProvider(facebookProvider)}>
+            <img src={facebook} alt="" />
+          </button>
+        </section>
+      </section>
+    </main>
   );
 };
 export default Login;

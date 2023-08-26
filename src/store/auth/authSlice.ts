@@ -12,6 +12,7 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
+
       setAuthStatus: (state, action: PayloadAction<boolean>) => {
         state.isAuth = action.payload;
         localStorage.setItem('role', JSON.stringify(state.isAuth))

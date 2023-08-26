@@ -14,10 +14,12 @@ import {useTokenExpirationCheck} from "../hooks /useTokenExpirationCheck.ts";
 
 
 export default function Root() {
+
     const { isAuth } = useAppSelector((state) => state.auth)
 
     //  Хук для проверки срока действия токена
     useTokenExpirationCheck();
+
 
     return (
         <Routes>
