@@ -1,47 +1,53 @@
 .product_details {
-    @apply text-gray-600 overflow-hidden md:h-screen my-20 md:my-0 flex items-center;
+  @apply text-gray-600 overflow-hidden md:h-screen my-20 md:my-0 flex items-center;
 }
 
 .product_details__container {
-    @apply container px-5 py-10 mx-auto ;
+  @apply container px-5 py-10 mx-auto my-52 p-52;
+}
+
+@media screen and (max-width: 768px) {
+  .product_details__container {
+    margin-top: 0;
+  }
 }
 
 .product_details__wrapper {
-    @apply lg:w-full flex flex-wrap relative gap-7;
+  @apply lg:w-full flex flex-wrap relative gap-7;
 }
 
 .product_details__image {
-    @apply lg:w-[50%] w-full lg:h-96 h-64 object-contain object-center rounded;
+  @apply lg:w-[50%] w-full lg:h-96 h-64 object-contain object-center rounded;
 }
 
 .product_details__information {
-    @apply lg:w-[40%] w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 flex flex-col gap-2;
+  @apply lg:w-[40%] w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 flex flex-col gap-2;
 }
 
 .product_details__brandName {
-    @apply text-sm  text-gray-500 tracking-widest;
+  @apply text-sm  text-gray-500 tracking-widest;
 }
 
 .product_details__title {
-    @apply text-gray-900 text-3xl font-medium mb-1 text-start
+  @apply text-gray-900 text-3xl font-medium mb-1 text-start;
 }
 
 .product_details__description {
-    @apply leading-relaxed;
+  @apply leading-relaxed;
 }
 
 .product_details__price {
-    @apply font-medium text-2xl text-gray-900
+  @apply font-medium text-2xl text-gray-900;
 }
 
 .product_details__add_cart {
-    @apply flex my-8;
+  @apply flex my-8;
 }
 
 .product_details__counter {
-    @apply flex items-center justify-between border border-gray-500 px-5 gap-3 text-lg;
+  @apply flex items-center justify-between border border-gray-500 px-5 gap-3 text-lg;
 }
 
 .product_details__btn {
-    @apply flex items-center justify-center w-full text-white bg-black border-0 py-2 px-6 focus:outline-none hover:bg-gray-900;
+  @apply flex items-center justify-center w-full text-white bg-black border-0 py-2 px-6 focus:outline-none hover:bg-gray-900;
 }

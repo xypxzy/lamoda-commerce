@@ -1,5 +1,13 @@
 .collection {
-  @apply flex flex-col justify-center max-w-screen-xl mx-auto px-4 mb-52 md:h-screen md:mb-0;
+  @apply flex flex-col justify-center max-w-screen-xl mx-auto px-4  md:h-screen md:mb-0;
+  margin-bottom: 5rem !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .collection {
+    margin-top: 100px;
+    margin-bottom: 400px !important;
+  }
 }
 
 .col_grid {

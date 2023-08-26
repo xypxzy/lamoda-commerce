@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/svg/logo.svg";
 import { FaGithub, FaDiscord, FaTwitter, FaDribbble } from "react-icons/fa";
-import styles from "./Footer.module.scss";
+import styles from "./Footer.module.css";
 
 interface ResourceLink {
   url: string;
