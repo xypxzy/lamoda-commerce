@@ -1,7 +1,7 @@
-interface  ImagesProps {
-    id: number;
-    image: string;
-    product: number;
+interface ImagesProps {
+  id: number;
+  image: string;
+  product: number;
 }
 
 export interface ProductProps {
@@ -24,3 +24,8 @@ export interface Compound {
     id: string,
     name: string
 }
+
+export interface SortType {
+  name: "rel" | "desc" | "asc";
+}
+
