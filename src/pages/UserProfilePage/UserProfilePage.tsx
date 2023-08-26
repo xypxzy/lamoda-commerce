@@ -39,7 +39,7 @@ const UserProfilePage: React.FC = () => {
     setIsEditing(true);
   }
 
-  const handleSaveClick = (data: FormData) => {
+  const handleSaveClick = () => {
     // Здесь вы можете добавить логику сохранения изменений, например, отправку на сервер
     setIsEditing(false);
   }

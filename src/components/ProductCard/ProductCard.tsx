@@ -33,10 +33,10 @@ const ProductCard = (props: ProductCardProps) => {
   const handleAddToCart = () => {
     dispatch(
       addItem({
-        id: product.id,
-        title: product.name,
-        price: product.price,
-        imageUrl: product.images[0].image,
+        id: product.id as number,
+        title: product.name as string,
+        price: product.price as number,
+        imageUrl:  (product.images ? product.images[0].image : '') as string ,
         count: 1,
         isSelected: true,
       })
@@ -75,7 +75,7 @@ const ProductCard = (props: ProductCardProps) => {
         <img
           alt="ecommerce"
           className={cls.card__image}
-          src={product.images.length > 0 ? product.images[0].image : ""}
+          src={(product.images && product.images.length > 0) ? product.images[0].image : ""}
         />
       </Link>
       <div className={cls.card__information}>

@@ -8,6 +8,7 @@ import {useParams} from "react-router-dom";
 import {addItem} from "../../store/cart/slice.ts";
 import {useAppDispatch} from "../../store/hooks.ts";
 import { addFav } from '../../store/favorits/favoritsSlice.ts';
+import {ProductProps} from "../../consts/consts.ts";
 
 const ProductDetails = () => {
     const [liked, setLiked] = useState(false);
@@ -27,10 +28,10 @@ const ProductDetails = () => {
     const handleAddToCart = () => {
         if(product) {
             dispatch(addItem({
-                id: product.id,
-                title: product.name,
-                price: product.price,
-                imageUrl: product.images[0].image ,
+                id: product.id as number,
+                title: product.name as string,
+                price: product.price as number,
+                imageUrl:  (product.images ? product.images[0].image : '') as string ,
                 count: count,
                 isSelected: true
             }))
@@ -39,10 +40,10 @@ const ProductDetails = () => {
     const handleAddToFav = () => {
         if(product) {
             dispatch(addFav({
-                id: product.id,
-                title: product.name,
-                price: product.price,
-                imageUrl: product.images[0].image ,
+                id: product.id as number,
+                title: product.name as string,
+                price: product.price  as number,
+                imageUrl: (product.images ? product.images[0].image : '') as string,
                 count: count,
                 isSelected: true
             }))
@@ -88,7 +89,7 @@ const ProductDetails = () => {
         <section className={cls.product_details}>
             <div className={cls.product_details__container}>
                 <div className={cls.product_details__wrapper}>
-                    <img alt="product" className={cls.product_details__image} src={product?.images[0] ? product.images[0].image : ''} />
+                    <img alt="product" className={cls.product_details__image} src={ (product?.images && product?.images[0]) ? product.images[0].image : ''} />
                     <div className={cls.product_details__information}>
                         <h1 className={cls.product_details__title}>{product?.name}</h1>
                         <span className={cls.product_details__price}>{product?.price} som</span>
@@ -114,7 +115,7 @@ const ProductDetails = () => {
                                 Добавить в корзину
                             </button>
                         </div>
-                        <Accordion product={product} id={id}/>
+                        <Accordion product={product as ProductProps} id={id}/>
                         <FavoriteButton
                             active={liked}
                             setActive={setLiked}

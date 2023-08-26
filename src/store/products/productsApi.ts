@@ -1,9 +1,10 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import {ProductProps, Compound} from "../../consts/consts.ts";
+import {DEFAULT_URL} from "../const.ts";
 
 export const productsApi = createApi({
     reducerPath: 'productsApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://team2back.sanarip.org' }),
+    baseQuery: fetchBaseQuery({ baseUrl: DEFAULT_URL }),
     endpoints: (builder) => ({
         getProducts: builder.query<ProductProps[], string>({
             query: () => '/products/product'
