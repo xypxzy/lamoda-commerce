@@ -12,6 +12,12 @@ class IsAuthor(BasePermission):
             request.user == obj.user
         )
 
+    def has_permission(self, request, view):
+        return bool(
+            request.user and
+            request.user.is_authenticated
+        )
+
 
 class IsProductAuthor(BasePermission):
     def has_permission(self, request, view):

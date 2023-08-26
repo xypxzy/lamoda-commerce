@@ -2,6 +2,7 @@ from django.db import IntegrityError
 from rest_framework import generics, viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.pagination import LimitOffsetPagination
 
 from . import models
 from . import serializers
@@ -13,6 +14,7 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = serializers.ProductSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, ]
     filter_backends = [SearchFilter, OrderingFilter]
+    pagination_class = LimitOffsetPagination
 
     # спецификация полей, по которым будет выполняться поиск и сортировка.
     search_fields = ['name', 'serial_number__iexact', 'user__username__iexact', 'compounds__name__iexact']
@@ -50,6 +52,7 @@ class ProductImagesCreateAPIView(generics.CreateAPIView):
     queryset = models.ProductImage.objects.all()
     serializer_class = serializers.ProductImageSerializer
     permission_classes = [IsProductAuthor, ]
+    
 
     def perform_create(self, serializer):
         serializer.save(
@@ -82,6 +85,7 @@ class FavouriteProductListAPIView(generics.ListAPIView):
     queryset = models.FavouriteProduct.objects.all()
     serializer_class = serializers.FavouriteProductSerializer
     permission_classes = [IsAuthor, ]
+    pagination_class = LimitOffsetPagination
 
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user)
