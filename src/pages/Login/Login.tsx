@@ -1,16 +1,13 @@
 import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {facebookProvider, githubProvider, googleProvider,} from "../../config/firebase-config";
-<<<<<<< HEAD
-import socialMediaAuth from "../../service/auth";
 
 import google from "../../assets/image 2.svg";
 import facebook from "../../assets/image 3.svg";
 import apple from "../../assets/image 4.svg";
-import {useAddTokenMutation} from "../../store/auth/authApi";
 import {toggle} from "../../store/auth/authSlice";
 import { useDispatch } from "react-redux";
-=======
+
 import {setAuthStatus} from "../../store/auth/authSlice";
 import {useAddTokenMutation} from "../../store/auth/authApi";
 import {useAppDispatch} from "../../store/hooks";
@@ -19,7 +16,6 @@ import cls from "./Login.module.css";
 import {FcGoogle } from 'react-icons/fc';
 import {GrGithub, GrFacebook} from 'react-icons/gr';
 import logo from "../../assets/svg/logo.svg";
->>>>>>> main
 
 type FormData = {
   username: string;
@@ -30,18 +26,18 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-<<<<<<< HEAD
+
     formState: { errors },
   } = useForm();
   const [booleanPassword, setBooleanPassword] = useState(true);
   const dispatch = useDispatch()
   const [addToken, {data, isError, error, isSuccess}] = useAddTokenMutation()
-=======
+
     formState: {errors},
   } = useForm<FormData>();
   const dispatch = useAppDispatch()
   const [addToken, { isError, error}] = useAddTokenMutation({})
->>>>>>> main
+
   const navigate = useNavigate()
 
   const onSubmit = async (data: FormData) => {
@@ -70,20 +66,18 @@ const Login = () => {
     socialMediaAuth(provider)
       .then((user) => {
         console.log("Authenticated user:", user);
-<<<<<<< HEAD
+
         console.log('success')
         dispatch(toggle(true))
-=======
+
         dispatch(setAuthStatus(true))
->>>>>>> main
         navigate('/')
       })
       .catch((error) => {
         console.error("Authentication error:", error);
-      });
+      })
   };
 
-<<<<<<< HEAD
 ////
   const onSubmit = async(data: any) => {
 
@@ -105,9 +99,8 @@ const Login = () => {
 ///
 
       
-=======
->>>>>>> main
   return (
+    <main>
     <section className={cls.login}>
       <div className={cls.login__container}>
         <Link to='/' className={cls.login__logo}>
@@ -189,7 +182,7 @@ const Login = () => {
       </div>
     </section>
 
-<<<<<<< HEAD
+
         <Link to='/registration'>
           <button className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">нет аккаунта !!!</button></Link>
 
@@ -200,21 +193,16 @@ const Login = () => {
           <div className={styles.line}></div>
         </section>
 
+
         <section className={styles.socialMediaButtons}>
-          {/* <button onClick={() => onClickProvider(googleProvider, true)}>
-            <img src={google} alt="" />
-          </button>
-          <button onClick={() => onClickProvider(githubProvider)}>
-            <img src={apple} alt="" />
-          </button> */}
+          
           <button onClick={() => onClickProvider(facebookProvider)}>
             <img src={facebook} alt="" />
           </button>
         </section>
       </section>
     </main>
-=======
->>>>>>> main
+
   );
 };
 export default Login;
