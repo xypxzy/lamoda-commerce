@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import {DEFAULT_URL} from "../const.ts";
 
+
 export interface AuthResponse {
   access: string;
   refresh: string;

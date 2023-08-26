@@ -19,12 +19,10 @@ export const productsApi = createApi({
                 body
             })
         }),
-        getCompound: builder.query<Compound[], string>({
-            query: (id: string) => `/products/compound/${id}`
-        })
+
     }),
 })
 
 
-export const {useGetProductsQuery, useGetProductQuery, useAddProductMutation, useGetCompoundQuery} = productsApi;
+export const {useGetProductsQuery, useGetProductQuery, useAddProductMutation} = productsApi;
 
