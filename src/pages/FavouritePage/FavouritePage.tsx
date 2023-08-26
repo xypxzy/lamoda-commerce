@@ -9,10 +9,8 @@ import FavItem from './FavItem.tsx';
 
 const FavouritePage = () => {
     const {data, isLoading} = useGetFavouritesQuery('');
-    const isAuth = useAppSelector((state) => state.auth)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
-    const change = true
     const chechAuth = () => {
         navigate('/login')
     }
@@ -23,10 +21,12 @@ const FavouritePage = () => {
         return <FavCardEmpty/>
     }
 
+    const { isAuth } = useAppSelector((state) => state.auth)
 
     return (
         <>
-        {change ? 
+        {isAuth ?
+
             (<>
                 <section className={cls.favourite_page}>
                     <div className={cls.favourite_page__container}>

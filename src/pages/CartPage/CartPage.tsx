@@ -18,7 +18,7 @@ const CartInput: FC<TCartInputProps> = ({type, hint}) => {
 };
 
 const CartPage = () => {
-    const isAuth = useAppSelector((state) => state.auth)
+    const {isAuth} = useAppSelector((state) => state.auth)
     const {cartItems} = useSelector(selectCart);
     const {totalPrice} = useAppSelector(state => state.cart);
 

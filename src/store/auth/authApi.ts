@@ -10,13 +10,14 @@ interface TokenInputProps {
   password: string;
 }
 
-export interface RegisterProps {
+export interface UserProps {
   username: string,
   password: string,
   password2: string,
   first_name: string,
   last_name: string,
-  email: string
+  email: string,
+  profile_image: string,
 }
 
 export interface RegisterResponse {
@@ -26,14 +27,19 @@ export interface RegisterResponse {
   email: string,
   profile_image: string,
 }
+const token: {
+  access_token: string,
+  refresh_token: string,
+} = JSON.parse(localStorage.getItem('token') as string);
 
+console.log(token.access_token)
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:8002/users'}),
+  baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:8002'}),
   endpoints: (builder) => ({
     addAuth: builder.mutation({
       query: (body) => ({
-        url: '/register/',
+        url: '/users/register/',
         method: 'POST',
         body
       }),
@@ -41,16 +47,27 @@ export const authApi = createApi({
     addToken: builder.mutation<AuthResponse, Partial<TokenInputProps>>({
       query: (credentials) => {
         return ({
-          url: '/token/',
+          url: '/users/token/',
           method: 'POST',
           body: credentials
         })
       },
+    }),
+    getUserData: builder.query<UserProps, string>({
+      query: () => ({
+        url: '/users/',
+        options: {
+          headers: {
+            Authorization: `Bearer ${token.access_token}`
+          }
+        }
+      })
     }),
   })
 })
 
 export const {
   useAddAuthMutation,
-  useAddTokenMutation
+  useAddTokenMutation,
+  useGetUserDataQuery
 } = authApi;
