@@ -18,11 +18,8 @@ export const productsApi = createApi({
                 body
             })
         }),
-        getNewProducts: builder.query<ProductProps[], number>({
-            query: (limit: number) => `/products/product?limit=${limit.toString()}`,
-        }),
     }),
 })
 
 
-export const {useGetProductsQuery, useGetProductQuery, useAddProductMutation, useGetNewProductsQuery} = productsApi;
+export const {useGetProductsQuery, useGetProductQuery, useAddProductMutation} = productsApi;

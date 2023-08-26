@@ -1,14 +1,8 @@
-import React from "react";
 import styles from "./NewCollection.module.css";
 import { Link } from "react-router-dom";
-import { useGetNewProductsQuery } from "../../store/products/productsApi";
 
 const NewCollection = () => {
-  const { data = [], error, isLoading, isError } = useGetNewProductsQuery(1);
-  
-  if(isError){
-    console.log(error)
-  }
+
   return (
     <section id="newcollection" className={styles.collection}>
       <h2 className="mb-20 font-bold text-3xl">Новая коллекция</h2>
