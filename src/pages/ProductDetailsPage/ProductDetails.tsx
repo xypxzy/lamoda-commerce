@@ -114,7 +114,7 @@ const ProductDetails = () => {
                                 Добавить в корзину
                             </button>
                         </div>
-                        <Accordion />
+                        <Accordion product={product} id={id}/>
                         <FavoriteButton
                             active={liked}
                             setActive={setLiked}

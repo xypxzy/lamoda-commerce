@@ -29,6 +29,7 @@ const ProductCard = (props: ProductCardProps) => {
     const handleAddToFavourites = () => {
         setFavourites(product.id);
         setLiked(!liked);
+        localStorage.setItem('like', JSON.stringify(liked))
     };
 
     const handleAddToCart = () => {
