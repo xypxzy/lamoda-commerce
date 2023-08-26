@@ -1,0 +1,26 @@
+.brands {
+  @apply m-10 text-center max-w-screen-xl mx-auto px-4 h-screen flex flex-col justify-center;
+}
+
+.brands__grid {
+  @apply grid  grid-cols-2 md:grid-cols-3  gap-10;
+}
+
+.brands__grid_item {
+  @apply flex justify-center;
+}
+
+.brands__title {
+  @apply text-center text-4xl mb-5;
+}
+
+.brands img {
+  @apply h-auto rounded-lg  max-w-[50%];
+  width: 150px;
+}
+
+@media screen and (max-width: 1024px) {
+  .brands img {
+    @apply max-w-[80%];
+  }
+}

@@ -4,48 +4,46 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsBag } from "react-icons/bs";
 import { BiUser } from "react-icons/bi";
 import { MdProductionQuantityLimits } from "react-icons/md";
-import styles from "./Header.module.scss";
-import { Turn as Hamburger } from "hamburger-react";
+import styles from "./Header.module.css";
 import { Link as ScrollLink } from "react-scroll";
-import {Link, Link as RouterLink, useNavigate} from "react-router-dom";
-
-import { setAuthStatus } from "../../store/auth/authSlice";
-import {useAppDispatch, useAppSelector} from "../../store/hooks";
-
+import { Link, Link as RouterLink, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { auth } from "../../config/firebase-config";
 import { signOut } from "firebase/auth";
-import { CiLogout, CiLogin } from "react-icons/ci";
+import { CiLogin, CiLogout } from "react-icons/ci";
+import HeaderMobile from "./HeaderMobile";
+import { RootState } from "../../store/store";
+import { useSelector } from "react-redux";
+import { setAuthStatus } from "../../store/auth/authSlice";
 
 export default function Header() {
   const [isOpen, setOpen] = React.useState(false);
-  const navigate = useNavigate()
-  const dispatch = useAppDispatch()
-  const {isAuth} = useAppSelector(state => state.auth);
+  const { isAuth } = useAppSelector((state) => state.auth);
+  // Следит за изменением каоличества товаров в sessionStorage
+  const itemsCount = useSelector(
+    (state: RootState) => state.cart.cartItems.length
+  );
 
   //Логика burger menu
-  const onClickMenu = () => {
-    setOpen(!isOpen);
-
-  };
   const closeMenu = () => {
     setOpen(false);
-
   };
   // logOut Button and refresh token
+  const dispatch = useAppDispatch();
 
-  const logOut = async() => {
-    if(auth){
+  const logOut = async () => {
+    if (auth) {
       try {
-        await signOut(auth)
+        await signOut(auth);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     } else {
-      localStorage.removeItem('token')
+      localStorage.removeItem("token");
     }
-    localStorage.removeItem('token')
-    dispatch(setAuthStatus(false))
-  }
+    localStorage.removeItem("token");
+    dispatch(setAuthStatus(false));
+  };
 
   //Страницы и иконки из Navbar
   const navItems = [
@@ -55,15 +53,8 @@ export default function Header() {
     { id: 4, text: "Бренды", link: "brands" },
   ];
 
-  const navLinks = [
-    { id: 1, icon: <MdProductionQuantityLimits /> ,text: "Каталог", link: "/catalog" },
-    { id: 2, icon: <BiUser />, link: "/user", text: "Профиль" },
-    { id: 3, icon: <AiOutlineHeart />, link: "/favourites", text: "Избранное" },
-    { id: 4, icon: <BsBag />, link: "/cart", text: "Корзина" },
-  ];
-
   return (
-    <div className={styles.header}>
+    <section className={styles.header}>
       <ul className={`DESKTOP-MENU ${styles.header__list}`}>
         {navItems.map((item) => (
           <li key={item.id}>
@@ -92,121 +83,72 @@ export default function Header() {
         <img src={logo} alt="lamoda logo" />
       </RouterLink>
       <nav>
-        <section className="MOBILE-MENU mt-0 flex lg:hidden">
-          <Hamburger
-            size={25}
-            color="black"
-            toggled={isOpen}
-            toggle={onClickMenu}
-          />
-
-          <div
-            className={`${styles.navbar} ${
-              isOpen ? styles["slidein"] : styles["slideout"]
-            }`}
-          >
-            <div
-              className="absolute top-0 right-0 px-8 py-8"
-              onClick={onClickMenu}
-            >
-              <svg
-                className="h-8 w-8 text-gray-900"
-                viewBox="0 0 24 24"
-                fill="none"
-                cursor="pointer"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </div>
-            <ul className={styles.header__mobile_list}>
-              {navItems.map((item) => (
-                <li className={styles.list_text} key={item.id}>
-                  {item.link.startsWith("/") ? (
-                    <RouterLink to={item.link} aria-current="page">
-                      {item.text}
-                    </RouterLink>
-                  ) : (
-                    <ScrollLink
-                      to={item.link}
-                      spy={true}
-                      smooth={true}
-                      offset={50}
-                      duration={1000}
-                      aria-current="page"
-                      onClick={closeMenu}
-                    >
-                      {item.text}
-                    </ScrollLink>
-                  )}
-                </li>
-              ))}
-              {navLinks.map((item) => (
-                <li className={isOpen ? styles.list_text : ""} key={item.id}>
-                  <RouterLink
-                    className={styles.icon_center}
-                    to={item.link}
-                    aria-current="page"
-                    onClick={closeMenu}
-                  >
-                    {item.icon}
-                    <span className={styles.icon__text}>{item.text}</span>
-                  </RouterLink>
-                </li>
-              ))}
-              <div className={styles.icon_center}>
-                {isAuth ?
-                  <button onClick={logOut}>
-                    <CiLogout className={styles.logoutIc}/>
-                    <p className={'text-sm'}>Выйти</p>
-                  </button> :
-                  <Link to={'/login'}>
-                    <CiLogin className={styles.logoutIc}/>
-                    <p className={'text-sm'}>Войти</p>
-                  </Link>
-                }
-              </div>
-            </ul>
-          </div>
-        </section>
-
+        <HeaderMobile />
         <ul className={`DESKTOP-MENU ${styles.header__list}`}>
-          {navLinks.map((item) => (
-            <li className={styles.nav__icons} key={item.id}>
-              <RouterLink
-                className={styles.icon_center}
-                to={item.link}
-                aria-current="page"
-              >
-                {item.icon}
-                <span className={styles.icon__text}>{item.text}</span>
-              </RouterLink>
-            </li>
-          ))}
+          <li className={isOpen ? styles.list_text : ""}>
+            <RouterLink
+              className={styles.icon_center}
+              to="/catalog"
+              aria-current="page"
+              onClick={closeMenu}
+            >
+              <MdProductionQuantityLimits />
+              <span className={styles.icon__text}>Каталог</span>
+            </RouterLink>
+          </li>
+          <li className={isOpen ? styles.list_text : ""}>
+            <RouterLink
+              className={styles.icon_center}
+              to="/user"
+              aria-current="page"
+              onClick={closeMenu}
+            >
+              <BiUser />
+              <span className={styles.icon__text}>Профиль</span>
+            </RouterLink>
+          </li>
+          <li className={isOpen ? styles.list_text : ""}>
+            <RouterLink
+              className={styles.icon_center}
+              to="/favourites"
+              aria-current="page"
+              onClick={closeMenu}
+            >
+              <AiOutlineHeart />
+              <span className={styles.icon__text}>Избранное</span>
+            </RouterLink>
+          </li>
+          <li className={isOpen ? styles.list_text : styles.cart}>
+            <RouterLink
+              className={styles.icon_center}
+              to="/cart"
+              aria-current="page"
+              onClick={closeMenu}
+            >
+              <BsBag />
+              <span className={styles.icon__text}>Корзина</span>
+            </RouterLink>
+            <div className={`${itemsCount ? styles.badge : styles.badgeNone}`}>
+              {itemsCount || 0}
+            </div>
+          </li>
           <li className={styles.nav__icons}>
             <div className={styles.icon_center}>
-              {isAuth ?
+              {isAuth ? (
                 <button onClick={logOut}>
-                  <CiLogout className={styles.logoutIc}/>
-                  <p className={'text-sm'}>Выйти</p>
-                </button> :
-                <Link to={'/login'}>
-                  <CiLogin className={styles.logoutIc}/>
-                  <p className={'text-sm'}>Войти</p>
+                  <CiLogout className={styles.logoutIc} />
+                  <p className={"text-sm"}>Выйти</p>
+                </button>
+              ) : (
+                <Link to={"/login"}>
+                  <CiLogin className={styles.logoutIc} />
+                  <p className={"text-sm"}>Войти</p>
                 </Link>
-              }
+              )}
             </div>
           </li>
         </ul>
-
       </nav>
-      <>
-
-      </>
-    </div>
+    </section>
   );
 }
