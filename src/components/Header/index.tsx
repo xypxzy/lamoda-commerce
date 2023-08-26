@@ -13,7 +13,6 @@ import { auth } from "../../config/firebase-config";
 import { signOut } from "firebase/auth";
 import { CiLogout } from "react-icons/ci";
 import HeaderMobile from "./HeaderMobile";
-import { cartItemsLength } from "../../store/cart/selectors";
 import { RootState } from "../../store/store";
 import { useSelector } from "react-redux";
 

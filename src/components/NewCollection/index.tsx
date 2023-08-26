@@ -12,12 +12,12 @@ const NewCollection: React.FC = () => {
         {data.slice(0, 3).map((el) =>
           el.images.map((obj, index) => (
             <div key={index} className={styles.col_card}>
-              <Link to="/">
+              <Link to={`/product/${el.id}`}>
                 <img className="mb-5" src={obj.image} alt="collection img" />
               </Link>
               <div className={styles.col_info}>
-                <h3 className={styles.col_title}>Mini Watermelon Glow PHA</h3>
-                <p className={styles.col_price}>$15.00</p>
+                <h3 className={styles.col_title}>{el.name}</h3>
+                <p className={styles.col_price}>{el.price} som</p>
               </div>
             </div>
           ))
