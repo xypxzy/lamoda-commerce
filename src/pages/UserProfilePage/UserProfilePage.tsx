@@ -25,6 +25,7 @@ const UserProfilePage: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
   const dispatch = useAppDispatch()
   const {data: userData} = useGetUserDataQuery('')
+  console.log(userData)
   const {
     register,
     handleSubmit,
