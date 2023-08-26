@@ -7,44 +7,44 @@ import { MdProductionQuantityLimits } from "react-icons/md";
 import styles from "./Header.module.scss";
 import { Turn as Hamburger } from "hamburger-react";
 import { Link as ScrollLink } from "react-scroll";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import {Link, Link as RouterLink, useNavigate} from "react-router-dom";
 
-import { toggle } from "../../store/auth/authSlice";
-import { useAppDispatch } from "../../store/hooks";
+import { setAuthStatus } from "../../store/auth/authSlice";
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
 
 import { auth } from "../../config/firebase-config";
 import { signOut } from "firebase/auth";
-import { CiLogout } from "react-icons/ci";
+import { CiLogout, CiLogin } from "react-icons/ci";
 
 export default function Header() {
   const [isOpen, setOpen] = React.useState(false);
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const {isAuth} = useAppSelector(state => state.auth);
 
   //Логика burger menu
   const onClickMenu = () => {
     setOpen(!isOpen);
-  };
 
+  };
   const closeMenu = () => {
     setOpen(false);
+
   };
-
   // logOut Button and refresh token
-  const dispatch = useAppDispatch()
 
-  const logOut = async(state: boolean) => {
+  const logOut = async() => {
     if(auth){
       try {
         await signOut(auth)
       } catch (error) {
         console.log(error)
       }
-    }else{
+    } else {
       localStorage.removeItem('token')
     }
     localStorage.removeItem('token')
-    dispatch(toggle(false))
-    navigate('/login')
+    dispatch(setAuthStatus(false))
   }
 
   //Страницы и иконки из Navbar
@@ -175,9 +175,26 @@ export default function Header() {
               </RouterLink>
             </li>
           ))}
+          <li className={styles.nav__icons}>
+            <div className={styles.icon_center}>
+              {isAuth ?
+                <button onClick={logOut}>
+                  <CiLogout className={styles.logoutIc}/>
+                  <p className={'text-sm'}>Выйти</p>
+                </button> :
+                <Link to={'/login'}>
+                  <CiLogin className={styles.logoutIc}/>
+                  <p className={'text-sm'}>Войти</p>
+                </Link>
+              }
+            </div>
+          </li>
         </ul>
+
       </nav>
-      <button onClick={() => logOut(false)}> <CiLogout className={styles.logoutIc}/> </button>
+      <>
+
+      </>
     </div>
   );
 }
