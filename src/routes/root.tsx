@@ -10,16 +10,14 @@ import {CartPageLazy} from "../pages/CartPage/CartPage.async.tsx";
 import {RegistLazy} from "../pages/Regist/Regist.async.tsx";
 import {LoginLazy} from "../pages/Login/Login.async.tsx";
 import {NotFoundLazy} from "../pages/NotFoundPage/NotFoundPage.async.tsx";
-import {useTokenExpirationCheck} from "../hooks /useTokenExpirationCheck.ts";
+import {useTokenExpirationCheck} from "../hooks/useTokenExpirationCheck.ts";
 
 
 export default function Root() {
-
     const { isAuth } = useAppSelector((state) => state.auth)
 
     //  Хук для проверки срока действия токена
     useTokenExpirationCheck();
-
 
     return (
         <Routes>

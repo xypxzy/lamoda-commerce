@@ -1,15 +1,50 @@
-.user {
-  @apply mb-56;
+.profile_card {
+    @apply h-screen flex  justify-center items-center;
 }
 
-.user__container {
-  @apply flex flex-wrap justify-around w-full max-w-5xl mx-auto p-6 bg-white rounded-lg shadow;
+.profile_card__container {
+    @apply md:w-full relative w-[90vw] p-10 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700;
 }
 
-.user__info {
-  @apply flex justify-center;
+.profile_card__information {
+    @apply flex flex-col items-center pb-10;
 }
 
-.user__btn {
-  @apply text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800;
+.profile_card__information_image {
+    @apply w-24 h-24 mb-3 rounded-full shadow-lg;
+}
+
+.profile_card__information_name {
+    @apply mb-1 text-xl font-medium text-gray-900 dark:text-white;
+}
+
+.profile_card__information_input {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-gray-600
+    focus:border-gray-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+    dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+}
+
+.profile_card__information_email {
+    @apply text-sm text-gray-500 dark:text-gray-400;
+}
+
+.profile_card__information_password {
+    @apply text-sm text-gray-500 dark:text-gray-400;
+}
+
+.profile_card__information_edit {
+    @apply inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg
+    hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700
+    dark:focus:ring-blue-800;
+}
+
+.profile_card__information_logout {
+    @apply inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border
+    border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200
+    dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700
+    dark:focus:ring-gray-700
+}
+
+.register__form_label {
+    @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
 }
