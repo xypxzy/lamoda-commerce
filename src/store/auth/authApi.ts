@@ -26,7 +26,6 @@ export interface RegisterResponse {
   email: string;
   profile_image: string;
 }
-
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8002/users" }),
