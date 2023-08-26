@@ -6,18 +6,19 @@ import { BiUser } from "react-icons/bi";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import styles from "./Header.module.css";
 import { Link as ScrollLink } from "react-scroll";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
-import { toggle } from "../../store/auth/authSlice";
-import { useAppDispatch } from "../../store/hooks";
+import { Link, Link as RouterLink, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { auth } from "../../config/firebase-config";
 import { signOut } from "firebase/auth";
-import { CiLogout } from "react-icons/ci";
+import { CiLogin, CiLogout } from "react-icons/ci";
 import HeaderMobile from "./HeaderMobile";
 import { RootState } from "../../store/store";
 import { useSelector } from "react-redux";
+import { setAuthStatus } from "../../store/auth/authSlice";
 
 export default function Header() {
   const [isOpen, setOpen] = React.useState(false);
+  const { isAuth } = useAppSelector((state) => state.auth);
   // Следит за изменением каоличества товаров в sessionStorage
   const itemsCount = useSelector(
     (state: RootState) => state.cart.cartItems.length
@@ -33,7 +34,7 @@ export default function Header() {
   // logOut Button and refresh token
   const dispatch = useAppDispatch();
 
-  const logOut = async (state: boolean) => {
+  const logOut = async () => {
     if (auth) {
       try {
         await signOut(auth);
@@ -44,8 +45,7 @@ export default function Header() {
       localStorage.removeItem("token");
     }
     localStorage.removeItem("token");
-    dispatch(toggle(false));
-    navigate("/login");
+    dispatch(setAuthStatus(false));
   };
 
   //Страницы и иконки из Navbar
@@ -133,11 +133,23 @@ export default function Header() {
             </RouterLink>
             <div className={styles.badge}>{itemsCount || 0}</div>
           </li>
+          <li className={styles.nav__icons}>
+            <div className={styles.icon_center}>
+              {isAuth ? (
+                <button onClick={logOut}>
+                  <CiLogout className={styles.logoutIc} />
+                  <p className={"text-sm"}>Выйти</p>
+                </button>
+              ) : (
+                <Link to={"/login"}>
+                  <CiLogin className={styles.logoutIc} />
+                  <p className={"text-sm"}>Войти</p>
+                </Link>
+              )}
+            </div>
+          </li>
         </ul>
       </nav>
-      <button onClick={() => logOut(false)}>
-        <CiLogout className={styles.logoutIc} />
-      </button>
     </section>
   );
 }
