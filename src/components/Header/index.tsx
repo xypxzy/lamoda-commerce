@@ -10,7 +10,7 @@ import { Link as ScrollLink } from "react-scroll";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 import { toggle } from "../../store/auth/authSlice";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 import { auth } from "../../config/firebase-config";
 import { signOut } from "firebase/auth";
@@ -19,6 +19,7 @@ import { CiLogout } from "react-icons/ci";
 export default function Header() {
   const [isOpen, setOpen] = React.useState(false);
   const navigate = useNavigate()
+  const isAuth = useAppSelector((state) => state.auth.isToggled)
 
   //Логика burger menu
   const onClickMenu = () => {
@@ -177,7 +178,8 @@ export default function Header() {
           ))}
         </ul>
       </nav>
-      <button onClick={() => logOut(false)}> <CiLogout className={styles.logoutIc}/> </button>
+      {isAuth && <button onClick={() => logOut(false)}> <CiLogout className={styles.logoutIc}/> </button>}
+      
     </div>
   );
 }

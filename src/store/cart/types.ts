@@ -11,3 +11,7 @@ export interface CartSliceState {
   totalPrice: number;
   cartItems: CartItems[];
 }
+
+export interface FavSliceState {
+  favItems: CartItems[];
+}

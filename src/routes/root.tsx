@@ -17,7 +17,6 @@ import { toggle } from "../store/auth/authSlice.ts";
 export default function Root() {
     const dispatch = useAppDispatch()
     const isAuth = useAppSelector((state) => state.auth)
-    console.log(isAuth)
 
     if(localStorage.getItem('token')){
         useEffect(() => {
@@ -26,7 +25,6 @@ export default function Root() {
             const tokenString = localStorage.getItem('token');
         
             const tokenObject = JSON.parse(tokenString);
-            console.log(tokenString)
     
             const parts = tokenObject.refresh_token.split('.');
             const payloadBase64 = parts[1];

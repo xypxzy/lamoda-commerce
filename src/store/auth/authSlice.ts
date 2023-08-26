@@ -14,7 +14,7 @@ const authSlice = createSlice({
     reducers: {
       toggle: (state, action: PayloadAction<boolean>) => {
         state.isToggled = action.payload;
-        localStorage.setItem('role', JSON.stringify(state.isToggled))
+        localStorage.setItem('role', state.isToggled)
       },
     },
 });

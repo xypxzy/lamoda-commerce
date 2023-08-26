@@ -14,9 +14,9 @@ import socialMediaAuth from "../../service/auth";
 import google from "../../assets/image 2.svg";
 import facebook from "../../assets/image 3.svg";
 import apple from "../../assets/image 4.svg";
-import {useAppDispatch} from "../../store/hooks";
 import {useAddTokenMutation} from "../../store/auth/authApi";
 import {toggle} from "../../store/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 
 const Login = () => {
@@ -27,7 +27,7 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const [booleanPassword, setBooleanPassword] = useState(true);
-  const dispatch = useAppDispatch()
+  const dispatch = useDispatch()
   const [addToken, {data, isError, error, isSuccess}] = useAddTokenMutation()
   const navigate = useNavigate()
 
@@ -36,6 +36,7 @@ const Login = () => {
     socialMediaAuth(provider)
       .then((user) => {
         console.log("Authenticated user:", user);
+        console.log('success')
         dispatch(toggle(true))
         navigate('/')
       })
@@ -51,7 +52,7 @@ const Login = () => {
         await addToken({username: data?.name, password: data?.password})
         .then((res) => localStorage.setItem('token', JSON.stringify({accesss_token:res?.data?.access, refresh_token: res?.data?.refresh})))
         .catch((err) => console.log(err))
-        
+        dispatch(toggle(true))
         console.log()
     } catch (error) {
       console.log(error)
@@ -145,12 +146,12 @@ const Login = () => {
         </section>
 
         <section className={styles.socialMediaButtons}>
-          <button onClick={() => onClickProvider(googleProvider)}>
+          {/* <button onClick={() => onClickProvider(googleProvider, true)}>
             <img src={google} alt="" />
           </button>
           <button onClick={() => onClickProvider(githubProvider)}>
             <img src={apple} alt="" />
-          </button>
+          </button> */}
           <button onClick={() => onClickProvider(facebookProvider)}>
             <img src={facebook} alt="" />
           </button>

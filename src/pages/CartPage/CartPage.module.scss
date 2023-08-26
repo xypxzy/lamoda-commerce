@@ -1,9 +1,12 @@
 .cart {
 	max-width: 1280px;
 	margin: 0 auto;
+	.cart__wrap{
+		margin-top: 30px;
+	}
 	&__wrap {
 		margin-bottom: 42px;
-		@apply pt-14 flex flex-col gap-y-16 sm:gap-x-28 sm:flex-row;
+		@apply pt-20 flex flex-col gap-y-16 sm:gap-x-28 sm:flex-row;
 	}
 	&__left,
 	&__right {
@@ -82,3 +85,36 @@
 		@apply w-full px-5;
 	}
 }
+
+.xs_df{
+	margin-left: 10px;
+	width: 30px;
+}
+
+@media  (max-width: 900px) { 
+    .df_gg{
+		width: 160px
+	}
+	.cart__item{
+		column-gap: 0px
+	}
+};
+@media  (max-width: 500px) { 
+    .df_gg{
+		width: 160px
+	}
+	.cart__item{
+		display: flex;
+		flex-direction: column;
+	}
+	.cart__item_actions{
+		justify-content: flex-start
+	}
+	#dffff{
+		align-items: center;
+	}
+	.cart__item_name{
+		text-align: center;
+	}
+};
+

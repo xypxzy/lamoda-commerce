@@ -7,6 +7,7 @@ import {useGetProductQuery} from "../../store/products/productsApi.ts";
 import {useParams} from "react-router-dom";
 import {addItem} from "../../store/cart/slice.ts";
 import {useAppDispatch} from "../../store/hooks.ts";
+import { addFav } from '../../store/favorits/favoritsSlice.ts';
 
 const ProductDetails = () => {
     const [liked, setLiked] = useState(false);
@@ -26,6 +27,18 @@ const ProductDetails = () => {
     const handleAddToCart = () => {
         if(product) {
             dispatch(addItem({
+                id: product.id,
+                title: product.name,
+                price: product.price,
+                imageUrl: product.images[0].image ,
+                count: count,
+                isSelected: true
+            }))
+        }
+    };
+    const handleAddToFav = () => {
+        if(product) {
+            dispatch(addFav({
                 id: product.id,
                 title: product.name,
                 price: product.price,
@@ -108,6 +121,7 @@ const ProductDetails = () => {
                             DefaultImage={<MdFavoriteBorder/>}
                             ActiveImage={<MdFavorite/>}
                             className={'lg:top-8 lg:right-16 top-5 right-5'}
+                            onClick={handleAddToFav}
                         />
                     </div>
                 </div>
