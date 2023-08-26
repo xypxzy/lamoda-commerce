@@ -2,6 +2,12 @@ import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {facebookProvider, githubProvider, googleProvider,} from "../../config/firebase-config";
 
+import google from "../../assets/image 2.svg";
+import facebook from "../../assets/image 3.svg";
+import apple from "../../assets/image 4.svg";
+import {toggle} from "../../store/auth/authSlice";
+import { useDispatch } from "react-redux";
+
 import {setAuthStatus} from "../../store/auth/authSlice";
 import {useAddTokenMutation} from "../../store/auth/authApi";
 import {useAppDispatch} from "../../store/hooks";
@@ -21,10 +27,17 @@ const Login = () => {
     register,
     handleSubmit,
 
+    formState: { errors },
+  } = useForm();
+  const [booleanPassword, setBooleanPassword] = useState(true);
+  const dispatch = useDispatch()
+  const [addToken, {data, isError, error, isSuccess}] = useAddTokenMutation()
+
     formState: {errors},
   } = useForm<FormData>();
   const dispatch = useAppDispatch()
   const [addToken, { isError, error}] = useAddTokenMutation({})
+
   const navigate = useNavigate()
 
   const onSubmit = async (data: FormData) => {
@@ -54,15 +67,40 @@ const Login = () => {
       .then((user) => {
         console.log("Authenticated user:", user);
 
+        console.log('success')
+        dispatch(toggle(true))
+
         dispatch(setAuthStatus(true))
         navigate('/')
       })
       .catch((error) => {
         console.error("Authentication error:", error);
-      });
+      })
   };
 
+////
+  const onSubmit = async(data: any) => {
+
+    try {
+        await addToken({username: data?.name, password: data?.password})
+        .then((res) => localStorage.setItem('token', JSON.stringify({accesss_token:res?.data?.access, refresh_token: res?.data?.refresh})))
+        .catch((err) => console.log(err))
+        dispatch(toggle(true))
+        console.log()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  if(isError){
+    console.log(error)
+  }
+
+///
+
+      
   return (
+    <main>
     <section className={cls.login}>
       <div className={cls.login__container}>
         <Link to='/' className={cls.login__logo}>
@@ -144,6 +182,18 @@ const Login = () => {
       </div>
     </section>
 
+
+        <Link to='/registration'>
+          <button className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">нет аккаунта !!!</button></Link>
+
+
+        <section className={styles.giveChoose}>
+          <div className={styles.line}></div>
+          <p>or</p>
+          <div className={styles.line}></div>
+        </section>
+
+
         <section className={styles.socialMediaButtons}>
           
           <button onClick={() => onClickProvider(facebookProvider)}>
@@ -152,6 +202,7 @@ const Login = () => {
         </section>
       </section>
     </main>
+
   );
 };
 export default Login;
