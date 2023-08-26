@@ -22,7 +22,7 @@ const resourcesLinks: ResourceLink[] = [
   { url: "/", text: "Q/A" },
 ];
 
-const followUsLinks: FollowLink[] = [
+const followUsLink: FollowLink[] = [
   {
     url: "https://github.com/themesberg/flowbite",
     text: "Github",
@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
 
           <div className="">
             <h2 className={styles.footer__contacts}>Социальные сети</h2>
-            {followUsLinks.map((link, index) => (
+            {followUsLink.map((link, index) => (
               <ul key={index} className={styles.footer__socialLinks}>
                 <li key={index} className="mb-6">
                   <span className="mr-5">{link.icon}</span>
