@@ -31,8 +31,6 @@ const token: {
   access_token: string,
   refresh_token: string,
 } = JSON.parse(localStorage.getItem('token') as string);
-
-console.log(token.access_token)
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:8002'}),
@@ -53,6 +51,15 @@ export const authApi = createApi({
         })
       },
     }),
+    refreshToken: builder.mutation({
+      query: (body) => {
+        return ({
+          url: '/users/token/refresh/',
+          method: 'POST',
+          body
+        })
+      },
+    }),
     getUserData: builder.query<UserProps, string>({
       query: () => ({
         url: '/users/',
@@ -69,5 +76,6 @@ export const authApi = createApi({
 export const {
   useAddAuthMutation,
   useAddTokenMutation,
-  useGetUserDataQuery
+  useGetUserDataQuery,
+  useRefreshTokenMutation
 } = authApi;
