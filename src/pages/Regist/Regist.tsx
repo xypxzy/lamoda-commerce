@@ -1,45 +1,45 @@
-// regist request
-
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import styles from "./Regist.module.css";
-import person from "../../assets/person_filled.svg";
-import lock from "../../assets/lock.svg";
-import eye from "../../assets/eye.svg";
-import eyeblock from "../../assets/eyeslash.svg";
+import { Link, useNavigate } from "react-router-dom";
 import { useAddAuthMutation } from "../../store/auth/authApi";
-import { useNavigate } from "react-router-dom";
+import cls from "./Regist.module.css";
+import logo from "../../assets/svg/logo.svg";
 
-import { useEffect, useState } from "react";
+type FormData = {
+  username: string;
+  email: string;
+  password: string;
+  confirm_password: string;
+  first_name: string;
+  last_name: string;
+};
 
 const Regist = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-  const [booleanPassword, setBooleanPassword] = useState(true);
-  const [booleanConfirmPassword, setBooleanConfirmPassword] = useState(true);
-  const [addUser, { isSuccess, error, isError, isLoading }] =
-    useAddAuthMutation();
+    getValues,
+  } = useForm<FormData>();
+  const [addUser, { isSuccess, error, isError }] = useAddAuthMutation();
   const navigate = useNavigate();
-  const onSubmit = async (data: any) => {
-    if (data.password === data.confirm_password) {
-      try {
+  const onSubmit = async (data: FormData) => {
+    try {
+      if (data.password === data.confirm_password) {
         const res = await addUser({
           first_name: data.first_name,
-          username: data.name,
+          last_name: data.last_name,
+          username: data.username,
           email: data.email,
           password: data.password,
           password2: data.confirm_password,
-          last_name: data.last_name,
         });
         console.log(res);
-      } catch (error) {
-        console.log(error);
       }
+    } catch (error) {
+      console.log(error);
     }
   };
+
   if (isError) {
     console.log(error);
   }
@@ -50,191 +50,173 @@ const Regist = () => {
   }
 
   return (
-    <main>
-      <section>
-        <button>на главную</button>
-        <h1>Регистрация</h1>
-        <form action="POST" onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-6">
-            <img src={person} alt={"person"} />
-            <input
-              type="name"
-              id="name"
-              placeholder="name"
-              {...register("name", {
-                required: "Параметр обязателен",
-                maxLength: {
-                  value: 15,
-                  message: "Ваше имя должно быть меньше 20 символов",
-                },
-                minLength: {
-                  value: 3,
-                  message: "Ваше имя должно быть больше 3 символов",
-                },
-              })}
-              required
-            ></input>
-            {errors?.name && (
-              <span className="error" role="alert">
-                {errors?.name?.message?.toString()}
-              </span>
-            )}
-          </div>
-          <div className="mb-6">
-            <img src={person} alt={"person"} />
-            <input
-              type="first_name"
-              id="first_name"
-              placeholder="first_name"
-              {...register("first_name", {
-                required: "Параметр обязателен",
-                maxLength: {
-                  value: 15,
-                  message: "Ваше имя должно быть меньше 20 символов",
-                },
-                minLength: {
-                  value: 3,
-                  message: "Ваше имя должно быть больше 3 символов",
-                },
-              })}
-              required
-            ></input>
-            {errors?.name && (
-              <span className="error" role="alert">
-                {errors?.name?.message?.toString()}
-              </span>
-            )}
-          </div>
-          <div className="mb-6">
-            <img src={person} alt={"person"} />
-            <input
-              type="last_name"
-              id="last_name"
-              placeholder="last_name"
-              {...register("last_name", {
-                required: "Параметр обязателен",
-                maxLength: {
-                  value: 15,
-                  message: "Ваша фамилия должна быть меньше 20 символов",
-                },
-                minLength: {
-                  value: 3,
-                  message: "Ваше фамилия должна быть больше 3 символов",
-                },
-              })}
-              required
-            ></input>
-            {errors?.name && (
-              <span className="error" role="alert">
-                {errors?.name?.message?.toString()}
-              </span>
-            )}
-          </div>
-          <div className="mb-6">
-            {/*<img src={} alt="" />*/}
-            <input
-              type="email"
-              id="email"
-              placeholder="john.doe@company.com"
-              {...register("email", {
-                required: "Параметр обязателен",
-              })}
-              required
-            ></input>
-            {errors?.name && (
-              <span className="error" role="alert">
-                {errors?.name?.message?.toString()}
-              </span>
-            )}
-          </div>
-          <div className="mb-6">
-            <img src={lock} alt="" />
-            <input
-              type={booleanPassword ? "text" : "password"}
-              id="password"
-              placeholder="•••••••••"
-              {...register("password", {
-                required: "Параметр обязателен",
-                minLength: {
-                  value: 3,
-                  message: "Ваш пароль должен быть больше 5 символов.",
-                },
-              })}
-              required
-            ></input>
-            {booleanPassword ? (
-              <img
-                src={eye}
-                alt=""
-                className={styles.imgEye}
-                onClick={() => setBooleanPassword(false)}
-              />
-            ) : (
-              <img
-                src={eyeblock}
-                alt=""
-                className={styles.imgEye}
-                onClick={() => setBooleanPassword(true)}
-              />
-            )}
-            {errors?.name && (
-              <span className="error" role="alert">
-                {errors?.name?.message?.toString()}
-              </span>
-            )}
-          </div>
-          <div className="mb-6">
-            <img src={lock} alt="" />
-            <input
-              type={booleanConfirmPassword ? "text" : "password"}
-              id="confirm_password"
-              placeholder="•••••••••"
-              {...register("confirm_password", {
-                required: "Параметр обязателен",
-                minLength: {
-                  value: 3,
-                  message: "Ваш пароль должен быть больше 5 символов.",
-                },
-              })}
-              required
-            ></input>
-            {booleanConfirmPassword ? (
-              <img
-                src={eye}
-                alt=""
-                className={styles.imgEye}
-                onClick={() => setBooleanConfirmPassword(false)}
-              />
-            ) : (
-              <img
-                src={eyeblock}
-                alt=""
-                className={styles.imgEye}
-                onClick={() => setBooleanConfirmPassword(true)}
-              />
-            )}
-            {errors?.name && (
-              <span className="error" role="alert">
-                {errors?.name?.message?.toString()}
-              </span>
-            )}
-          </div>
-
-          <button
-            type="submit"
-            className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-          >
-            Зарегистрироваться
-          </button>
-        </form>
-
-        <Link to="/login">
-          <button className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-            есть аккаунт
-          </button>
+    <section className={cls.register}>
+      <div className={cls.register__container}>
+        <Link to={"/"} className={cls.register__logo}>
+          <img className="w-20 h-20 mr-2" src={logo} alt="logo" />
         </Link>
-      </section>
-    </main>
+        <div className={cls.register__form_wrap}>
+          <div className={cls.register__form_wrapper}>
+            <h1 className={cls.register__form_title}>Создайте новый аккаунт</h1>
+            <form className={cls.register__form_forms} action="#">
+              <div>
+                <label htmlFor="username" className={cls.register__form_label}>
+                  Ваш username
+                </label>
+                <input
+                  type="username"
+                  id="username"
+                  placeholder="username"
+                  className={cls.register__form_input}
+                  {...register("username", {
+                    required: "Username является обязательным для заполнения.",
+                  })}
+                />
+                {errors.username && (
+                  <p className="text-red-500 text-[12px] mt-1">
+                    {errors.username.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label htmlFor="email" className={cls.register__form_label}>
+                  Ваш email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  // Adding validation rules here
+                  {...register("email", {
+                    required: "Email является обязательным для заполнения.",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                      message: "Invalid email address",
+                    },
+                  })}
+                  className={`bg-gray-50 border ${
+                    errors.email ? "border-red-500" : "border-gray-300"
+                  } ${cls.register__form_input}`}
+                  placeholder="name@company.com"
+                />
+                {errors.email && (
+                  <p className="text-red-500  text-[12px] mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label htmlFor="firstName" className={cls.register__form_label}>
+                  Имя
+                </label>
+                <input
+                  type="firstName"
+                  id="firstName"
+                  placeholder="Alex"
+                  className={cls.register__form_input}
+                  {...register("first_name", {
+                    required: "Имя является обязательным для заполнения.",
+                  })}
+                />
+                {errors.first_name && (
+                  <p className="text-red-500 text-[12px] mt-1">
+                    {errors.first_name.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label htmlFor="lastName" className={cls.register__form_label}>
+                  Фамилия
+                </label>
+                <input
+                  type="lastName"
+                  id="lastName"
+                  placeholder="Alex"
+                  className={cls.register__form_input}
+                  {...register("last_name", {
+                    required: "Фамилия является обязательным для заполнения.",
+                  })}
+                />
+                {errors.last_name && (
+                  <p className="text-red-500 text-[12px] mt-1">
+                    {errors.last_name.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label htmlFor="password" className={cls.register__form_label}>
+                  Пароль
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="••••••••"
+                  className={cls.register__form_input}
+                  {...register("password", {
+                    required: "Пароль является обязательным для заполнения.",
+                    minLength: {
+                      value: 8,
+                      message:
+                        " Пароль должен состоять из не менее чем 8 символов.",
+                    },
+                    validate: (value) => {
+                      return (
+                        (/[A-Z]/.test(value) && /[0-9]/.test(value)) ||
+                        "Пароль должен содержать заглавные и строчные буквы и цифры"
+                      );
+                    },
+                  })}
+                />
+                {errors.password && (
+                  <p className="text-red-500 text-[12px] mt-1">
+                    {errors.password.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label
+                  htmlFor="confirm-password"
+                  className={cls.register__form_label}
+                >
+                  Подтвердить пароль
+                </label>
+                <input
+                  type="password"
+                  id="confirm-password"
+                  placeholder="••••••••"
+                  className={cls.register__form_input}
+                  {...register("confirm_password", {
+                    required: "Потвердите пароль",
+                    validate: (value) =>
+                      value === getValues("password") || "Пароли не совподают",
+                  })}
+                />
+                {errors.confirm_password && (
+                  <p className="text-red-500  text-[12px] mt-1">
+                    {errors.confirm_password.message}
+                  </p>
+                )}
+              </div>
+              <button
+                type="submit"
+                onClick={handleSubmit(onSubmit)}
+                className={cls.register__form_signup__button}
+              >
+                Создать аккаунт
+              </button>
+              <p className={cls.register__form_register__link}>
+                У вас уже есть аккаунт?
+                <Link
+                  to={"/login"}
+                  className={cls.register__form_register__link__text}
+                >
+                  Зайти в аккаунт
+                </Link>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 export default Regist;
