@@ -125,15 +125,6 @@ const Login = () => {
         </div>
       </div>
     </section>
-
-        <section className={styles.socialMediaButtons}>
-          
-          <button onClick={() => onClickProvider(facebookProvider)}>
-            <img src={facebook} alt="" />
-          </button>
-        </section>
-      </section>
-    </main>
   );
 };
 export default Login;
