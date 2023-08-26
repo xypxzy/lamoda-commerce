@@ -158,6 +158,18 @@ export default function Header() {
                   </RouterLink>
                 </li>
               ))}
+              <div className={styles.icon_center}>
+                {isAuth ?
+                  <button onClick={logOut}>
+                    <CiLogout className={styles.logoutIc}/>
+                    <p className={'text-sm'}>Выйти</p>
+                  </button> :
+                  <Link to={'/login'}>
+                    <CiLogin className={styles.logoutIc}/>
+                    <p className={'text-sm'}>Войти</p>
+                  </Link>
+                }
+              </div>
             </ul>
           </div>
         </section>

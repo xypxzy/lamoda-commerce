@@ -13,11 +13,11 @@ const FavouritePage = () => {
         navigate('/login')
     }
 
-    const isAuth = useAppSelector((state) => state.auth)
+    const { isAuth } = useAppSelector((state) => state.auth)
 
     return (
         <>
-        {isAuth.isToggled ? 
+        {isAuth ?
             (<>
                 <section className={cls.favourite_page}>
                     <div className={cls.favourite_page__container}>

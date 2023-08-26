@@ -94,24 +94,6 @@ const Login = () => {
                 {errors.password && <p className={cls.login__form_required__error}>{errors.password.message}</p>}
               </div>
               <div className={cls.login__form_options}>
-                {/*<div className={cls.login__form_options__wrapper}>*/}
-                {/*  <div className="flex items-center h-5">*/}
-                {/*    <input*/}
-                {/*      id="remember_password"*/}
-                {/*      aria-describedby="remember_password"*/}
-                {/*      type="checkbox"*/}
-                {/*      className={cls.login__form_options__checkbox}*/}
-                {/*      {...register('remember_password')}*/}
-                {/*    />*/}
-                {/*  </div>*/}
-                {/*  <div className="ml-3 text-sm">*/}
-                {/*    <label*/}
-                {/*      htmlFor="remember_password"*/}
-                {/*      className={cls.login__form_options__label}>*/}
-                {/*      Запомнить меня*/}
-                {/*    </label>*/}
-                {/*  </div>*/}
-                {/*</div>*/}
                 <a href="#" className={cls.login__form_options__password}>Забыли пароль?</a>
               </div>
               <button type="submit" className={cls.login__form_signin__button}>Войти</button>
