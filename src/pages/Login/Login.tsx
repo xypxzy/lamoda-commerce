@@ -63,6 +63,7 @@ const Login = () => {
   };
 
   return (
+    <main>
     <section className={cls.login}>
       <div className={cls.login__container}>
         <Link to='/' className={cls.login__logo}>
@@ -144,13 +145,6 @@ const Login = () => {
       </div>
     </section>
 
-        <section className={styles.socialMediaButtons}>
-          
-          <button onClick={() => onClickProvider(facebookProvider)}>
-            <img src={facebook} alt="" />
-          </button>
-        </section>
-      </section>
     </main>
   );
 };
