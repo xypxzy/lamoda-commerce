@@ -7,6 +7,8 @@ import styles from "./Header.module.css";
 import { Turn as Hamburger } from "hamburger-react";
 import { Link as ScrollLink } from "react-scroll";
 import { Link as RouterLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 const HeaderMobile: React.FC = () => {
   const [isOpen, setOpen] = React.useState(false);
@@ -15,6 +17,10 @@ const HeaderMobile: React.FC = () => {
   const closeMenu = () => {
     setOpen(false);
   };
+
+  const itemsCount = useSelector(
+    (state: RootState) => state.cart.cartItems.length
+  );
 
   const navItems = [
     { id: 1, text: "Новинки", link: "newcollection" },
@@ -117,7 +123,7 @@ const HeaderMobile: React.FC = () => {
                 <span className={styles.icon__text}>Избранное</span>
               </RouterLink>
             </li>
-            <li className={isOpen ? styles.list_text : ""}>
+            <li className={isOpen ? styles.cart : styles.list_text}>
               <RouterLink
                 className={styles.icon_center}
                 to="/cart"
@@ -127,7 +133,11 @@ const HeaderMobile: React.FC = () => {
                 <BsBag />
                 <span className={styles.icon__text}>Корзина</span>
               </RouterLink>
-              <div>BADGE</div>
+              <div
+                className={`${itemsCount ? styles.badge : styles.badgeNone}`}
+              >
+                {itemsCount || 0}
+              </div>
             </li>
           </ul>
         </div>

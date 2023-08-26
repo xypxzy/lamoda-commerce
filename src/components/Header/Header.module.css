@@ -75,3 +75,6 @@ a {
   border-radius: 50%;
   background: rgb(234, 10, 10);
 }
+.badgeNone {
+  display: none;
+}

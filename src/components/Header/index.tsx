@@ -24,8 +24,6 @@ export default function Header() {
     (state: RootState) => state.cart.cartItems.length
   );
 
-  const navigate = useNavigate();
-
   //Логика burger menu
   const closeMenu = () => {
     setOpen(false);
@@ -131,7 +129,9 @@ export default function Header() {
               <BsBag />
               <span className={styles.icon__text}>Корзина</span>
             </RouterLink>
-            <div className={styles.badge}>{itemsCount || 0}</div>
+            <div className={`${itemsCount ? styles.badge : styles.badgeNone}`}>
+              {itemsCount || 0}
+            </div>
           </li>
           <li className={styles.nav__icons}>
             <div className={styles.icon_center}>
