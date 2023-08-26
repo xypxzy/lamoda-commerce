@@ -5,20 +5,27 @@ interface ImagesProps {
 }
 
 export interface ProductProps {
-  name: string;
-  serial_number: string;
-  description: string;
-  price: number;
-  id: number;
-  images: ImagesProps[];
-  categories: string[];
+    name?: string,
+    serial_number?: string
+    way_to_use?: string,
+    description?: string,
+    price?: number,
+    id?: number,
+    images?: ImagesProps[];
+    categories?: string[];
 }
 
 export interface CategoriesProps {
-  name: string;
-  id: number;
+    name: string,
+    id: number,
+}
+
+export interface Compound {
+    id: string,
+    name: string
 }
 
 export interface SortType {
   name: "rel" | "desc" | "asc";
 }
+

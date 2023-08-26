@@ -21,6 +21,7 @@ const ProductCard = (props: ProductCardProps) => {
   const [addCart, setAddCart] = useState(false);
   const [setFavourites] = useSetFavouritesMutation();
 
+
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector((state) => state.auth);
 
