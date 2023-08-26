@@ -17,4 +17,4 @@ python manage.py create_default_admin
 # python manage.py loaddata backend/products/fixtures/goods_w.json
 # python manage.py loaddata backend/products/fixtures/images_w.json
 
-
+exec "$@"
