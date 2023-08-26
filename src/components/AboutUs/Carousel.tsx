@@ -1,16 +1,19 @@
 import React from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import firstSlide from "../../assets/img/Womens-Group-Service-First-Image.jpg";
+import secondSlide from "../../assets/img/65168748-group-of-women-socialize-teamwork-happiness-concept.jpg";
+import thirdSlide from "../../assets/img/iStock-951541912.jpg";
 
 const Carousel: React.FC = () => {
   const slides = [
     {
-      url: "https://149358811.v2.pressablecdn.com/wp-content/uploads/2017/09/Womens-Group-Service-First-Image.jpg",
+      url: firstSlide,
     },
     {
-      url: "https://thumbs.dreamstime.com/b/group-women-socialize-teamwork-happiness-concept-97129071.jpg",
+      url: secondSlide,
     },
     {
-      url: "https://img.freepik.com/free-photo/cute-interracial-young-adult-women-casual-clothes-chatting-among-themselves-beige-background_197531-31859.jpg",
+      url: thirdSlide,
     },
   ];
 
