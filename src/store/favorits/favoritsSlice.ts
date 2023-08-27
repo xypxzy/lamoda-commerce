@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CartItems, FavSliceState } from "../cart/types";
-import { activate } from "firebase/remote-config";
 
 const favCardData = sessionStorage.getItem('favData');
 const initialFavItem: CartItems[] = favCardData ? JSON.parse(favCardData) : [];
@@ -37,22 +36,15 @@ export const favSlice = createSlice({
 
         },
         removeFav: (state, action: PayloadAction<number>) => {
-            const indexToRemove = state.favItems.findIndex(item => item.id === action.payload);
+            const indexToRemove = state.favItems.findIndex((item) => item.id === action.payload);
             if (indexToRemove !== -1) {
-                state.favItems = state.favItems.filter(item => item.id !== action.payload);
+                state.favItems.splice(indexToRemove, 1);
             }
             sessionStorage.setItem("favData", JSON.stringify(state.favItems));
         },
-        addToCard: (state, action: PayloadAction<number>) => {
-            const indexToRemoveFav = state.favItems.findIndex(item => item.id === action.payload);
-            sessionStorage.setItem("cartData", JSON.stringify(state.favItems));
-            if (indexToRemoveFav !== -1) {
-                state.favItems = state.favItems.filter(item => item.id !== action.payload);
-            }
-            sessionStorage.setItem("favData", JSON.stringify(state.favItems));
-        }
+
     }
 })
 
-export const {addFav, minusFav, removeFav, addToCard} = favSlice.actions;
+export const {addFav, minusFav, removeFav} = favSlice.actions;
 export default favSlice.reducer
