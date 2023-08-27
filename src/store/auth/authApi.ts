@@ -30,12 +30,6 @@ export interface RegisterResponse {
   email: string,
   profile_image: string,
 }
-
-const token: {
-  access_token: string,
-  refresh_token: string,
-} = JSON.parse(localStorage.getItem('token') as string);
-
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({baseUrl: DEFAULT_URL}),
@@ -65,17 +59,7 @@ export const authApi = createApi({
         })
       },
     }),
-    getUserData: builder.query<UserProps, string>({
-      query: () => ({
-        url: '/users/',
-        options: {
-          headers: {
-            Authorization: `Bearer ${token.access_token}`
-          }
-        }
-      })
-    }),
   }),
 });
 
-export const { useAddAuthMutation, useAddTokenMutation, useGetUserDataQuery, useRefreshTokenMutation } = authApi;
+export const { useAddAuthMutation, useAddTokenMutation, useRefreshTokenMutation } = authApi;

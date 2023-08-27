@@ -1,34 +1,21 @@
-// Функция для обновления токена через refreshToken
-import {useRefreshTokenMutation} from "./authApi.ts";
+import {DEFAULT_URL} from "../const.ts";
 
-const refreshTokenFn = async () => {
+export const refreshAccessToken = async (refresh: string) => {
   try {
-    const [refreshToken] = useRefreshTokenMutation()
-    const token: {
-      access_token: string,
-      refresh_token: string,
-    } = JSON.parse(localStorage.getItem('token') as string);
-
-    const res = await refreshToken({refresh: token.refresh_token})
-      .unwrap()
-      .then(((res) => {
-        localStorage.setItem('token', JSON.stringify({
-          'access_token': res.access,
-          'refresh_token': res.refresh,
-        }));
-        console.log(res)
-      }))
-
-      .catch((err) => console.log(err));
+    const response = await fetch(`${DEFAULT_URL}/users/token/refresh/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({refresh})
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return data.access;
+    } else {
+      throw new Error('Failed to refresh access token');
+    }
   } catch (error) {
-    console.error('Error refreshing token:', error);
+    console.error('Error refreshing access token:', error);
   }
 };
-
-// Запуск обновления токена каждые 5 минут
-const refreshTokenInterval = setInterval(refreshTokenFn, 5 * 60 * 1000);
-
-// Остановить интервал через 5 минут
-setTimeout(() => {
-  clearInterval(refreshTokenInterval);
-}, 5 * 60 * 1000);

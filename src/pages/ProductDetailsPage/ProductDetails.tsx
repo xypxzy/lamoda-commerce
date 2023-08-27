@@ -4,14 +4,16 @@ import cls from './ProductDetails.module.css'
 import FavoriteButton from "../../components/FavoriteButton/FavoriteButton.tsx";
 import Accordion from "../../components/Accordion/Accordion.tsx";
 import {useGetProductQuery} from "../../store/products/productsApi.ts";
-import {useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {addItem} from "../../store/cart/slice.ts";
-import {useAppDispatch} from "../../store/hooks.ts";
+import {useAppDispatch, useAppSelector} from "../../store/hooks.ts";
 import { addFav } from '../../store/favorits/favoritsSlice.ts';
 import {ProductProps} from "../../consts/consts.ts";
 
 const ProductDetails = () => {
     const [liked, setLiked] = useState(false);
+    const {isAuth} = useAppSelector((state) => state.auth);
+    const navigate = useNavigate();
     const { id } = useParams<string>();
     if(!id) {
         return;
@@ -26,6 +28,10 @@ const ProductDetails = () => {
     const dispatch = useAppDispatch();
 
     const handleAddToCart = () => {
+        if(!isAuth) {
+            navigate('/login')
+            return;
+        }
         if(product) {
             dispatch(addItem({
                 id: product.id as number,
@@ -115,15 +121,21 @@ const ProductDetails = () => {
                                 Добавить в корзину
                             </button>
                         </div>
-                        <Accordion product={product as ProductProps} id={id}/>
-                        <FavoriteButton
-                            active={liked}
-                            setActive={setLiked}
-                            DefaultImage={<MdFavoriteBorder/>}
-                            ActiveImage={<MdFavorite/>}
-                            className={'lg:top-8 lg:right-16 top-5 right-5'}
-                            onClick={handleAddToFav}
-                        />
+                        <Accordion product={product as ProductProps}/>
+                        {
+                            isAuth ? (
+                                <FavoriteButton
+                                    active={liked}
+                                    setActive={setLiked}
+                                    DefaultImage={<MdFavoriteBorder/>}
+                                    ActiveImage={<MdFavorite/>}
+                                    className={'lg:top-8 lg:right-16 top-5 right-5'}
+                                    onClick={handleAddToFav}
+                                />
+                            ) : (
+                                <Link to={'/login'} />
+                            )
+                        }
                     </div>
                 </div>
             </div>

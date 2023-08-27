@@ -4,7 +4,7 @@ import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
 import { selectCart } from "../../store/cart/selectors";
 import CartEmpty from "../../components/CartEmpty";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { useAppSelector } from "../../store/hooks.ts";
 
 type TCartInputProps = {
@@ -24,7 +24,7 @@ const CartPage = () => {
   const navigate = useNavigate();
 
   const handleGoToCatalog = () => {
-    navigate("/catalog");
+    navigate("/login");
   };
 
   if (!cartItems.length) {
@@ -61,7 +61,7 @@ const CartPage = () => {
                 ))}
                 <div className={cls.cart__total_allTotal}>
                   <p>Общий</p>
-                  <p>{Math.ceil(totalPrice)}$</p>
+                  <p>{Math.ceil(totalPrice)} som</p>
                 </div>
               </div>
               <div className={cls.cart__right}>
@@ -114,7 +114,7 @@ const CartPage = () => {
                         d="M15.75 19.5L8.25 12l7.5-7.5"
                       />
                     </svg>
-                    <a href="">Вернуться в корзину</a>
+                    <Link to={'/cart'}>Вернуться в корзину</Link>
                   </p>
                 </div>
               </div>

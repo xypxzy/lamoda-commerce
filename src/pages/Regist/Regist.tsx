@@ -1,6 +1,6 @@
-import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { useAddAuthMutation } from "../../store/auth/authApi";
+import {useForm} from "react-hook-form";
+import {Link, useNavigate} from "react-router-dom";
+import {useAddAuthMutation} from "../../store/auth/authApi";
 import cls from "./Regist.module.css";
 import logo from "../../assets/svg/logo.svg";
 
@@ -20,7 +20,7 @@ const Regist = () => {
     formState: { errors },
     getValues,
   } = useForm<FormData>();
-  const [addUser, { isSuccess, error, isError }] = useAddAuthMutation();
+  const [addUser, { isSuccess, isError }] = useAddAuthMutation();
   const navigate = useNavigate();
   const onSubmit = async (data: FormData) => {
     try {
@@ -33,16 +33,12 @@ const Regist = () => {
           password: data.password,
           password2: data.confirm_password,
         });
-        console.log(res);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
-  if (isError) {
-    console.log(error);
-  }
 
   if (isSuccess) {
     console.log("login is success");
@@ -85,7 +81,6 @@ const Regist = () => {
                 <input
                   type="email"
                   id="email"
-                  // Adding validation rules here
                   {...register("email", {
                     required: "Email является обязательным для заполнения.",
                     pattern: {
@@ -195,6 +190,11 @@ const Regist = () => {
                     {errors.confirm_password.message}
                   </p>
                 )}
+              </div>
+              <div>
+                {isError && <p className="text-red-500  text-[12px] mt-1">
+                  Есть такой пользователь
+                </p>}
               </div>
               <button
                 type="submit"

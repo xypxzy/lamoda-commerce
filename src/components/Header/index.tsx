@@ -1,20 +1,20 @@
 import React from "react";
 import logo from "../../assets/svg/logo.svg";
-import { AiOutlineHeart } from "react-icons/ai";
-import { BsBag } from "react-icons/bs";
-import { BiUser } from "react-icons/bi";
-import { MdProductionQuantityLimits } from "react-icons/md";
+import {AiOutlineHeart} from "react-icons/ai";
+import {BsBag} from "react-icons/bs";
+import {BiUser} from "react-icons/bi";
+import {MdProductionQuantityLimits} from "react-icons/md";
 import styles from "./Header.module.css";
-import { Link as ScrollLink } from "react-scroll";
-import { Link, Link as RouterLink, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { auth } from "../../config/firebase-config";
-import { signOut } from "firebase/auth";
-import { CiLogin, CiLogout } from "react-icons/ci";
+import {Link as ScrollLink} from "react-scroll";
+import {Link, Link as RouterLink} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
+import {auth} from "../../config/firebase-config";
+import {signOut} from "firebase/auth";
+import {CiLogin, CiLogout} from "react-icons/ci";
 import HeaderMobile from "./HeaderMobile";
-import { RootState } from "../../store/store";
-import { useSelector } from "react-redux";
-import { setAuthStatus } from "../../store/auth/authSlice";
+import {RootState} from "../../store/store";
+import {useSelector} from "react-redux";
+import {setAuthStatus} from "../../store/auth/authSlice";
 
 export default function Header() {
   const [isOpen, setOpen] = React.useState(false);
@@ -128,9 +128,13 @@ export default function Header() {
               <BsBag />
               <span className={styles.icon__text}>Корзина</span>
             </RouterLink>
-            <div className={`${itemsCount ? styles.badge : styles.badgeNone}`}>
-              {itemsCount || 0}
-            </div>
+            {
+              isAuth && (
+                    <div className={`${itemsCount ? styles.badge : styles.badgeNone}`}>
+                      {(itemsCount) || 0}
+                    </div>
+                )
+            }
           </li>
           <li className={styles.nav__icons}>
             <div className={styles.icon_center}>

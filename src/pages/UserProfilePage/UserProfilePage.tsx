@@ -1,10 +1,8 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import cls from "./UserProfile.module.css";
 import {Link, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../store/hooks.ts";
-import {SlOptions} from 'react-icons/sl'
 import {useForm} from "react-hook-form";
-import {useGetUserDataQuery} from "../../store/auth/authApi.ts";
 import {auth} from "../../config/firebase-config.ts";
 import {signOut} from "firebase/auth";
 import {setAuthStatus} from "../../store/auth/authSlice.ts";
@@ -18,20 +16,67 @@ type FormData = {
   last_name: string;
 };
 
+type UserData = {
+  username: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  profile_image: string
+};
+
 const UserProfilePage: React.FC = () => {
   const navigate = useNavigate()
   const {isAuth} = useAppSelector((state) => state.auth)
 
   const [isEditing, setIsEditing] = useState(false);
+  const [userData, setUserData] = useState<UserData>({
+    username: 'Username',
+    email: 'email@gmail.com',
+    first_name: 'Alex',
+    last_name: 'Alexov',
+    profile_image: ''
+  });
   const dispatch = useAppDispatch()
-  const {data: userData} = useGetUserDataQuery('')
-  console.log(userData)
   const {
     register,
     handleSubmit,
     formState: {errors},
     getValues
   } = useForm<FormData>();
+
+  useEffect(() => {
+    if(isAuth) {
+      const url = 'http://team2back.sanarip.org/users/';
+
+      const token: {
+        access_token: string,
+        refresh_token: string,
+      } = JSON.parse(localStorage.getItem('token') as string);
+
+      const headers = new Headers();
+      headers.append('Authorization', `Bearer ${token.access_token}`);
+
+      const requestOptions = {
+        method: 'GET',
+        headers: headers,
+      };
+
+      fetch(url, requestOptions)
+          .then(response => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Ошибка запроса: ' + response.status);
+            }
+          })
+          .then(data => {
+            setUserData(data)
+          })
+          .catch(error => {
+            console.error(error);
+          });
+    }
+  }, []);
 
   const handleToLogin = () => {
     navigate('/login')
@@ -67,7 +112,7 @@ const UserProfilePage: React.FC = () => {
             <section className={cls.profile_card}>
               <div className={cls.profile_card__container}>
                 <div className={cls.profile_card__information}>
-                  <img className={cls.profile_card__information_image} src="/docs/images/people/profile-picture-3.jpg"
+                  <img className={cls.profile_card__information_image} src={userData?.profile_image}
                        alt="Bonnie image"/>
                   {isEditing ? (
                     <section className={'flex flex-col gap-4'}>
@@ -158,10 +203,10 @@ const UserProfilePage: React.FC = () => {
                     </section>
                   ) : (
                     <div className={'flex flex-col  gap-2'}>
-                      <span className={'flex items-center'}><p className={'text-lg text-blue-600'}>Username</p>: username</span>
-                      <span className={'flex items-center'}><p className={'text-lg text-blue-600'}>Email</p>: username@emal.com</span>
-                      <span className={'flex items-center'}><p className={'text-lg text-blue-600'}>First Name</p>: First Name</span>
-                      <span className={'flex items-center'}><p className={'text-lg text-blue-600'}>Last name</p>: Last name</span>
+                      <span className={'flex items-center'}><p className={'text-lg text-blue-600'}>Username</p>: {userData.username}</span>
+                      <span className={'flex items-center'}><p className={'text-lg text-blue-600'}>Email</p>: {userData.email}</span>
+                      <span className={'flex items-center'}><p className={'text-lg text-blue-600'}>First Name</p>: {userData.first_name}</span>
+                      <span className={'flex items-center'}><p className={'text-lg text-blue-600'}>Last name</p>: {userData.last_name}</span>
                     </div>
                   )}
                   <div className="flex mt-4 space-x-3 md:mt-6">

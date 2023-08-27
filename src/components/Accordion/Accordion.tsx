@@ -1,15 +1,13 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import cls from './Accordion.module.css'
 import AccordionLayout from "../AccordionLayout/AccordionLayout.tsx";
-import React from "react";
-import { ProductProps } from "../../consts/consts.ts";
-import { useAppSelector } from "../../store/hooks.ts";
-import { useParams } from "react-router-dom";
+import {ProductProps} from "../../consts/consts.ts";
 
-interface Discription{
-    product: ProductProps,}
+interface Description{
+    product: ProductProps,
+}
 
-const Accordion: React.FC<Discription> = ({product, }) => {    
+const Accordion: React.FC<Description> = ({product, }) => {
     
     const [activeIndex, setActiveIndex] = useState(0);
     //accordion

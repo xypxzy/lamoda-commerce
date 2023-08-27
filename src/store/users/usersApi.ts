@@ -7,16 +7,13 @@ export const usersApi= createApi({
     baseQuery: fetchBaseQuery({ baseUrl: DEFAULT_URL }),
     endpoints: (builder) => ({
         getFavourites: builder.query<ProductProps[], string>({
-            query: () => '/users/favourite'
+            query: () => '/users/favourite/'
         }),
         setFavourites: builder.mutation({
             query: (id) => ({
-                url: `/products/product/${id}/favourite`,
+                url: `/products/product/${id}/favourite/`,
                 method: 'POST',
             })
         }),
     }),
 })
-
-
-export const {useGetFavouritesQuery, useSetFavouritesMutation } = usersApi;

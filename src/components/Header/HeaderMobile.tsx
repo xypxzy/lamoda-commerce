@@ -6,12 +6,19 @@ import { MdProductionQuantityLimits } from "react-icons/md";
 import styles from "./Header.module.css";
 import { Turn as Hamburger } from "hamburger-react";
 import { Link as ScrollLink } from "react-scroll";
-import { Link as RouterLink } from "react-router-dom";
+import {Link, Link as RouterLink} from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import {CiLogin, CiLogout} from "react-icons/ci";
+import {useAppDispatch, useAppSelector} from "../../store/hooks.ts";
+import {auth} from "../../config/firebase-config.ts";
+import {signOut} from "firebase/auth";
+import {setAuthStatus} from "../../store/auth/authSlice.ts";
 
 const HeaderMobile: React.FC = () => {
   const [isOpen, setOpen] = React.useState(false);
+  const { isAuth } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
 
   //Логика burger menu
   const closeMenu = () => {
@@ -28,6 +35,20 @@ const HeaderMobile: React.FC = () => {
     { id: 3, text: "О нас", link: "aboutus" },
     { id: 4, text: "Бренды", link: "brands" },
   ];
+
+  const logOut = async () => {
+    if (auth) {
+      try {
+        await signOut(auth);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      localStorage.removeItem("token");
+    }
+    localStorage.removeItem("token");
+    dispatch(setAuthStatus(false));
+  };
 
   //Логика burger menu
   const onClickMenu = () => {
@@ -138,6 +159,21 @@ const HeaderMobile: React.FC = () => {
               >
                 {itemsCount || 0}
               </div>
+            </li>
+            <li className={isOpen ? styles.list_text : ""}>
+                <div className={`${styles.icon_center}  mt-4`}>
+                  {isAuth ? (
+                      <button onClick={logOut}>
+                        <CiLogout className={styles.logoutIc} />
+                        <p className={"text-sm"}>Выйти</p>
+                      </button>
+                  ) : (
+                      <Link to={"/login"}>
+                        <CiLogin className={styles.logoutIc} />
+                        <p className={"text-sm"}>Войти</p>
+                      </Link>
+                  )}
+                </div>
             </li>
           </ul>
         </div>

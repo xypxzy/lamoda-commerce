@@ -1,13 +1,13 @@
 import cls from "./ProductCard.module.css";
-import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
-import { PiBagSimpleFill, PiBagSimpleLight } from "react-icons/pi";
-import { useState } from "react";
+import {MdFavorite, MdFavoriteBorder} from "react-icons/md";
+import {PiBagSimpleFill, PiBagSimpleLight} from "react-icons/pi";
+import {useState} from "react";
 import FavoriteButton from "../FavoriteButton/FavoriteButton.tsx";
-import { Link } from "react-router-dom";
-import { ProductProps, SortType } from "../../consts/consts.ts";
-import { useSetFavouritesMutation } from "../../store/users/usersApi.ts";
-import { useAppDispatch, useAppSelector } from "../../store/hooks.ts";
-import { addItem } from "../../store/cart/slice.ts";
+import {Link} from "react-router-dom";
+import {ProductProps} from "../../consts/consts.ts";
+import {useAppDispatch, useAppSelector} from "../../store/hooks.ts";
+import {addItem} from "../../store/cart/slice.ts";
+import {DEFAULT_URL} from "../../store/const.ts";
 
 interface ProductCardProps {
   product: ProductProps;
@@ -19,14 +19,12 @@ const ProductCard = (props: ProductCardProps) => {
   const { product, isLoading } = props;
   const [liked, setLiked] = useState(false);
   const [addCart, setAddCart] = useState(false);
-  const [setFavourites] = useSetFavouritesMutation();
 
 
   const dispatch = useAppDispatch();
-  const isAuth = useAppSelector((state) => state.auth);
+  const {isAuth} = useAppSelector((state) => state.auth);
 
   const handleAddToFavourites = () => {
-    setFavourites(product.id);
     setLiked(!liked);
   };
 
@@ -43,7 +41,25 @@ const ProductCard = (props: ProductCardProps) => {
     );
   };
 
-  const handleAddToFav = () => {};
+  const handleAddToFav = async (id: number) => {
+      try {
+          const response = await fetch(`${DEFAULT_URL}/users/${id}/favourite/`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({id})
+          });
+          if (response.ok) {
+              const data = await response.json();
+              console.log(data)
+          } else {
+              throw new Error('Failed to refresh access token');
+          }
+      } catch (error) {
+          console.error('Error refreshing access token:', error);
+      }
+  };
 
   //Skeletons
   if (isLoading) {
