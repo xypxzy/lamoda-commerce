@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sleep 10
+sleep 20
 python manage.py flush --no-input
 python manage.py migrate
 python manage.py create_default_admin
