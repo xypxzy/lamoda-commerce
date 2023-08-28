@@ -99,7 +99,6 @@ const ProductDetails = () => {
                     <div className={cls.product_details__information}>
                         <h1 className={cls.product_details__title}>{product?.name}</h1>
                         <span className={cls.product_details__price}>{product?.price} som</span>
-                        <h2 className={cls.product_details__brandName}>{product?.categories}</h2>
                         <p className={cls.product_details__description}>
                             {product?.description}
                         </p>
