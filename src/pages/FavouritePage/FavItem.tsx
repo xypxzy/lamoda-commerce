@@ -24,8 +24,9 @@ const FavItem: FC<FavItemProps> = ({
     count,
 }) => {
 
-    const dispatch = useAppDispatch();
     const {favItems} = useSelector(selectFav)
+    const dispatch = useAppDispatch();
+    // console.log(favItems)
 
 
     const onClickPlus = () => {
@@ -41,6 +42,9 @@ const FavItem: FC<FavItemProps> = ({
     const addToCardF = () => {
         dispatch(removeFav(id))
         dispatch(addItem({id, count, imageUrl, price, title}));
+    }
+    const remover = () => {
+        dispatch(removeFav(id))
     }
     return(
         <>
@@ -65,7 +69,7 @@ const FavItem: FC<FavItemProps> = ({
                 <div style={{display: 'flex'}}>
                     <button className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none max-w-md focus:ring-gray-300
                         font-medium rounded-lg px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-                        onClick={() => dispatch(removeFav(id))}
+                        onClick={remover}
                     >
                         Удалить
                     </button>

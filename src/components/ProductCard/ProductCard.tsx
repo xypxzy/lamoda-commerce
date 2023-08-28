@@ -8,6 +8,8 @@ import {ProductProps} from "../../consts/consts.ts";
 import {useAppDispatch, useAppSelector} from "../../store/hooks.ts";
 import {addItem} from "../../store/cart/slice.ts";
 import {DEFAULT_URL} from "../../store/const.ts";
+import { useParams } from "react-router-dom";
+import { addFav } from "../../store/favorits/favoritsSlice.ts";
 
 interface ProductCardProps {
   product: ProductProps;
@@ -20,13 +22,14 @@ const ProductCard = (props: ProductCardProps) => {
   const [liked, setLiked] = useState(false);
   const [addCart, setAddCart] = useState(false);
 
-
+  const {id} = useParams()
   const dispatch = useAppDispatch();
   const {isAuth} = useAppSelector((state) => state.auth);
 
   const handleAddToFavourites = () => {
     setLiked(!liked);
   };
+
 
   const handleAddToCart = () => {
     dispatch(
@@ -41,25 +44,36 @@ const ProductCard = (props: ProductCardProps) => {
     );
   };
 
-  const handleAddToFav = async (id: number) => {
-      try {
-          const response = await fetch(`${DEFAULT_URL}/users/${id}/favourite/`, {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({id})
-          });
-          if (response.ok) {
-              const data = await response.json();
-              console.log(data)
-          } else {
-              throw new Error('Failed to refresh access token');
-          }
-      } catch (error) {
-          console.error('Error refreshing access token:', error);
-      }
-  };
+  // const handleAddToFav = async (id: number) => {
+  //   try {
+  //       const response = await fetch(`${DEFAULT_URL}/users/${id}/favourite/`, {
+  //           method: 'POST',
+  //           headers: {
+  //               'Content-Type': 'application/json'
+  //           },
+  //           body: JSON.stringify({id})
+  //       });
+  //       if (response.ok) {
+  //           const data = await response.json();
+  //           console.log(data)
+  //       } else {
+  //           throw new Error('Failed to refresh access token');
+  //       }
+  //   } catch (error) {
+  //       console.error('Error refreshing access token:', error);
+  //   }
+  // };
+
+  const handleAddToFav = () => {
+    dispatch(addFav({
+        id: product.id as number,
+        title: product.name as string,
+        price: product.price as number,
+        imageUrl:  (product.images ? product.images[0].image : '') as string ,
+        count: 1,
+        isSelected: true,
+    }))
+  }
 
   //Skeletons
   if (isLoading) {
@@ -110,6 +124,7 @@ const ProductCard = (props: ProductCardProps) => {
             ActiveImage={<MdFavorite />}
             className={`${cls.card__button} hover:text-red-500 right-12 top-8`}
             color={"red"}
+            onClick={handleAddToFav}
           />
           <FavoriteButton
             active={addCart}

@@ -5,7 +5,8 @@ import {selectFav} from '../../store/favorits/favSelector.ts';
 import {useSelector} from 'react-redux/es/hooks/useSelector';
 import FavCardEmpty from '../../components/FavCartEmpty.tsx';
 import FavItem from './FavItem.tsx';
-import {useEffect, useState} from "react";
+import { FC, useEffect } from 'react';
+// import {useEffect, useState} from "react";
 
 type FavProps = {
     id: number;
@@ -18,53 +19,52 @@ type FavProps = {
 
 const FavouritePage = () => {
     // const [favData, setFavData] = useState<FavProps[]>([])
+    const { isAuth } = useAppSelector((state) => state.auth)
+    const {favItems} = useSelector(selectFav)
 
     const navigate = useNavigate()
     const checkAuth = () => {
         navigate('/login')
     }
-    const {favItems} = useSelector(selectFav)
-    console.log(favItems[0]?.count)
 
     if (!favItems.length) {
         return <FavCardEmpty/>
     }
 
-    const { isAuth } = useAppSelector((state) => state.auth)
-    const token: {
-        access_token: string,
-        refresh_token: string,
-    } = JSON.parse(localStorage.getItem('token') as string);
+    // const token: {
+    //     access_token: string,
+    //     refresh_token: string,
+    // } = JSON.parse(localStorage.getItem('token') as string);
 
 
-    useEffect(() => {
-        if(isAuth) {
-            const url = 'http://team2back.sanarip.org/users/favourite/';
+    // useEffect(() => {
+    //     if(isAuth) {
+    //         const url = 'http://team2back.sanarip.org/users/favourite/';
 
-            const headers = new Headers();
-            headers.append('Authorization', `Bearer ${token.access_token}`);
+    //         const headers = new Headers();
+    //         headers.append('Authorization', `Bearer ${token.access_token}`);
 
-            const requestOptions = {
-                method: 'GET',
-                headers: headers,
-            };
+    //         const requestOptions = {
+    //             method: 'GET',
+    //             headers: headers,
+    //         };
 
-            fetch(url, requestOptions)
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Ошибка запроса: ' + response.status);
-                    }
-                })
-                .then(data => {
-                    console.log(data)
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        }
-    }, []);
+    //         fetch(url, requestOptions)
+    //             .then(response => {
+    //                 if (response.ok) {
+    //                     return response.json();
+    //                 } else {
+    //                     throw new Error('Ошибка запроса: ' + response.status);
+    //                 }
+    //             })
+    //             .then(data => {
+    //                 console.log(data)
+    //             })
+    //             .catch(error => {
+    //                 console.error(error);
+    //             });
+    //     }
+    // }, []);
 
     return (
         <>
