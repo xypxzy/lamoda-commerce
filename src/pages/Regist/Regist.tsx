@@ -41,7 +41,6 @@ const Regist = () => {
 
 
   if (isSuccess) {
-    console.log("login is success");
     navigate("/login");
   }
 

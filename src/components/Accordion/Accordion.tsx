@@ -8,7 +8,6 @@ interface Description{
 }
 
 const Accordion: React.FC<Description> = ({product, }) => {
-    console.log(product)
     
     const [activeIndex, setActiveIndex] = useState(0);
     //accordion

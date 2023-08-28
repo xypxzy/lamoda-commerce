@@ -31,41 +31,6 @@ const FavouritePage = () => {
         return <FavCardEmpty/>
     }
 
-    // const token: {
-    //     access_token: string,
-    //     refresh_token: string,
-    // } = JSON.parse(localStorage.getItem('token') as string);
-
-
-    // useEffect(() => {
-    //     if(isAuth) {
-    //         const url = 'http://team2back.sanarip.org/users/favourite/';
-
-    //         const headers = new Headers();
-    //         headers.append('Authorization', `Bearer ${token.access_token}`);
-
-    //         const requestOptions = {
-    //             method: 'GET',
-    //             headers: headers,
-    //         };
-
-    //         fetch(url, requestOptions)
-    //             .then(response => {
-    //                 if (response.ok) {
-    //                     return response.json();
-    //                 } else {
-    //                     throw new Error('Ошибка запроса: ' + response.status);
-    //                 }
-    //             })
-    //             .then(data => {
-    //                 console.log(data)
-    //             })
-    //             .catch(error => {
-    //                 console.error(error);
-    //             });
-    //     }
-    // }, []);
-
     return (
         <>
         {isAuth ?
