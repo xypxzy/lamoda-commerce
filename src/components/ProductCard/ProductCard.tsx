@@ -44,25 +44,7 @@ const ProductCard = (props: ProductCardProps) => {
     );
   };
 
-  // const handleAddToFav = async (id: number) => {
-  //   try {
-  //       const response = await fetch(`${DEFAULT_URL}/users/${id}/favourite/`, {
-  //           method: 'POST',
-  //           headers: {
-  //               'Content-Type': 'application/json'
-  //           },
-  //           body: JSON.stringify({id})
-  //       });
-  //       if (response.ok) {
-  //           const data = await response.json();
-  //           console.log(data)
-  //       } else {
-  //           throw new Error('Failed to refresh access token');
-  //       }
-  //   } catch (error) {
-  //       console.error('Error refreshing access token:', error);
-  //   }
-  // };
+
 
   const handleAddToFav = () => {
     dispatch(addFav({

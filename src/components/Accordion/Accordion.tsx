@@ -29,6 +29,19 @@ const Accordion: React.FC<Description> = ({product, }) => {
             >
                 {product?.way_to_use}
             </AccordionLayout>
+            <AccordionLayout
+                title="Состав"
+                index={3}
+                activeIndex={activeIndex}
+                setActiveIndex={setActiveIndex}
+            >
+                <div>
+                {product.compounds?.map((el) => (
+                    <div>{el}</div>
+                ))}
+                </div>
+                
+            </AccordionLayout>
         </div>
     );
 };

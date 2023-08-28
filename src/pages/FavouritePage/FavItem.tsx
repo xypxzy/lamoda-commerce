@@ -4,8 +4,6 @@ import { addFav, removeFav, minusFav } from "../../store/favorits/favoritsSlice"
 import { addItem } from "../../store/cart/slice";
 import cls from '../CartPage/CartPage.module.scss'
 import { BsFillBasketFill } from "react-icons/bs";
-import { useSelector } from "react-redux";
-import { selectFav } from '../../store/favorits/favSelector.ts';
 
 
 type FavItemProps = {
@@ -24,9 +22,7 @@ const FavItem: FC<FavItemProps> = ({
     count,
 }) => {
 
-    const {favItems} = useSelector(selectFav)
     const dispatch = useAppDispatch();
-    // console.log(favItems)
 
 
     const onClickPlus = () => {
