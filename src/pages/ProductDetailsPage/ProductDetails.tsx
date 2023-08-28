@@ -99,9 +99,9 @@ const ProductDetails = () => {
                     <div className={cls.product_details__information}>
                         <h1 className={cls.product_details__title}>{product?.name}</h1>
                         <span className={cls.product_details__price}>{product?.price} som</span>
-                        <p className={cls.product_details__description}>
-                            {product?.description}
-                        </p>
+                        <div> Категории: {product?.categories?.map((el) => (
+                            <div className={cls.product_details__description}>{el} </div>
+                        ))}</div>
                         <div className={cls.product_details__add_cart}>
                             <div className={cls.product_details__counter}>
                                 <button onClick={() => {
